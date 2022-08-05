@@ -1,0 +1,97 @@
+﻿@page "/learning-categories2"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Categories2> _localizer
+
+<style>
+    .card-style {
+        border-radius: 25px;
+    }
+
+    .card-style-1 {
+        background-image: url(/images/p1.png);
+        background-size: cover !important;
+        background-position: center center !important;
+        border-radius: 25px;
+    }
+
+    .card-hero {
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+    <MudPaper Elevation="3" Height="150" Class="px-4 mx-n4 mt-n10 pt-10 mud-theme-primary" Style="border-radius: 0px 0px 45px 45px;" Outlined="false">
+        <MudPaper Elevation="0" Class="py-6" Style="background-color: transparent">
+
+        </MudPaper>
+    </MudPaper>
+
+    <MudGrid Class="mt-n15 pt-0" Spacing="2">
+        <MudItem xs="6" sm="6" md="6">
+            <MudCard Elevation="25" Class="rounded-xl" Style="height:190px;">
+                <MudCardContent Class="d-flex flex-column px-3 py-2" Style="height:190px;">
+                    <MudIconButton Icon="fas fa-award" Color="Color.Info" Class="mt-3 pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                    <MudText Style="font-weight: 500;" Typo="Typo.h6" Class="align-self-center" Color="@Color.Surface">Courses</MudText>
+                    <MudText Typo="Typo.caption" Class="align-self-center" Color="@Color.Primary">Certified Lessions</MudText>
+                    <MudText Typo="Typo.caption" Style="font-weight: 300;" Class="mt-auto align-self-center mud-text-secondary" Color="@Color.Default">Tap to view </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="6" sm="6" md="6">
+            <MudCard Elevation="25" Class="rounded-xl" Style="height:190px;">
+                <MudCardContent Class="d-flex flex-column px-3 py-2" Style="height:190px;">
+                    <MudIconButton Icon="fas fa-book" Color="Color.Success" Class="mt-3 pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                    <MudText Style="font-weight: 500;" Typo="Typo.h6" Class="align-self-center" Color="@Color.Surface">Basic</MudText>
+                    <MudText Typo="Typo.caption" Class="align-self-center" Color="@Color.Primary">Learn Something New</MudText>
+                    <MudText Typo="Typo.caption" Style="font-weight: 300;" Class="mt-auto align-self-center mud-text-secondary" Color="@Color.Default">Tap to view </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="my-1" Spacing="2">
+        <MudItem xs="12" sm="12" md="12">
+            <MudCard Elevation="25" Class="mt-2 py-3 d-flex flex-row rounded-xl justify-space-between" >
+                <div class="pa-3 align-self-center">
+                    <MudText Style="font-weight: 500;" Typo="Typo.h6" Color="@Color.Default">SEO &amp; Ranking</MudText>
+                    <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Primary" Class="mud-text-primary">Learn how to Rank Pages Higher </MudText>
+                </div>
+                <MudIconButton Icon="fas fa-globe" Color="Color.Secondary" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>    
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Class="my-1" Spacing="2">
+        <MudItem xs="6" sm="6" md="6">
+            <MudCard Elevation="25" Class=" rounded-xl" Style="height:190px;">
+                <MudCardContent Class="d-flex flex-column align-self-center flex-wrap px-3 py-2" Style="height:190px;">
+                    <MudIconButton Icon="fas fa-swatchbook" Color="Color.Warning" Class="mt-3 pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                    <MudText Style="font-weight: 500;" Typo="Typo.h6" Class="align-self-center" Color="@Color.Surface">Principles</MudText>
+                    <MudText Typo="Typo.caption" Class="align-self-center" Color="@Color.Primary">Mobile-first Designs</MudText>
+                    <MudText Typo="Typo.caption" Style="font-weight: 300;" Class="mt-auto align-self-center mud-text-secondary" Color="@Color.Default">Tap to view </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+
+        <MudItem xs="6" sm="6" md="6">
+            <MudCard Elevation="25" Class="rounded-xl" Style="height:190px;">
+                <MudCardContent Class="d-flex flex-column align-self-center flex-wrap px-3 py-2" Style="height:190px;">
+                    <MudIconButton Icon="fas fa-map-marker-alt" Color="Color.Error" Class="mt-3 pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                    <MudText Style="font-weight: 500;" Typo="Typo.h6" Class="align-self-center" Color="@Color.Surface">Near You</MudText>
+                    <MudText Typo="Typo.caption" Class="align-self-center" Color="@Color.Primary">Live Courses Near You</MudText>
+                    <MudText Typo="Typo.caption" Style="font-weight: 300;" Class="mt-auto align-self-center mud-text-primary" Color="@Color.Default">Tap to view </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    
+}

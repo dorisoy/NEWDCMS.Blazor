@@ -1,0 +1,36 @@
+﻿@using DCMS.Application.Models
+
+<MudDialog>
+    <TitleContent>
+        <div class="d-flex flex-row">
+            <MudIcon Icon="@Icons.Material.Filled.Campaign" Class="mr-3 mb-n1" />
+            <MudText Typo="Typo.h5" Color="Color.Primary"></MudText>
+        </div>
+    </TitleContent>
+    <DialogContent>
+        <MudGrid>
+            <MudItem xs="12" md="12">
+                <MudCardMedia Image="@Post.Image" Height="280" Class="rounded-lg" />
+            </MudItem>
+            <MudItem xs="12" md="12">
+                <div class="d-flex align-start flex-column">
+                    <MudText Typo="Typo.h6" Class="mud-text-secondary mb-n1">@Post.Title</MudText>
+                    <div class="ml-3 mt-1">
+                        <MudText Typo="Typo.body2">@Post.ShortDesc</MudText>
+                        @*<MudText Typo="Typo.subtitle2" Class="mb-n1">@Post.PostedDate</MudText>*@
+                    </div>
+                </div>
+
+            </MudItem>
+            <MudItem xs="12" md="12">
+                <div class="d-flex align-start flex-column">
+                    <MudText Typo="Typo.h6" Class="mud-text-secondary mb-n1">@Post.PostedDate</MudText>
+                </div>
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [Parameter] public PostSummary Post { get; set; } = new();
+}

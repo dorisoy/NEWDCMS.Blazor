@@ -1,0 +1,99 @@
+﻿@page "/project-task-list"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TaskList> _localizer
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+<MudPaper Elevation="3" Height="150" Class="px-4 mx-n4 mt-n10 pt-10 mud-theme-primary" Style="border-radius: 0px 0px 45px 45px;" Outlined="false">
+    <MudPaper Elevation="0" Class="py-6" Style="background-color: transparent">
+
+    </MudPaper>
+</MudPaper>
+
+<MudGrid Class="mt-n15 pt-0 mb-1">
+    <MudItem xs="12">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardContent>
+                <MudText Color="Color.Default" Align="Align.Left" Typo="Typo.body2" Style="font-weight: 400;">Prebuilt E-Commerce, Store Branding pages for your Web or Mobile apps.</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Class="mb-5" Spacing="2">
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg" @onclick="@(() => NavigateToCommerceDashboard())">
+            <MudIcon Icon="@Icons.Material.TwoTone.ShoppingBag" Color="Color.Warning" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Homepage </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg" @onclick="@(() => NavigateToCategoriesPage())">
+            <MudIcon Icon="@Icons.Material.TwoTone.Category" Color="Color.Warning" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Categories </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg"  @onclick="@(() => NavigateToProductPage1())">
+            <MudIcon Icon="@Icons.Material.TwoTone.List" Color="Color.Error" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Product List 1 </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg" @onclick="@(() => NavigateToProductPage2())">
+            <MudIcon Icon="@Icons.Material.TwoTone.SyncAlt" Color="Color.Secondary" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Product List 2 </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg" @onclick="@(() => NavigateToProductDetailPage())">
+            <MudIcon Icon="@Icons.Material.TwoTone.FilePresent" Color="Color.Primary" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Product Detail </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg"  @onclick="@(() => NavigateToCartPage())">
+            <MudIcon Icon="@Icons.Material.TwoTone.ShoppingCart" Color="Color.Info" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Cart </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg"  @onclick="@(() => NavigateToCheckoutPage())">
+            <MudIcon Icon="@Icons.Material.TwoTone.CreditScore" Color="Color.Secondary" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Checkout </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg" @onclick="@(() => NavigateToInvoicesPage())">
+            <MudIcon Icon="@Icons.Material.TwoTone.CardGiftcard" Color="Color.Secondary" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Invoices </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudCard Elevation="25" Class="d-flex flex-row rounded-lg"  @onclick="@(() => NavigateToInvoicePage())">
+            <MudIcon Icon="@Icons.Material.TwoTone.Settings" Color="Color.Warning" Class="mx-3 my-5 align-self-center" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Default"> Invoice </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+}

@@ -1,0 +1,68 @@
+﻿@inject HttpClient HttpClient
+
+<Breadcrumb>
+	<BreadcrumbItem Href="/">
+		<Icon Type="home" />
+		首页
+	</BreadcrumbItem>
+	@foreach (var bread in Breadcrumbs)
+	{
+		<BreadcrumbItem>
+			@bread.Name
+		</BreadcrumbItem>
+	}
+</Breadcrumb>
+
+@code
+{
+	private List<MenuDataItem> Breadcrumbs { get; set; } = new();
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			await base.OnInitializedAsync();
+
+			var menus = await HttpClient.GetFromJsonAsync<MenuDataItem[]>("data/menu.json");
+			var key = _navigationManager.QueryString("v");
+			var path = _navigationManager.ToAbsoluteUri(_navigationManager.Uri);
+			var links = new List<MenuDataItem>();
+
+			ParareAllNode(menus, ref key, ref links);
+
+			Breadcrumbs = links;
+
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.Print($"{ex.Message}");
+		}
+	}
+
+
+	private void ParareAllNode(MenuDataItem[]? trees, ref string key, ref List<MenuDataItem> navs)
+	{
+		if (trees?.Any() ?? false)
+		{
+			foreach (MenuDataItem tree in trees)
+			{
+				if (key.IndexOf(tree.Key)>=0)
+				{
+					navs.Add(tree);
+				}
+
+				if (tree.Key == key)
+				{
+					break;
+				}
+				else
+				{
+					if (tree.Children?.Count() != 0)
+					{
+						ParareAllNode(tree.Children, ref key, ref navs);
+					}
+				}
+			}
+		}
+
+	}
+}

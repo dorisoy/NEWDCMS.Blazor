@@ -1,0 +1,10 @@
+﻿@inherits MudComponentBase
+
+<MudPaper Elevation="25">
+    <CascadingValue Value="this">
+        <div id="footer-bar" @attributes="UserAttributes" class="footer-bar" style="@Style">
+            @ChildContent
+        </div>
+    </CascadingValue>
+</MudPaper>
+

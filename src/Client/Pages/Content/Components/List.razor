@@ -1,0 +1,134 @@
+﻿@page "/components/list"
+@using DCMS.Application.Models
+@inject Microsoft.Extensions.Localization.IStringLocalizer<List> _localizer
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Simple List </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> There are five severity levels that each set a different icon and a color. </MudText>
+<MudPaper Class="my-3" Width="300px">
+    <MudList Clickable="true">
+        <MudListItem Text="Inbox" Icon="@Icons.Material.Filled.Inbox" />
+        <MudListItem Text="Sent" Icon="@Icons.Material.Filled.Send" />
+        <MudDivider />
+        <MudListItem Text="Trash" />
+        <MudListItem Text="Spam" />
+    </MudList>
+</MudPaper>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Nested List </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> The default variant is normal. In addition to that, outlined and filled is available. </MudText>
+<MudPaper Class="my-3" Width="300px">
+    <MudList Clickable="true">
+        <MudListSubheader>
+            Nested List Items
+        </MudListSubheader>
+        <MudListItem Icon="@Icons.Material.Filled.Send">
+            Sent mail
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Drafts">
+            Drafts
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Inbox" Text="Inbox" InitiallyExpanded="true">
+            <NestedList>
+                <MudListItem Icon="@Icons.Material.Filled.StarRate">
+                    Starred
+                </MudListItem>
+                <MudListItem Icon="@Icons.Material.Filled.WatchLater">
+                    Snoozed
+                </MudListItem>
+            </NestedList>
+        </MudListItem>
+    </MudList>
+</MudPaper>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Avatar List </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Taking up too much space? Set the Dense property to true. It removes the vertical padding and lowers the horizontal. </MudText>
+<MudPaper Class="my-3" Width="300px">
+    <MudList>
+        <MudListItem Avatar="@Icons.Material.Filled.Image">
+            Photos
+        </MudListItem>
+        <MudListItem Avatar="@Icons.Material.Filled.Work">
+            Work
+        </MudListItem>
+        <MudListItem Avatar="@Icons.Material.Filled.Umbrella">
+            Vacation
+        </MudListItem>
+    </MudList>
+</MudPaper>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Interactive </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> You can disable the alert icons with the bool NoIcon set to true. </MudText>
+<MudGrid>
+    <MudItem xs="12" md="12">
+        <MudCheckBox @bind-Checked="@Dense" Label="Dense" Color="Color.Default" />
+        <MudCheckBox @bind-Checked="@Clickable" Label="Clickable" Color="Color.Primary" />
+        <MudCheckBox @bind-Checked="@Gutters" Label="Disable Gutters" Color="Color.Secondary" />
+    </MudItem>
+    <MudItem xs="12" md="6">
+        <MudText Typo="Typo.h6" GutterBottom="true">Text only</MudText>
+        <MudPaper Width="100%">
+            <MudList Clickable="@Clickable" Dense="@Dense" DisableGutters="@Gutters">
+                <MudListItem Text="Single List Item" />
+                <MudListItem Text="Single List Item" />
+                <MudListItem Text="Single List Item" />
+            </MudList>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="6">
+        <MudText Typo="Typo.h6" GutterBottom="true">Icons with text</MudText>
+        <MudPaper Width="100%">
+            <MudList Clickable="@Clickable" Dense="@Dense" DisableGutters="@Gutters">
+                <MudListItem Text="Single List Item" Icon="@Icons.Filled.Bookmark" />
+                <MudListItem Text="Single List Item" Icon="@Icons.Filled.Bookmark" IconColor="Color.Primary" />
+                <MudListItem Text="Single List Item" Icon="@Icons.Filled.Bookmark" IconColor="Color.Secondary" />
+            </MudList>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="6">
+        <MudText Typo="Typo.h6" GutterBottom="true">Avatar with text</MudText>
+        <MudPaper Width="100%">
+            <MudList Clickable="@Clickable" Dense="@Dense" DisableGutters="@Gutters">
+                <MudListItem Text="Single List Item" Avatar="@Icons.Filled.Image" />
+                <MudListItem Text="Single List Item" Avatar="@Icons.Filled.Image" IconColor="Color.Dark" />
+                <MudListItem Text="Single List Item" Avatar="@Icons.Filled.Image" IconColor="Color.Error" />
+            </MudList>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Selection </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> If you set Clickable="true" and use @@bind-SelectedItem, MudList will manage an exclusive single-selection across all its nested lists for you.  </MudText>
+<MudPaper Class="my-3" Width="300px">
+    <MudList Clickable="true" @bind-SelectedItem="selectedItem" @bind-SelectedValue="selectedValue">
+        <MudListSubheader>
+            Your drink:
+            <MudChip Color="Color.Secondary">
+                @(selectedItem?.Text ?? "You are dry") (@(selectedValue?.ToString() ?? "0"))
+            </MudChip>
+        </MudListSubheader>
+        <MudListItem Text="Sparkling Water" Value="1" />
+        <MudListItem Text="Teas">
+            <NestedList>
+                <MudListItem Text="Earl Grey" Value="2" />
+                <MudListItem Text="Matcha" Value="3" />
+                <MudListItem Text="Pu'er" Value="4" />
+            </NestedList>
+        </MudListItem>
+        <MudListItem Text="Coffees">
+            <NestedList>
+                <MudListItem Text="Irish Coffee" Value="5" />
+                <MudListItem Text="Double Espresso" Value="6" />
+                <MudListItem Text="Cafe Latte" Value="7" />
+            </NestedList>
+        </MudListItem>
+    </MudList>
+</MudPaper>
+
+@code {
+    public bool Dense { get; set; }
+    public bool Clickable { get; set; }
+    public bool Gutters { get; set; }
+
+    MudListItem selectedItem;
+    object selectedValue = 1;
+}

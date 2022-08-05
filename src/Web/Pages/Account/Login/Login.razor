@@ -1,0 +1,135 @@
+﻿@page "/login"
+
+@layout MainLayout
+
+
+@attribute [AllowAnonymous]
+
+<div class="login-top">
+
+	<Row Align="center" Justify="center">
+		<Col Xs="2" Sm="4" Md="6" Lg="8" Xl="9">
+		</Col>
+		<Col Xs="20" Sm="16" Md="12" Lg="8" Xl="6" Class="login-licon-box ">
+		<Icon Type="windows" Theme="fill" Class="login-licon" />
+		</Col>
+		<Col Xs="2" Sm="4" Md="6" Lg="8" Xl="9">
+		</Col>
+	</Row>
+
+	<Row>
+		<Col Xs="2" Sm="4" Md="6" Lg="8" Xl="9">
+		</Col>
+		<Col Xs="20" Sm="16" Md="12" Lg="8" Xl="6" Class="login-box">
+		<Form Model="@_tokenModel" OnFinish="SubmitAsync">
+			<Tabs ActiveKey="@(context.LoginType)" Centered>
+				<TabPane Key="1" Tab="账户登录">
+					<FormItem>
+						<AntDesign.Input Placeholder="用户名/Email" Size="large" @bind-Value="@context.Email">
+							<Prefix><Icon Type="user" /></Prefix>
+						</AntDesign.Input>
+					</FormItem>
+					<FormItem>
+						<AntDesign.Input Placeholder="密码" Size="large" @bind-Value="@context.Password" Type="password">
+							<Prefix><Icon Type="lock" /></Prefix>
+						</AntDesign.Input>
+					</FormItem>
+				</TabPane>
+				<TabPane Key="2" Tab="手机登录">
+					<FormItem>
+						<AntDesign.Input Placeholder="手机号" Size="large" @bind-Value="@context.Mobile">
+							<Prefix><Icon Type="mobile" /></Prefix>
+						</AntDesign.Input>
+					</FormItem>
+					<FormItem>
+						<Row Gutter="8">
+							<AntDesign.Col Span="16">
+								<AntDesign.Input Placeholder="验证码" Size="large" @bind-Value="@context.Captcha">
+									<Prefix><Icon Type="mail" /></Prefix>
+								</AntDesign.Input>
+							</AntDesign.Col>
+							<AntDesign.Col Span="8">
+								<Button Size="large" Block>验证</Button>
+							</AntDesign.Col>
+						</Row>
+					</FormItem>
+				</TabPane>
+			</Tabs>
+			<div style="margin-bottom:10px">
+				<Checkbox Checked="@context.AutoLogin">
+					自动登录
+				</Checkbox>
+				<a style="float: right;">
+					忘记密码
+				</a>
+			</div>
+			<Button Type="primary" HtmlType="submit" Class="submit" Size="large" Block>登录</Button>
+		@*	<Button OnClick="@(async ()=> await ShowConfirmIcon(ConfirmIcon.Error))">T1</Button>
+			<Button OnClick="@CountDown">T2</Button>*@
+		</Form>
+		</Col>
+		<Col Xs="2" Sm="4" Md="6" Lg="8" Xl="9">
+		</Col>
+	</Row>
+</div>
+
+
+
+
+
+
+@code {
+
+
+	private RenderFragment _icon = @<Icon Type="exclamation-circle" Theme="outline"></Icon>;
+
+	string title = "BasicModal";
+	bool _visible = false;
+
+	private void HandleOk(MouseEventArgs e)
+	{
+		Console.WriteLine(e);
+		_visible = false;
+	}
+
+	private void HandleCancel(MouseEventArgs e)
+	{
+		Console.WriteLine(e);
+		_visible = false;
+	}
+
+	private async Task ShowConfirmIcon(ConfirmIcon confirmIcon)
+	{
+		Console.WriteLine("ShowConfirmIcon");
+		Serilog.Log.Debug($"ShowConfirmIcon");
+
+		var content = "You can set different icons";
+		var title = confirmIcon.ToString();
+		var confirmResult = await _confirmService.Show(content, title, ConfirmButtons.OK, confirmIcon);
+		var _ = _message.Info($"{confirmResult} button is clicked", 2);
+		Console.WriteLine(confirmResult);
+	}
+
+
+	private async Task CountDown()
+	{
+		Console.WriteLine("CountDown");
+		Serilog.Log.Debug($"CountDown");
+
+		var secondsToGo = 5;
+		var props = new ConfirmOptions()
+			{
+				Title = "This is a notification message",
+				Content = $"This modal will be destroyed after {secondsToGo} second."
+			};
+		var modelRef = _modalService.Success(props);
+		while (secondsToGo > 0)
+		{
+			secondsToGo -= 1;
+			await Task.Delay(1000);
+			props.Content = $"This modal will be destroyed after {secondsToGo} second.";
+			await modelRef.UpdateConfigAsync();
+		}
+		await _modalService.DestroyConfirmAsync(modelRef);
+	}
+}

@@ -1,0 +1,74 @@
+﻿@page "/wallet-settings"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<WalletSettings> _localizer
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+<MudGrid Class="my-3" Spacing="0">
+    <MudItem xs="12" sm="12" md="12">
+        <MudPaper Elevation="0" Class="d-flex flex-row" Style="background-color: transparent">
+            <MudIcon Icon="@Icons.Material.TwoTone.Fingerprint" Color="Color.Error" Class="mx-0 my-5 align-self-center" Size="Size.Medium"></MudIcon>
+            <MudText Typo="Typo.subtitle2" Style="font-weight: 500;" Class="mx-3 align-self-center" Color="@Color.Default"> Sign In with Fingerprint</MudText>
+            <MudSwitch T="bool" Checked="true" Color="Color.Tertiary" Class="mr-0 ml-auto align-self-center" />
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="12" md="12">
+        <MudPaper Elevation="0" Class="d-flex flex-row" Style="background-color: transparent">
+            <MudIcon Icon="@Icons.Material.TwoTone.Warning" Color="Color.Error" Class="mx-0 my-5 align-self-center" Size="Size.Medium"></MudIcon>
+            <MudText Typo="Typo.subtitle2" Style="font-weight: 500;" Class="mx-3 align-self-center" Color="@Color.Default"> Account Sign In Alert </MudText>
+            <MudSwitch T="bool" Checked="false" Color="Color.Tertiary" Class="mr-0 ml-auto align-self-center" />
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudDivider></MudDivider>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudPaper Elevation="0" Class="d-flex flex-row" Style="background-color: transparent">
+            <MudIcon Icon="@Icons.Material.TwoTone.Security" Color="Color.Error" Class="mx-0 my-5 align-self-center" Size="Size.Medium"></MudIcon>
+            <MudText Typo="Typo.subtitle2" Style="font-weight: 500;" Class="mx-3 align-self-center" Color="@Color.Default"> Authentication Method </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mr-0 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudDivider></MudDivider>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudPaper Elevation="0" Class="d-flex flex-row" Style="background-color: transparent">
+            <MudIcon Icon="@Icons.Material.TwoTone.Password" Color="Color.Success" Class="mx-0 my-5 align-self-center" Size="Size.Medium"></MudIcon>
+            <MudText Typo="Typo.subtitle2" Style="font-weight: 500;" Class="mx-3 align-self-center" Color="@Color.Default"> Change Password </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mr-0 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudDivider></MudDivider>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudPaper Elevation="0" Class="d-flex flex-row" Style="background-color: transparent">
+            <MudIcon Icon="@Icons.Material.TwoTone.LiveHelp" Color="Color.Secondary" Class="mx-0 my-5 align-self-center" Size="Size.Medium"></MudIcon>
+            <MudText Typo="Typo.subtitle2" Style="font-weight: 500;" Class="mx-3 align-self-center" Color="@Color.Default"> Sercure Questions </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mr-0 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudDivider></MudDivider>
+    </MudItem>
+
+    <MudItem xs="12" sm="12" md="12">
+        <MudPaper Elevation="0" Class="d-flex flex-row" Style="background-color: transparent">
+            <MudIcon Icon="@Icons.Material.TwoTone.AppSettingsAlt" Color="Color.Primary" Class="mx-0 my-5 align-self-center" Size="Size.Medium"></MudIcon>
+            <MudText Typo="Typo.subtitle2" Style="font-weight: 500;" Class="mx-3 align-self-center" Color="@Color.Default"> App Info </MudText>
+            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mr-0 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+}

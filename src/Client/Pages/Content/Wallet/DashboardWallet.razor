@@ -1,0 +1,243 @@
+﻿@page "/dashboard-wallet"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<DashboardWallet> _localizer
+
+<MudPaper Elevation="3" Class="px-4 mx-n4 mt-n8 pt-5 pb-10 mud-theme-primary" Style="border-radius: 0px 0px 30px 30px;" Outlined="false">
+    <MudGrid>
+        <MudItem xs="12">
+            <MudPaper Elevation="0" Style="background-color: transparent" Class="d-flex pa-0">
+                <MudPaper Elevation="0" Style="background-color: transparent" Class="pa-0 mr-2 align-self-center">
+                    <MudText Typo="Typo.subtitle1" Style="@($" color:{Colors.Shades.White}; font-weight: 400;")">Welcome back,</MudText>
+                    <MudText Color="Color.Default" Typo="Typo.subtitle1" Class="mt-n2" Style="@($" color:{Colors.Shades.White}; font-weight: 600;")">JOHN DOE</MudText>
+                </MudPaper>
+                <MudPaper Elevation="0" Style="background-color: transparent" Class="pa-0 mr-0 ml-auto align-self-center">
+                    <MudAvatar Image="/images/pictures/faces/3s.png" Style="height: 50px; width: 50px;"> </MudAvatar>
+                </MudPaper>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Spacing="1">
+        <MudItem xs="3" sm="3" md="3">
+            <MudCard Elevation="5" Class="rounded-lg" @onclick="@(() => NavigateToTransferPage())">
+                <MudCardContent Class="d-flex flex-column mb-1 mt-1 px-1 py-2">
+                    <MudIconButton Icon="@Icons.Material.TwoTone.SyncAlt" Color="Color.Error" Variant="Variant.Text" Class="align-self-center" Size="Size.Large" OnClick="NavigateToTransferPage"></MudIconButton>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Default" Style="font-weight: 500;" Class="align-self-center">Transfer</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="3" sm="3" md="3">
+            <MudCard Elevation="5" Class="rounded-lg">
+                <MudCardContent Class="d-flex flex-column mb-1 mt-1 px-1 py-2">
+                    <MudIconButton Icon="@Icons.Material.TwoTone.RequestQuote" Color="Color.Info" Variant="Variant.Text" Class="align-self-center" Size="Size.Large"></MudIconButton>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Default" Style="font-weight: 500;" Class="align-self-center">Request</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="3" sm="3" md="3">
+            <MudCard Elevation="5" Class="rounded-lg">
+                <MudCardContent Class="d-flex flex-column mb-1 mt-1 px-1 py-2">
+                    <MudIconButton Icon="@Icons.Material.TwoTone.AccountBalance" Color="Color.Secondary" Variant="Variant.Text" Class="align-self-center" Size="Size.Large"></MudIconButton>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Default" Style="font-weight: 500;" Class="align-self-center">Withdraw</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="3" sm="3" md="3">
+            <MudCard Elevation="5" Class="rounded-lg">
+                <MudCardContent Class="d-flex flex-column mb-1 mt-1 px-1 py-2">
+                    <MudIconButton Icon="@Icons.Material.TwoTone.Payment" Color="Color.Warning" Variant="Variant.Text" Class="align-self-center" Size="Size.Large"></MudIconButton>
+                    <MudText Typo="Typo.subtitle2" Color="Color.Default" Style="font-weight: 500;" Class="align-self-center">Cards</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+<MudGrid Class="mt-n10 pt-3 mb-0" Spacing="1">
+    <div class="hz-container pa-1">
+        <MudCard Elevation="25" Class="mr-3 rounded-lg">
+            <MudCardContent Style="width: 300px;">
+                <MudGrid>
+                    <MudItem md="10" xs="9">
+                        <MudText Typo="Typo.caption" Color="@Color.Primary" Style="font-weight: 400;">DCMS.Blazor Wallet</MudText>
+                        <MudText Typo="Typo.subtitle1" Style="font-weight: 500;">Balances:  $100</MudText>
+                    </MudItem>
+                    <MudItem md="2" xs="3">
+                        <MudIconButton  Icon="@Icons.Material.TwoTone.AddCircle"  Color="Color.Warning" Class="pa-3" Size="Size.Large"></MudIconButton>
+                        @*<MudAvatar Image="/images/redemption_icon.png" Style="height:50px; width:50px;"> </MudAvatar>*@
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardContent Style="width: 300px;">
+                <MudGrid>
+                    <MudItem md="10" xs="9">
+                        <MudText Typo="Typo.caption" Color="@Color.Primary" Style="font-weight: 400;">Link To Bank Account</MudText>
+                        <MudText Typo="Typo.subtitle1" Style="font-weight: 500;">01 account(s) linked </MudText>
+                    </MudItem>
+                    <MudItem md="2" xs="3">
+                        <MudIconButton Icon="@Icons.Material.TwoTone.CreditScore" Color="Color.Success"  Class="pa-3" Size="Size.Large"></MudIconButton>
+                        @*<MudAvatar Image="/images/reward_icon.png" Style="height:50px; width:50px;"> </MudAvatar>*@
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </div>
+</MudGrid>
+
+<MudGrid Class="mt-2 mb-5" Spacing="1">
+    <MudItem xs="4" sm="4" md="3">
+        <MudCard Class="rounded-lg" Elevation="25" @onclick="@(() => NavigateToTransferPage())" >
+            <MudCardContent Class="d-flex flex-column py-1 mb-1 mt-1">
+                <MudIconButton Icon="fas fa-exchange-alt" Color="Color.Info" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.caption" Style="font-weight: 500;" Align="Align.Center">Bank <br> Transfer</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="4" sm="4" md="3">
+        <MudCard Class="rounded-lg" Elevation="25" >
+            <MudCardContent Class="d-flex flex-column py-1 mb-1 mt-1">
+                <MudIconButton Icon="fab fa-cc-apple-pay" Color="Color.Success" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.caption" Style="font-weight: 500;" Align="Align.Center">Smart <br> Transfer</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="4" sm="4" md="3">
+        <MudCard Class="rounded-lg" Elevation="25" >
+            <MudCardContent Class="d-flex flex-column py-1 mb-1 mt-1">
+                <MudIconButton Icon="fas fa-sim-card" Color="Color.Warning" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.caption" Style="font-weight: 500;" Align="Align.Center">Phone <br> Topup</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="4" sm="4" md="3">
+        <MudCard Class="rounded-lg" Elevation="25">
+            <MudCardContent Class="d-flex flex-column py-1 mb-1">
+                <MudIconButton Icon="fab fa-hornbill" Color="Color.Secondary" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                @*<MudAvatar Image="/images/icon-512.png" Class="align-self-center mb-2" Style="height:40px; width:40px;"> </MudAvatar>*@
+                <MudText Typo="Typo.caption" Style="font-weight: 500;" Align="Align.Center">Blazor <br> Services</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="4" sm="4" md="3">
+        <MudCard Class="rounded-lg" Elevation="25" >
+            <MudCardContent Class="d-flex flex-column py-1 mb-1">
+                <MudIconButton Icon="fas fa-file-invoice-dollar" Color="Color.Error" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.caption" Style="font-weight: 500;" Align="Align.Center">Electricity <br> Bills</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="4" sm="4" md="3">
+        <MudCard Class="rounded-lg" Elevation="25">
+            <MudCardContent Class="d-flex flex-column py-1 mb-1">
+                <MudIconButton Icon="fas fa-file-invoice" Color="Color.Primary" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.caption" Style="font-weight: 500;" Align="Align.Center">Internet <br> Bills </MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudCarousel Style="height:150px;" Class="rounded-lg" ShowArrows="false" ShowDelimiters="true" AutoCycle="true" TData="object">
+    <DelimiterTemplate Context="selected">
+        <div Class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">
+            <span class="mud-icon-button-label">
+                <MudIcon Style="font-size: 1rem !important;" Icon="@(selected ? "fas fa-circle" : "far fa-circle")" Color="Color.Dark" />
+            </span>
+        </div>
+    </DelimiterTemplate>
+    <ChildContent>
+        <MudCarouselItem Transition="Transition.Slide">
+            <MudCard Outlined="false" Class="rounded-lg">
+                <MudCardMedia Image="/images/pictures/10w.jpg" Height="250" />
+            </MudCard>
+        </MudCarouselItem>
+        <MudCarouselItem Transition="Transition.Slide">
+            <MudCard Outlined="false" Class="rounded-lg">
+                <MudCardMedia Image="/images/pictures/11w.jpg" Height="250" />
+            </MudCard>
+        </MudCarouselItem>
+        <MudCarouselItem Transition="Transition.Slide">
+            <MudCard Outlined="false" Class="rounded-lg">
+                <MudCardMedia Image="/images/pictures/12w.jpg" Height="250" />
+            </MudCard>
+        </MudCarouselItem>
+    </ChildContent>
+</MudCarousel>
+
+<MudGrid Class="mt-3 mb-1" Spacing="2">
+    <MudItem xs="6" sm="6" md="6">
+        <MudText Color="Color.Default" Style="font-weight: 500;" Class="mt-5 mb-1" Typo="Typo.subtitle1">Promotions</MudText>
+    </MudItem>
+    <MudItem xs="6" sm="6" md="6">
+        <MudText Color="Color.Error" Class="mt-5 mb-1" Align="Align.Right" Typo="Typo.subtitle2">View all</MudText>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Spacing="2">
+    <MudItem xs="6" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardMedia Class="rounded-lg" Image="/images/pictures/5.jpg" Height="160" />
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">An Excellent, One-pan</MudText>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudText Typo="Typo.body2">One-pot meals are the savior of weeknight cooking, and this pasta is one of my go-tos.</MudText>
+                </MudHidden>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardMedia Class="rounded-lg" Image="/images/pictures/6.jpg" Height="160" />
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">An Excellent, One-pan</MudText>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudText Typo="Typo.body2">One-pot meals are the savior of weeknight cooking, and this pasta is one of my go-tos.</MudText>
+                </MudHidden>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardMedia Class="rounded-lg" Image="/images/pictures/7.jpg" Height="160" />
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">An Excellent, One-pan</MudText>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudText Typo="Typo.body2">One-pot meals are the savior of weeknight cooking, and this pasta is one of my go-tos.</MudText>
+                </MudHidden>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardMedia Class="rounded-lg" Image="/images/pictures/8.jpg" Height="160" />
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">An Excellent, One-pan</MudText>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudText Typo="Typo.body2">One-pot meals are the savior of weeknight cooking, and this pasta is one of my go-tos.</MudText>
+                </MudHidden>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardMedia Class="rounded-lg" Image="/images/pictures/9.jpg" Height="160" />
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">An Excellent, One-pan</MudText>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudText Typo="Typo.body2">One-pot meals are the savior of weeknight cooking, and this pasta is one of my go-tos.</MudText>
+                </MudHidden>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6" sm="6" md="3">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardMedia Class="rounded-lg" Image="/images/pictures/1.jpg" Height="160" />
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">An Excellent, One-pan</MudText>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudText Typo="Typo.body2">One-pot meals are the savior of weeknight cooking, and this pasta is one of my go-tos.</MudText>
+                </MudHidden>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>

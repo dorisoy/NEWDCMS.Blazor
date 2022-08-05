@@ -1,0 +1,171 @@
+﻿@page "/wallet-cards"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Cards> _localizer
+@inject IDialogService DialogService
+
+
+<style>
+    .card-style {
+        border-radius: 15px;
+    }
+    .card-style-1 {
+        background-image: url(/images/cards/bg_card_1.png);
+        background-size: cover !important;
+        background-position: center center !important;
+        border-radius: 15px;
+    }
+
+    .card-style-2 {
+        background-image: url(/images/cards/bg_card_2.png);
+        background-size: cover !important;
+        background-position: center center !important;
+        border-radius: 15px;
+    }
+
+    .card-style-3 {
+        background-image: url(/images/cards/bg_card_3.png);
+        background-size: cover !important;
+        background-position: center center !important;
+        border-radius: 15px;
+    }
+
+    .card-style-4 {
+        background-image: url(/images/cards/bg_card_4.png);
+        background-size: cover !important;
+        background-position: center center !important;
+        border-radius: 15px;
+    }
+
+    .card-style-5 {
+        background-image: url(/images/cards/bg_card_5.png);
+        background-size: cover !important;
+        background-position: center center !important;
+        border-radius: 15px;
+    }
+</style>
+
+@*<MudBreadcrumbs Items="_routes"></MudBreadcrumbs>*@
+
+<MudPaper Elevation="3" Height="150" Class="px-4 mx-n4 mt-n10 pt-8 mud-theme-primary" Style="border-radius: 0px 0px 45px 45px;" Outlined="false">
+    <MudPaper Elevation="0" Class="py-6" Style="background-color: transparent">
+
+    </MudPaper>
+</MudPaper>
+
+<MudGrid Class="mt-n10 pt-0 mb-1">
+    <MudItem xs="12">
+        <MudCard Elevation="25" Class="rounded-lg">
+            <MudCardContent>
+                <MudText Typo="Typo.h6" Style="font-weight: 600;">Cards Management</MudText>
+                <MudText Color="Color.Default" Align="Align.Left" Typo="Typo.body2" Style="font-weight: 400;">Add cards or remove them anytime</MudText>
+                <MudButton FullWidth="true" Class="mt-5 rounded-lg" Variant="Variant.Filled" Color="Color.Primary">Add Card</MudButton>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudCard Elevation="25" Class="my-7 mud-theme-primary card-style">
+    <MudCardContent Class="d-flex flex-column justify-space-between card-style-1" Style="height: 250px;">
+        <div class="d-flex justify-space-between">
+            <MudText Typo="Typo.h6" Color="Color.Warning" Style="font-weight: 800;">BLAZOR CLUB</MudText>
+            <div class="d-flex">
+                <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Class="mx-2" Size="Size.Large"></MudIcon>
+                <MudIcon Icon="@Icons.Material.TwoTone.CardMembership" Class="mx-2" Size="Size.Large"></MudIcon>
+            </div>
+        </div>
+        <div>
+            <MudText Typo="Typo.caption" Style="font-weight: 500;">MEMBER ID</MudText>
+            <MudText Typo="Typo.h6" Style="font-weight: 600;">1234 5678 9012 3456</MudText>
+        </div>
+        <div class="d-flex justify-space-between">
+            <div>
+                <MudText Typo="Typo.caption" Style="font-weight: 600;">CARD HOLDER</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">JOHN DOE</MudText>
+            </div>
+            <div>
+                <MudText Typo="Typo.caption" Style="font-weight: 600;">VALID THRU</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">03/2025</MudText>
+            </div>
+        </div>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="my-7 mud-theme-primary card-style">
+    <MudCardContent Class="d-flex flex-column justify-space-between card-style-2" Style="height: 230px;">
+        <MudPaper Elevation="0" Class="d-flex justify-space-between" Style="background-color: transparent">
+            <MudText Typo="Typo.h6" Style="font-weight: 600;"></MudText>
+            <MudText Typo="Typo.h6" Style="font-weight: 700;">GRASSAVOIR</MudText>
+        </MudPaper>
+        <div class="pt-5">
+            <MudText Typo="Typo.caption" Style="font-weight: 500;">CARD NUMBER</MudText>
+            <MudText Typo="Typo.h6" Style="font-weight: 600;">1234 5678 9012 3456</MudText>
+        </div>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between" Style="background-color: transparent">
+            <div>
+                <MudText Typo="Typo.caption" Style="font-weight: 600;">CARD HOLDER</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">JOHN DOE</MudText>
+            </div>
+            <div>
+                <MudText Typo="Typo.caption" Style="font-weight: 600;">VALID THRU</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">03/2025</MudText>
+            </div>
+        </MudPaper>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="mud-theme-secondary rounded-xl">
+    <MudCardContent Class="d-flex flex-column justify-space-around" Style="height: 210px;">
+        <div>
+            <MudIcon Icon="@Icons.Material.TwoTone.CardGiftcard"  Class="mx-2 justify-self-center mud-text-secondary" Size="Size.Large"></MudIcon>
+            <MudText Typo="Typo.h6" Style="font-weight: 800;">GIFT CARD</MudText>
+            <MudText Typo="Typo.subtitle2" Style="font-weight: 700;" Class="mud-text-secondary">AVAILABLE IN DCMS.BlazorS</MudText>
+        </div>
+        <MudText Typo="Typo.h5" Align="Align.Right" Style="font-weight: 600;">$50.00</MudText>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="my-7 card-style mud-theme-primary">
+    <MudCardContent Class="d-flex flex-column justify-space-around card-style-3" Style="height: 230px;">
+        <MudPaper Elevation="0" Class="d-flex justify-space-between" Style="background-color: transparent">
+            <MudText Typo="Typo.h6" Style="font-weight: 600;"></MudText>
+            <div class="d-flex">
+                <MudText Typo="Typo.h5" Color="Color.Warning" Class="align-self-center" Style="font-weight: 900;">VIP</MudText>
+                <MudIcon Icon="fas fa-gem" Color="Color.Warning" Class="mx-2 align-self-center" Size="Size.Medium"></MudIcon>
+            </div>
+        </MudPaper>
+        
+        <div>
+            <MudText Typo="Typo.caption" Style="font-weight: 500;">CARD NUMBER</MudText>
+            <MudText Typo="Typo.h6" Style="font-weight: 600;">1234 5678 9012 3456</MudText>
+        </div>
+        <div class="d-flex justify-space-between">
+            <div>
+                <MudText Typo="Typo.caption" Style="font-weight: 600;">CARD HOLDER</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">JOHN DOE</MudText>
+            </div>
+            <div>
+                <MudText Typo="Typo.caption" Style="font-weight: 600;">VALID THRU</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">03/2025</MudText>
+            </div>
+        </div>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="my-7 card-style">
+    <MudCardContent Class="d-flex flex-column justify-space-between card-style-4" Style="height: 230px;">
+        <MudText Typo="Typo.h6" Style="font-weight: 800;">GOLD MEMBER</MudText>
+        <div>
+            <MudText Typo="Typo.caption" Class="mud-text-secondary" Style="font-weight: 500;">MEMBER ID</MudText>
+            <MudText Typo="Typo.h6" Style="font-weight: 700;" Class="mud-text-secondary">1234567890123456</MudText>
+        </div>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between" Style="background-color: transparent">
+            <div>
+                <MudText Typo="Typo.caption" Class="mud-text-secondary" Style="font-weight: 600;">MEMBER NAME</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">JOHN DOE</MudText>
+            </div>
+            <div>
+                <MudText Typo="Typo.caption"  Class="mud-text-secondary" Style="font-weight: 600;">DATE JOIN</MudText>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;">03/2025</MudText>
+            </div>
+        </MudPaper>
+    </MudCardContent>
+</MudCard>

@@ -1,0 +1,251 @@
+﻿@page "/learning-style3"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<CourseStyle3> _localizer
+
+<style>
+    .card-style {
+        border-radius: 25px;
+    }
+
+    .card-style-1 {
+        background-image: url(/images/pictures_vertical/bg1.jpg);
+        background-size: cover !important;
+        background-position: center center !important;
+        border-radius: 25px;
+    }
+
+    .card-hero {
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+    <MudPaper Elevation="3" Class="px-4 mx-n4 mt-n10 pt-10 pb-12 mud-theme-primary" Style="border-radius: 0px 0px 30px 30px;" Outlined="false">
+        <MudGrid Class="mt-n5 pb-5">
+            <MudItem xs="12">
+                <MudPaper Elevation="0" Style="background-color: transparent" Class="d-flex justify-space-between pa-0">
+                    <MudPaper Elevation="0" Style="background-color: transparent" Class="pa-0 mr-2 align-self-center">
+                        <MudText Typo="Typo.subtitle1" Style="@($" color:{Colors.Shades.White}; font-weight: 400;")">Welcome back,</MudText>
+                        <MudText Color="Color.Default" Typo="Typo.subtitle1" Class="mt-n2" Style="@($" color:{Colors.Shades.White}; font-weight: 600;")">JOHN DOE</MudText>
+                    </MudPaper>
+                    <MudPaper Elevation="0" Style="background-color: transparent" Class="pa-0 mr-0 align-self-center">
+                        <MudAvatar Image="/images/pictures/faces/3s.png" Style="height: 50px; width: 50px;"> </MudAvatar>
+                    </MudPaper>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    <MudCard Elevation="25" Class="mt-n15 mb-8 mud-theme-primary rounded-xl card-style">
+        <MudCardContent Class="d-flex flex-column justify-space-between card-style-1" Style="height: 500px; width: 100%;">
+           <div class="d-flex flex-column mt-auto align-center">
+                <MudText Align="Align.Center" Typo="Typo.h4" Style="font-weight: 700;">DCMS.Blazor</MudText>                     
+                <MudText Class="my-3" Align="Align.Center" Typo="Typo.caption" Style="font-weight: 500;">Learn how Blazor WebAssembly works and start integrating it to your project.</MudText>
+                <MudButton Class="mb-n8 px-10 rounded-lg align-self-center" Color="Color.Primary" Variant="Variant.Filled">Join Course</MudButton>
+           </div>
+        </MudCardContent>
+    </MudCard>                
+
+    <div class="hz-container py-5">
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="fas fa-layer-group" Color="Color.Error" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Align="Align.Center" Style="font-weight: 500;" Class="align-self-center" Color="@Color.Surface">Eye Friendly</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Light and Dark mode</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="@Icons.Material.TwoTone.AddToHomeScreen" Color="Color.Tertiary" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">PWA Ready</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Install like apps</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="fas fa-laptop-code" Color="Color.Info" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">MudBlazor</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Amazing components</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="fas fa-globe" Color="Color.Success" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">WebAssembly</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Run in all browsers</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="@Icons.Material.Filled.ImportantDevices" Color="Color.Primary" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">Modern SPA</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Build modern web app</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="fas fa-tasks" Color="Color.Error" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">Project/ Tasks</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Speed up development</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="fas fa-heartbeat" Color="Color.Tertiary" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">Socials Health</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Speed up development</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="fas fa-shopping-bag" Color="Color.Secondary" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">E-Commerce</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Speed up development</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-3">
+            <MudCardContent Style="width: 150px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIconButton Icon="fas fa-wallet" Color="Color.Warning" Class="pa-3 align-self-center" Size="Size.Large"></MudIconButton>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Align="Align.Center" Class="align-self-center" Color="@Color.Surface">E-Wallet</MudText>
+                <MudText Typo="Typo.caption" Class="align-self-center" Align="Align.Center" Color="@Color.Default">Speed up development</MudText>
+            </MudCardContent>
+        </MudCard>
+    </div>
+
+    <MudPaper Elevation="0" Class="px-4 mx-n4 my-5 py-5 mud-theme-primary" Outlined="false" Square="true">
+        <MudText Typo="Typo.h6" Style="font-weight: 600; text-align: left;">Course Highlights</MudText>
+        <MudText Typo="Typo.caption" Style="text-align: left;">What you'll be learning from our course.</MudText>
+
+        <MudCard Elevation="25" Class="my-5 rounded-xl">
+            <MudCardContent>
+                <MudGrid Spacing="1">
+                    <MudItem xs="12" sm="12" md="12">
+                        <MudCard Elevation="0" Class="d-flex flex-row justify-space-between rounded-xl pa-0">
+                            <MudCardContent Class="px-0">
+                                <MudText Typo="Typo.subtitle1" Color="@Color.Default" Style="font-weight: 600;">Weddings</MudText>
+                                <MudText Class="align-self-center" Typo="Typo.caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta a ex ac iaculis.</MudText>
+                            </MudCardContent>
+                            <MudCardMedia Image="/images/pictures/28.jpg" Class="rounded-lg align-self-center" Style="height: 100px; min-width: 100px; max-width: 100px; " />
+                        </MudCard>
+                    </MudItem>
+
+                    <MudItem xs="12" sm="12" md="12">
+                        <MudCard Elevation="0" Class="d-flex flex-row justify-space-between rounded-xl pa-0">
+                            <MudCardContent Class="px-0">
+                                <MudText Typo="Typo.subtitle1" Color="@Color.Default" Style="font-weight: 600;">Baby Showers</MudText>
+                                <MudText Class="align-self-center" Typo="Typo.caption">Integer maximus quis sem a posuere. Proin posuere velit sit amet metus rhoncus, ut lobortis lectus feugiat.</MudText>
+                            </MudCardContent>
+                            <MudCardMedia Image="/images/pictures/27.jpg" Class="rounded-lg align-self-center" Style="height: 100px; min-width: 100px; max-width: 100px; " />
+                        </MudCard>
+                    </MudItem>
+
+                    <MudItem xs="12" sm="12" md="12">
+                        <MudCard Elevation="0" Class="d-flex flex-row justify-space-between rounded-xl pa-0">
+                            <MudCardContent Class="px-0">
+                                <MudText Typo="Typo.subtitle1" Color="@Color.Default" Style="font-weight: 600;">Birthday Parties</MudText>
+                                <MudText Class="align-self-center" Typo="Typo.caption">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta a ex ac iaculis.</MudText>
+                            </MudCardContent>
+                            <MudCardMedia Image="/images/pictures/26.jpg" Class="rounded-lg align-self-center" Style="height: 100px; min-width: 100px; max-width: 100px; " />
+                        </MudCard>
+                    </MudItem>
+
+                    <MudItem xs="12" sm="12" md="12">
+                        <MudButton Class="my-1 rounded-lg" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Join Course</MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudPaper>
+
+    <MudGrid Class="mb-5" Spacing="2">
+        <MudItem xs="4" sm="4" md="4">
+            <MudCard Elevation="25" Class="rounded-xl">
+                <MudCardContent Class="d-flex flex-column mb-1 mt-1 px-1 py-5">
+                    <MudIconButton Icon="fab fa-facebook" Class="align-self-center" Color="Color.Primary" Size="Size.Large"></MudIconButton>
+                    @*<MudAvatar Elevation="0" Image="/images/icons/14.png" Class="align-self-center" Style="height: 50px; width: 50px;"> </MudAvatar>*@
+                    <MudText Typo="Typo.caption" Color="Color.Default" Align="Align.Center" Class="mt-1">Like Our Page</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="4" sm="4" md="4">
+            <MudCard Elevation="25" Class="rounded-xl">
+                <MudCardContent Class="d-flex flex-column mb-1 mt-1 px-1 py-5">
+                    <MudIconButton Icon="fab fa-instagram" Class="align-self-center" Color="Color.Secondary" Size="Size.Large"></MudIconButton>
+                    @*<MudAvatar Elevation="0" Image="/images/icons/9.png" Class="align-self-center" Style="height: 50px; width: 50px;"> </MudAvatar>*@
+                    <MudText Typo="Typo.caption" Color="Color.Default" Align="Align.Center" Class="mt-1">Our Stories</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="4" sm="4" md="4">
+            <MudCard Elevation="25" Class="rounded-xl">
+                <MudCardContent Class="d-flex flex-column mb-1 mt-1 px-1 py-5">
+                    <MudIconButton Icon="fab fa-twitter" Class="align-self-center" Color="Color.Tertiary" Size="Size.Large"></MudIconButton>
+                    @*<MudAvatar Elevation="0" Image="/images/icons/13.png" Class="align-self-center" Style="height: 50px; width: 50px;"> </MudAvatar>*@
+                    <MudText Typo="Typo.caption" Color="Color.Default" Align="Align.Center" Class="mt-1">Our Tweets</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+
+    <MudCard Elevation="25" Class="rounded-xl my-5">
+        <MudCardContent>
+            <MudGrid Spacing="2">
+                <MudItem xs="12">
+                    <MudText Color="Color.Primary" Align="Align.Center" Typo="Typo.h6" Style="font-weight: 600;">Simple and Easy</MudText>
+                    <MudText Color="Color.Default" Align="Align.Center" Typo="Typo.caption" Style="text-align: center; display: block; margin-left: 15px; margin-right: 15px;">Our customers love our professionalism and speed of delivery. We love each event.</MudText>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider DividerType="DividerType.Middle" Class="mx-15" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <div class="d-flex flex-row">
+                        <MudIconButton Icon="@Icons.Material.TwoTone.CalendarToday" Class="align-self-center" Color="Color.Primary" Size="Size.Large"></MudIconButton>
+                        @*<MudAvatar Image="/images/018-send.png" Class="pa-0 mr-5 align-self-center" Style="height:45px; width:45px;"></MudAvatar>*@
+                        <div>
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Book your Event</MudText>
+                            <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Default">Let's talk about what you need. We're here to listen to your plans and make them a reality.</MudText>
+                        </div>
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <div class="d-flex flex-row">
+                        <MudIconButton Icon="@Icons.Material.TwoTone.CameraAlt" Class="align-self-center" Color="Color.Tertiary" Size="Size.Large"></MudIconButton>
+                        @*<MudAvatar Image="/images/004-configuration.png" Class="pa-0 mr-5 align-self-center" Style="height:45px; width:45px;"></MudAvatar>*@
+                        <div>
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Enjoy your Event</MudText>
+                            <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Default">Don't worry about us. We'll be there capturing every gorgeous moment. Enjoy your spotlight!</MudText>
+                        </div>
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <div class="d-flex flex-row">
+                        <MudIconButton Icon="@Icons.Material.TwoTone.CardGiftcard" Class="align-self-center" Color="Color.Secondary" Size="Size.Large"></MudIconButton>
+                        @*<MudAvatar Image="/images/001-upload.png" Class="pa-0 mr-5 align-self-center" Style="height:45px; width:45px;"></MudAvatar>*@
+                        <div>
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Remember it Forever</MudText>
+                            <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Default">In no time flat after your event, we'll deliver the pack agreed via our initial call. It's that easy!</MudText>
+                        </div>
+                    </div>
+                </MudItem>
+
+                <div class="my-1"></div>
+
+                <MudItem xs="12" Class="mb-n8 d-flex justify-center">
+                    <MudButton Class="rounded-lg px-5" Color="Color.Primary" Variant="Variant.Filled">Join Course Today</MudButton>
+                </MudItem>
+                
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+}

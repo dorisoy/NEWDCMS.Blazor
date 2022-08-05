@@ -1,0 +1,134 @@
+﻿@page "/components/file-upload"
+@using DCMS.Application.Models
+@inject ISnackbar Snackbar
+@inject Microsoft.Extensions.Localization.IStringLocalizer<FileUpload> _localizer
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Use any type of MudButton </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Use a MudButton, a MudIconButton or a MudFab with the HtmlTag property set to "label" in combination with a hidden InputFile. That way, the MudButton will render a label element. </MudText>
+
+<InputFile id="fileInput" OnChange="UploadFiles" hidden multiple />
+
+<MudGrid>
+    <MudItem xs="12">
+        <div Class="d-flex flex-wrap mt-4">
+            <MudButton HtmlTag="label" Class="ma-2"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Filled.CloudUpload"
+                       for="fileInput">
+                Upload Files
+            </MudButton>
+
+            <MudFab HtmlTag="label" Class="ma-2"
+                    Color="Color.Secondary"
+                    Icon="@Icons.Filled.Image"
+                    Label="Load picture"
+                    for="fileInput" />
+
+            <MudFab HtmlTag="label" Class="ma-2"
+                    Color="Color.Success"
+                    Icon="@Icons.Filled.AttachFile"
+                    for="fileInput" />
+
+            <MudIconButton HtmlTag="label" Class="ma-2"
+                           Color="Color.Info"
+                           Icon="@Icons.Filled.PhotoCamera"
+                           for="fileInput">
+            </MudIconButton>
+        </div>
+    </MudItem>
+</MudGrid>
+
+
+@if (files != null)
+{
+    <MudText Typo="@Typo.h6">@files.Count() File@(files.Count() == 1 ? "" : "s"):</MudText>
+    <MudList>
+        @foreach (var file in files)
+        {
+            <MudListItem Icon="@Icons.Filled.AttachFile" @key="@file">
+                @file.Name <code>@file.Size bytes</code>
+            </MudListItem>
+        }
+    </MudList>
+}
+
+<MudText Color="Color.Default" Class="mt-3 mb-1" Typo="Typo.h6"> Use a standard label </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Use an html label styled to your liking in combination with a hidden InputFile. </MudText>
+<MudGrid Class="my-3">
+    <MudItem xs="12">
+        <label style="
+        box-shadow: 0 2px 7px #4caf50;
+        display: inline-flex;
+        width: 150px;
+        justify-content: space-around;
+        border-radius: 2em;
+        color: white;
+        border:2px solid;
+        cursor: pointer;
+        align-items: center;
+        padding:16px;
+        background-color: #4caf50;"
+               for="fileInput2">
+            Upload <MudIcon Icon="@Icons.Filled.CloudUpload" />
+        </label>
+    </MudItem>
+</MudGrid>
+
+<InputFile id="fileInput2" OnChange="UploadFiles" hidden multiple />
+
+@if (files != null)
+{
+    <MudList>
+        @foreach (var file in files)
+        {
+            <MudListItem Icon="@Icons.Filled.AttachFile">
+                @file.Name <code>@file.Size bytes</code>
+            </MudListItem>
+        }
+    </MudList>
+}
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Use a standard label </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Use an html label styled to your liking in combination with a hidden InputFile. </MudText>
+<InputFile id="fileInput112" OnChange="UploadFiles1" hidden multiple accept=".jpg, .jpeg, .png" />
+<MudGrid Class="my-3">
+    <MudItem xs="12">
+        <MudButton HtmlTag="label"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Filled.CloudUpload"
+                   for="fileInput112">
+            Upload your images
+        </MudButton>
+    </MudItem>
+</MudGrid>
+
+
+@code
+{
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    private void UploadFiles(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles())
+        {
+            files.Add(file);
+        }
+        //TODO upload the files to the server
+    }
+
+    private void UploadFiles1(InputFileChangeEventArgs e)
+    {
+        var entries = e.GetMultipleFiles();
+        //Do your validations here
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+        Snackbar.Add($"Files with {entries.FirstOrDefault().Size} bytes size are not allowed", Severity.Error);
+        Snackbar.Add($"Files starting with letter {entries.FirstOrDefault().Name.Substring(0, 1)} are not recommended", Severity.Warning);
+        Snackbar.Add($"This file has the extension {entries.FirstOrDefault().Name.Split(".").Last()}", Severity.Info);
+
+        //TODO upload the files to the server
+    }
+}
+
+
+

@@ -1,0 +1,25 @@
+﻿@page "/news"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<News> _localizer
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+<MudGrid Class="mb-5" Spacing="2">
+    @foreach (var item in _postList)
+    {
+        <MudItem xs="12" sm="6" md="6">
+            <MudCard Elevation="25" Class="d-flex flex-row rounded-lg" Style="height:150px;"  @onclick="@(() => OpenPostDetails(item.Id))">
+                <MudCardMedia Image="@item.Image" Class="rounded-lg" Style="height:150px; min-width: 130px; max-width:130px;"  />
+                <MudCardContent Class="d-flex align-content-space-between flex-wrap px-3 py-2" Style="height:150px;">
+                    <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Color="@Color.Primary" >@item.Title</MudText>
+                    <MudText Typo="Typo.body1">@item.ShortDesc</MudText>
+                    <MudText Typo="Typo.subtitle1" Style="font-weight: 500;" Color="@Color.Secondary" Class="mud-text-secondary">@item.PostedDate </MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+}

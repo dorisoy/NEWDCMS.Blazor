@@ -1,0 +1,296 @@
+﻿@page "/project-home2"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<HomePage2> _localizer
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+    <MudPaper Elevation="3" Height="150" Class="px-4 mx-n4 mt-n10 py-10 mud-theme-primary" Style="border-radius: 0px 0px 45px 45px;" Outlined="false">
+        <MudPaper Elevation="0" Class="py-0">
+
+        </MudPaper>
+    </MudPaper>
+
+    <MudCard Elevation="25" Class="mt-n10 rounded-xl">
+        <MudCardContent>
+            <MudGrid Class="mb-3">
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6" Style="font-weight: 700;" Color="Color.Default">Today Tasks</MudText>
+                    <MudText Typo="Typo.caption">Marked as Important for Today. </MudText>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-heart" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Error" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Create Task Pages</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Essential for Customers</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-check" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Success" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Create New Page</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">With New Design Patterns</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-gem" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Info" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Upgrade Components</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">More Powerful Features</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-bolt" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Warning" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Load Faster</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">More Powerful Features</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-mobile-alt" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Success" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Release PWA Version</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">More Powerful Features</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-book" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Tertiary" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Update Documentation</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Easier and More Details</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+
+    <div class="d-flex flex-row justify-space-between mt-10 mb-2">
+        <MudText Color="Color.Default" Class="mx-3" Style="font-weight: 700;" Typo="Typo.h6">To Do List</MudText>
+        <MudText Color="Color.Primary" Class="ml-auto" Typo="Typo.subtitle2">View All</MudText>
+    </div>
+    <div class="hz-container pb-3">
+        <MudCard Elevation="25" Class="rounded-xl mr-5">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="fas fa-layer-group" Color="Color.Error" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Align="Align.Left" Style="font-weight: 600;" Color="@Color.Surface">Homepage Design Task</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">High</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-5">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="@Icons.Material.TwoTone.AddToHomeScreen" Color="Color.Tertiary" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Align="Align.Left" Color="@Color.Surface">Create Task List Design Task</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">Medium</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-5">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="fas fa-laptop-code" Color="Color.Info" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Align="Align.Left" Color="@Color.Surface">Have A Pizza Task</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">Urgent</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-5">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="fas fa-globe" Color="Color.Success" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Align="Align.Left" Color="@Color.Surface">Custom Components Design Task</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">Low</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-5">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="@Icons.Material.Filled.ImportantDevices" Color="Color.Primary" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Align="Align.Left" Color="@Color.Surface">Design Task Categories Page</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">Medium</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-5">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="fas fa-heartbeat" Color="Color.Tertiary" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Align="Align.Left" Color="@Color.Surface">Implement Chat Module Task</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">Medium</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl mr-5">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="fas fa-shopping-bag" Color="Color.Secondary" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Align="Align.Left" Color="@Color.Surface">Have A Coffee Task</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">Low</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Elevation="25" Class="rounded-xl">
+            <MudCardContent Style="width: 160px;" Class="d-flex flex-column mb-1 mt-1">
+                <MudIcon Icon="fas fa-wallet" Color="Color.Warning" Class="mb-3" Size="Size.Large"></MudIcon>
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Align="Align.Left" Color="@Color.Surface">Improving UIUX Design Task</MudText>
+                <MudText Typo="Typo.caption" Align="Align.Left" Color="@Color.Default">Medium</MudText>
+            </MudCardContent>
+        </MudCard>
+    </div>
+
+    <MudCard Elevation="25" Class="mt-7 rounded-xl">
+        <MudCardContent>
+            <MudGrid Class="mb-3">
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6" Style="font-weight: 700;" Color="Color.Default">Overdue Tasks</MudText>
+                    <MudText Typo="Typo.caption">Marked as Important for Today. </MudText>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-heart" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Error" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Create Task Pages</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Essential for Customers</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-check" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Success" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Create New Page</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">With New Design Patterns</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-gem" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Info" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Upgrade Components</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">More Powerful Features</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-bolt" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Warning" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Load Faster</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">More Powerful Features</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-mobile-alt" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Success" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Release PWA Version</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">More Powerful Features</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12" sm="12" md="12">
+                    <MudPaper Elevation="0" Class="d-flex pa-0">
+                        <MudIconButton Icon="fas fa-book" Variant="Variant.Filled" Class="ml-0 align-self-center" Color="Color.Tertiary" Size="Size.Medium"></MudIconButton>
+                        <MudPaper Elevation="0" Class="pa-0 mx-5 align-self-center">
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="@Color.Default">Update Documentation</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Easier and More Details</MudText>
+                        </MudPaper>
+                        <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                            <MudIcon Icon="@Icons.Material.TwoTone.ArrowRight" Color="Color.Default" Class="mx-3 ml-auto align-self-center" Size="Size.Medium"></MudIcon>
+                        </MudPaper>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+}

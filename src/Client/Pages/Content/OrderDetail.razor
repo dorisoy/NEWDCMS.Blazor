@@ -1,0 +1,271 @@
+﻿@page "/orderhistory/detail"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<OrderDetail> _localizer
+@inject IDialogService DialogService
+
+<MudBreadcrumbs Items="_routes"></MudBreadcrumbs>
+
+<MudCard Elevation="25" Class="rounded-lg">
+    <MudCardContent>
+        <MudGrid Class="mb-2" Spacing="3">
+            <MudItem xs="12">
+                <MudPaper Elevation="0" Class="d-flex pa-0">
+                    <MudPaper Elevation="0" Class="pa-0 mr-2 align-self-center">
+                        <MudText Typo="Typo.h6" Style="font-weight: 600;">DCMS.Blazor</MudText>
+                        <MudText Typo="Typo.body1" Color="@Color.Primary">Friendly Progressive Web App Template</MudText>
+                    </MudPaper>
+                    <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                        <MudCardMedia Image="/images/icon-512.png" Style="height:60px; width:60px;"> </MudCardMedia>
+                    </MudPaper>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider Class="mt-1 mb-3"></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Date</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">15th June 2025</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Invoice No.</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">#134562463</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Order No.</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">#341531</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="rounded-lg mt-5">
+    <MudCardContent>
+        <MudGrid Class="mb-2" Spacing="3">
+            <MudItem xs="12">
+                <MudPaper Elevation="0" Class="d-flex pa-0">
+                    <MudPaper Elevation="0" Class="pa-0 mr-2 align-self-center">
+                        <MudText Typo="Typo.h6" Style="font-weight: 600;">Invoice To</MudText>
+                        <MudText Typo="Typo.body1" Color="@Color.Primary">Your company information will be placed here.</MudText>
+                    </MudPaper>
+                    <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                        <MudCardMedia Image="/images/icons/9.png" Style="height:60px; width:60px;"> </MudCardMedia>
+                    </MudPaper>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12">
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Name</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">John Doe</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Company</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">YourCo Web Design LTD</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Address</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Collins Street West Victoria 8007</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Country</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Australia</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">City/State</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Victoria, Melbourne</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">PO Box</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">16122</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">VAT Number</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">1234567890</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="rounded-lg mt-5">
+    <MudCardContent>
+        <MudGrid Class="mb-2" Spacing="3">
+            <MudItem xs="12">
+                <MudPaper Elevation="0" Class="d-flex pa-0">
+                    <MudPaper Elevation="0" Class="pa-0 mr-2 align-self-center">
+                        <MudText Typo="Typo.h6" Style="font-weight: 600;">Invoice From</MudText>
+                        <MudText Typo="Typo.body1" Color="@Color.Primary">Our company information will be placed here.</MudText>
+                    </MudPaper>
+                    <MudPaper Elevation="0" Class="pa-0 mr-0 ml-auto align-self-center">
+                        <MudCardMedia Image="/images/icon-512.png" Style="height:60px; width:60px;"> </MudCardMedia>
+                    </MudPaper>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12">
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Name</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">TLS Software</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Company</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">YourCo Web Design LTD</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600; " Typo="Typo.body1">Address</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Collins Street West Victoria 8007</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Country</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Australia</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">City/State</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Victoria, Melbourne</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">PO Box</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">16122</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">VAT Number</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">1234567890</MudText>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<MudCard Elevation="25" Class="rounded-lg mt-5">
+    <MudCardContent>
+        <MudGrid Class="mb-3" Spacing="3">
+            <MudItem xs="12">
+                <MudText Typo="Typo.h6" Style="font-weight: 600;">Invoice Details</MudText>
+                <MudText Typo="Typo.body1">
+                    Products and totals will go here.
+                </MudText>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudText Style="font-weight: 600;" Typo="Typo.subtitle2">Items</MudText>
+            </MudItem>
+            <MudItem xs="2">
+                <MudText Style="font-weight: 600;" Align="Align.Center" Typo="Typo.subtitle2">Q.ty</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Align="Align.Right" Typo="Typo.subtitle2">Amount</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider Class="mt-0 mb-1"></MudDivider>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1">Blazor Mobile and PWA Template</MudText>
+            </MudItem>
+            <MudItem xs="2">
+                <MudText Typo="Typo.body1" Align="Align.Center">1</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <MudText Typo="Typo.body1" Align="Align.Right">$23.99</MudText>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1">StickyMobile and PWA Template</MudText>
+            </MudItem>
+            <MudItem xs="2">
+                <MudText Typo="Typo.body1" Align="Align.Center">1</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <MudText Typo="Typo.body1" Align="Align.Right">$23.99</MudText>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudText Typo="Typo.body1">Customization Services billed at $30/ hour</MudText>
+            </MudItem>
+            <MudItem xs="2">
+                <MudText Typo="Typo.body1" Align="Align.Center">10</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <MudText Typo="Typo.body1" Align="Align.Right">$300</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider Class="mb-1"></MudDivider>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudText Style="font-weight: 600;" Typo="Typo.subtitle2">Total</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Style="font-weight: 600;" Typo="Typo.subtitle2" Align="Align.Right">$348</MudText>
+            </MudItem>
+
+            <MudItem xs="6">
+                <MudText Style="font-weight: 600;" Typo="Typo.subtitle2">Status</MudText>
+            </MudItem>
+            <MudItem xs="6">
+                <MudText Style="font-weight: 600;" Typo="Typo.subtitle2" Align="Align.Right" Color="@Color.Success">Paid In Full</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider Class="my-1"></MudDivider>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudContainer Fixed="true" Class="px-0">
+                    <MudButton FullWidth="true" Class="rounded-lg" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Theme.Palette.SuccessDarken};")">Download Invoice </MudButton>
+                </MudContainer>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>

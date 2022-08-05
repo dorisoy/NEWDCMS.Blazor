@@ -1,0 +1,104 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<MainLayout> _localizer
+
+
+<MudAppBar Elevation="0">
+	<MudToolBar DisableGutters="true">
+		<MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer" />
+	</MudToolBar>
+	<MudSpacer />
+	<MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+
+		<LanguageSelector />
+		<MudTooltip Text="RTL模式">
+			<MudToggleIconButton Icon="@Icons.Outlined.FormatTextdirectionRToL" ToggledIcon="@Icons.Outlined.FormatTextdirectionLToR" Color="Color.Inherit" ToggledColor="Color.Inherit" ToggledChanged="RightToLeftToggle" />
+		</MudTooltip>
+		<MudTooltip Text="暗主题">
+			<MudToggleIconButton Icon="@Icons.Material.Outlined.DarkMode" ToggledIcon="@Icons.Material.Outlined.LightMode" Color="Color.Inherit" ToggledColor="Color.Inherit" ToggledChanged="ToggleDarkMode" />
+		</MudTooltip>
+
+		<MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+			<ActivatorContent>
+				@if (string.IsNullOrEmpty(ImageDataUrl))
+				{
+					<MudAvatar Color="Color.Secondary">@FirstLetterOfName</MudAvatar>
+				}
+				else
+				{
+					<MudAvatar Image="@ImageDataUrl" Style="height:50px; width:50px;"> </MudAvatar>
+				}
+			</ActivatorContent>
+			<ChildContent>
+				<UserCard Class="mt-n2" />
+				<MudDivider Class="mb-2" />
+				<MudListItem Text="账户" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+				<MudListItem Text="设置" Href="/settings" Icon="@Icons.Material.Outlined.SettingsApplications" />
+				<MudListItem Text="注销" Icon="@Icons.Material.Filled.Logout" IconColor="Color.Error" OnClick="Logout" />
+			</ChildContent>
+		</MudMenu>
+	</MudHidden>
+	<MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="false">
+		<MudTooltip Text="RTL模式">
+			<MudToggleIconButton Icon="@Icons.Outlined.FormatTextdirectionRToL" ToggledIcon="@Icons.Outlined.FormatTextdirectionLToR" Color="Color.Inherit" ToggledColor="Color.Inherit" ToggledChanged="RightToLeftToggle" />
+		</MudTooltip>
+		<MudTooltip Text="暗主题">
+			<MudToggleIconButton Icon="@Icons.Material.Outlined.DarkMode" ToggledIcon="@Icons.Material.Outlined.LightMode" Color="Color.Inherit" ToggledColor="Color.Inherit" ToggledChanged="ToggleDarkMode" />
+		</MudTooltip>
+	</MudHidden>
+</MudAppBar>
+
+@*
+	<MudDrawerContainer Class="mud-height-full">*@
+
+<MudDrawer @bind-Open="@open"
+		   ClipMode="clipMode"
+		   Breakpoint="@breakpoint"
+		   PreserveOpenState="@(false)"
+		   Variant="@DrawerVariant.Persistent"
+		   Color="Color.Dark"
+		   Elevation="0">
+
+	<MudDrawerHeader Class="d-flex justify-center align-content-center"
+					 Style="background-color:var(--mud-palette-dark) !important;">
+		<MudText Typo="Typo.h6"
+				 Style="@($"color:{Colors.Shades.White};font-weight:bold")">DCMS</MudText>
+	</MudDrawerHeader>
+	<NavMenu />
+</MudDrawer>
+
+<MudMainContent>
+	<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+		<CascadingValue Value="hubConnection">
+			@ChildContent
+		</CascadingValue>
+	</MudContainer>
+	<div style="height: 80px">
+	</div>
+	<MudHidden Breakpoint="Breakpoint.MdAndDown" Invert="true">
+		<BottomNavMenu>
+			<BottomNavMenuItem Href="/stores" Match="NavLinkMatch.All" Icon="@Icons.Material.TwoTone.LocationOn" IconColor="Color.Error" Title="应用"></BottomNavMenuItem>
+			<BottomNavMenuItem Href="/shopping" Match="NavLinkMatch.All" Icon="@Icons.Material.TwoTone.ShoppingBag" IconColor="Color.Primary" Title="消息"></BottomNavMenuItem>
+			<BottomNavMenuItem Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.TwoTone.Cottage" IconColor="Color.Secondary" Title="首页"></BottomNavMenuItem>
+			<BottomNavMenuItem Href="/pages" Match="NavLinkMatch.All" Icon="@Icons.Material.TwoTone.Pages" IconColor="Color.Tertiary" Title="通知"></BottomNavMenuItem>
+			<BottomNavMenuItem Href="/settings" Match="NavLinkMatch.All" Icon="@Icons.Material.TwoTone.Settings" IconColor="Color.Warning" Title="设置"></BottomNavMenuItem>
+		</BottomNavMenu>
+	</MudHidden>
+</MudMainContent>
+
+@*</MudDrawerContainer>*@
+
+
+
+@code {
+	bool open = false;
+	bool dense = false;
+	bool preserveOpenState = false;
+	Breakpoint breakpoint = Breakpoint.Lg;
+	DrawerClipMode clipMode = DrawerClipMode.Never;
+
+	void ToggleDrawer()
+	{
+		open = !open;
+	}
+}
+
+

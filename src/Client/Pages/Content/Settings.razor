@@ -1,0 +1,86 @@
+﻿@page "/settings"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Settings> _localizer
+@inject IDialogService DialogService
+
+<MudText Color="Color.Primary" Class="mt-5 mb-1" Typo="Typo.h6">Utilities</MudText>
+<MudGrid Spacing="2">
+    <MudItem xs="6" sm="6" md="4">
+        <MudCard Elevation="25" Class="rounded-xl" @onclick="@(() => NavigateToOrderHistory())">
+            <MudCardContent>
+                <div class="mb-1">
+                    <MudIcon Icon="@Icons.Material.Filled.History" Color="Color.Success" Size="Size.Large" Title="Orders" />
+                </div>
+                <MudText Typo="Typo.body1" Align="Align.Left">Order history</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="6" sm="6" md="4">
+        <MudCard Elevation="25" Class="rounded-xl">
+            <MudCardContent>
+                <div class="mb-1">
+                    <MudIcon Icon="@Icons.Material.Filled.Loyalty" Color="Color.Warning" Size="Size.Large" Title="Rewards" />
+                </div>
+                <MudText Typo="Typo.body1" Align="Align.Left">Store rewards</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="12" md="4">
+        <MudCard Elevation="25" Class="rounded-xl">
+            <MudCardContent>
+                <div class="mb-1">
+                    <MudIcon Icon="@Icons.Material.Filled.GifBox" Color="Color.Error" Size="Size.Large" Title="Vouchers" />
+                </div>
+                <MudText Typo="Typo.body1" Align="Align.Left">Vouchers</MudText>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudText Color="Color.Primary" Class="mt-5 mb-1" Typo="Typo.h6">Account</MudText>
+<MudCard Elevation="25" Class="rounded-xl">
+    <MudCardContent Class="page-bg py-3">
+        <MudList Clickable="true" Class="py-0">
+            <MudListItem OnClick="(() => InvokeAccountInfoModal())" Text="Account Info" Icon="@Icons.Material.Filled.AccountCircle" />
+            <MudDivider />
+            <MudListItem Text="Payment" Icon="@Icons.Material.Filled.CreditCard" />
+            <MudDivider />
+            <MudListItem Text="Settings" Icon="@Icons.Material.Filled.Settings" />
+            <MudDivider />
+            <MudListItem OnClick="(() => InvokeLanguageSelectionModal())" Text="Language" Icon="@Icons.Material.Filled.Language" />
+            <MudDivider />
+            <MudListItem Text="@_localizer["Logout"]" IconColor="Color.Error" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
+        </MudList>
+    </MudCardContent>
+</MudCard>
+
+<MudText Color="Color.Primary" Class="mt-5 mb-1" Typo="Typo.h6">System</MudText>
+<MudCard Elevation="25" Class="rounded-xl">
+    <MudCardContent Class="page-bg py-3">
+        <MudList Class="py-0">
+            <MudListItem Icon="@Icons.Material.Filled.Brightness4" >
+                <MudPaper Elevation="0" Class="pa-0 d-flex justify-space-between">
+                    <MudText Typo="Typo.body1" Color="Color.Default" Class="align-self-center">Dark Mode</MudText>
+                    <MudSwitch CheckedChanged="@((e) => ToggleDarkModeAsync(e))" T="bool" Checked="@DarkMode" Color="Color.Tertiary" Class="align-self-center mr-n5" />
+                </MudPaper>
+            </MudListItem>
+            <MudDivider />
+            <MudListItem Icon="@Icons.Material.Filled.FormatTextdirectionRToL">
+                <MudPaper Elevation="0" Class="pa-0 d-flex justify-space-between">
+                    <MudText Typo="Typo.body1" Color="Color.Default" Class="align-self-center">RTL Mode</MudText>
+                    <MudSwitch CheckedChanged="@((e) => ToggleRTLModeAsync(e))" T="bool" Checked="@IsRTL" Color="Color.Tertiary" Class="align-self-center mr-n5" />
+                </MudPaper>
+            </MudListItem>
+        </MudList>
+    </MudCardContent>
+</MudCard>
+
+<MudText Color="Color.Primary" Class="mt-5 mb-1" Typo="Typo.h6">Support</MudText>
+<MudCard Elevation="25" Class="rounded-xl">
+    <MudCardContent Class="page-bg py-3">
+        <MudList Clickable="true" Class="py-0">
+            <MudListItem Text="Terms" Icon="@Icons.Material.Filled.FilePresent" />
+            <MudDivider />
+            <MudListItem Text="Help" Icon="@Icons.Material.Filled.Help" />
+        </MudList>
+    </MudCardContent>
+</MudCard>

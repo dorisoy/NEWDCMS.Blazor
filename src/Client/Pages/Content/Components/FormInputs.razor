@@ -1,0 +1,709 @@
+﻿@page "/components/form-inputs"
+@using DCMS.Application.Models
+@inject Microsoft.Extensions.Localization.IStringLocalizer<FormInputs> _localizer
+@using System.ComponentModel.DataAnnotations
+@using System.Text.RegularExpressions
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Autocomplete </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> The Autocomplete component offers simple and flexible type-ahead functionality. It is great for searching a value from a long list of options. </MudText>
+<MudGrid>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Basic Usage</MudText>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <MudAutocomplete T="string" Label="US States" @bind-Value="value1" SearchFunc="@Search1"
+                         ResetValueOnEmptyText="@resetValueOnEmptyText"
+                         CoerceText="@coerceText" CoerceValue="@coerceValue" />
+    </MudItem>
+    <MudItem xs="12" sm="6" md="4">
+        <MudAutocomplete T="string" Label="US States" @bind-Value="value2" SearchFunc="@Search2"
+                         ResetValueOnEmptyText="@resetValueOnEmptyText"
+                         CoerceText="@coerceText" CoerceValue="@coerceValue"
+                         AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" />
+    </MudItem>
+    <MudItem xs="12" md="12">
+        <MudText Class="mb-n3" Typo="Typo.body2">
+            <MudChip>@(value1 ?? "Not selected")</MudChip><MudChip>@(value2 ?? "Not selected")</MudChip>
+        </MudText>
+    </MudItem>
+    <MudItem xs="12" md="12" class="flex-column">
+        <MudSwitch @bind-Checked="resetValueOnEmptyText" Color="Color.Primary">Reset Value on empty Text</MudSwitch>
+        <MudSwitch @bind-Checked="coerceText" Color="Color.Secondary">Coerce Text to Value</MudSwitch>
+        <MudSwitch @bind-Checked="coerceValue" Color="Color.Tertiary">Coerce Value to Text (if not found)</MudSwitch>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Validation</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="4">
+                <EditForm EditContext="editContext1">
+                    <DataAnnotationsValidator />
+                    <MudAutocomplete Label="US States" @bind-Value="choice1.State" Required="true"
+                                     SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
+                                     AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                     For="@(() => choice1.State)" />
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary"
+                               Class="ml-auto mt-3 mb-3" OnClick="@(()=>success1=editContext1.Validate())">Validate</MudButton>
+                    @if (success1)
+                    {
+                        <MudText Color="Color.Success">Success</MudText>
+                    }
+                </EditForm>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <EditForm EditContext="editContext2">
+                    <DataAnnotationsValidator />
+                    <MudAutocomplete Label="US States" @bind-Value="choice2.State" Required="true"
+                                     SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
+                                     OpenIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary"
+                                     Validation="@(new Func<string, IEnumerable<string>>(Validate))" />
+                    <MudButton ButtonType="ButtonType.Button" Variant="Variant.Filled" Color="Color.Primary"
+                               Class="ml-auto mt-3 mb-3" OnClick="@(()=>success2=editContext2.Validate())">Validate</MudButton>
+                    @if (success2)
+                    {
+                        <MudText Color="Color.Success">Success</MudText>
+                    }
+                </EditForm>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudForm @ref="form">
+                    <MudAutocomplete T="string" Label="US States" @bind-Value="choice3.State" Required="true"
+                                     SearchFunc="@SearchAsync" Immediate="true" CoerceValue="@coerceValue" ResetValueOnEmptyText="true"
+                                     CloseIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Tertiary"
+                                     Validation="@(new Func<string, IEnumerable<string>>(Validate))" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto mt-3 mb-3"
+                               OnClick="@(()=>form.Validate())">Validate</MudButton>
+                    @if (form.IsTouched && form.IsValid)
+                    {
+                        <MudText Color="Color.Success">Success</MudText>
+                    }
+                    else
+                    {
+                        <MudText>IsTouched: @form.IsTouched, IsValid: @form.IsValid</MudText>
+                    }
+                </MudForm>
+            </MudItem>
+            <MudItem xs="12" md="12">
+                <MudText Class="mb-n3" Typo="Typo.body2">
+                    <MudChip>@(choice1.State ?? "Not selected")</MudChip><MudChip>@(choice2.State ?? "Not selected")</MudChip><MudChip>@(choice3.State ?? "Not selected")</MudChip>
+                </MudText>
+            </MudItem>
+            <MudItem xs="12" md="12" class="flex-column">
+                <MudSwitch @bind-Checked="coerceValue" Color="Color.Tertiary">Coerce Value to Text (if not found)</MudSwitch>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+
+</MudGrid>
+
+<MudDivider Class="my-3"/>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Checkbox </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> The default variant is normal. In addition to that, outlined and filled is available. </MudText>
+<MudGrid Spacing="1">
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Basic Checkboxes</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudCheckBox @bind-Checked="@Basic_CheckBox1"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Basic_CheckBox2" Color="Color.Primary"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Basic_CheckBox1" Color="Color.Secondary"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Basic_CheckBox1" Disabled="true"></MudCheckBox>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Labels</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudCheckBox @bind-Checked="@Label_CheckBox1" Label="Default"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Label_CheckBox2" Label="Primary" Color="Color.Primary"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Label_CheckBox3" Label="Secondary" Color="Color.Secondary"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Label_CheckBox1" Disabled="true" Label="Disabled"></MudCheckBox>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Icons</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudCheckBox @bind-Checked="@CheckBox1" Color="Color.Secondary" CheckedIcon="@Icons.Material.Filled.Favorite" UncheckedIcon="@Icons.Material.Filled.FavoriteBorder"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@CheckBox2" Color="Color.Tertiary" CheckedIcon="@Icons.Material.Filled.Bookmark" UncheckedIcon="@Icons.Material.Filled.BookmarkBorder"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@CheckBox3" Color="Color.Warning" CheckedIcon="@Icons.Material.Filled.Star" UncheckedIcon="@Icons.Material.Filled.StarOutline"></MudCheckBox>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Dense</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudCheckBox @bind-Checked="@Dense_CheckBox" Dense="true" Color="Color.Success"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Dense_CheckBox" Dense="false" Color="Color.Primary"></MudCheckBox>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Sizes</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudCheckBox @bind-Checked="@Size_CheckBox1" Size="Size.Small" Color="Color.Primary"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Size_CheckBox2" Size="Size.Medium" Color="Color.Secondary"></MudCheckBox>
+        <MudCheckBox @bind-Checked="@Size_CheckBox3" Size="Size.Large" Color="Color.Tertiary"></MudCheckBox>
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3"/>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Form Validation </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> All about checking user input and visualization of errors. </MudText>
+<div style="max-width: 400px;">
+    <MudCard>
+        <MudCardContent>
+            <MudForm @ref="form2" @bind-IsValid="@success" @bind-Errors="@errors">
+                <MudTextField T="string" Label="Username" Required="true" RequiredError="User name is required!" />
+                <MudTextField T="string" Label="Email" Required="true" RequiredError="Email is required!"
+                              Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
+                <MudTextField T="string" Label="Password" HelperText="Choose a strong password" @ref="pwField1"
+                              InputType="InputType.Password"
+                              Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
+                              RequiredError="Password is required!" />
+                <MudTextField T="string"
+                              Label="Password" HelperText="Repeat the password" InputType="InputType.Password"
+                              Validation="@(new Func<string, string>(PasswordMatch))" />
+                <div class="d-flex">
+                    <MudRadioGroup T="string" Required="true" RequiredError="Account type is required!">
+                        <MudRadio Option="@("Personal")">Personal</MudRadio>
+                        <MudRadio Option="@("Professional")">Professional</MudRadio>
+                    </MudRadioGroup>
+                </div>
+                <MudCheckBox T="bool" Required="true" RequiredError="You must agree" Class="ml-n2"
+                             Label="I agree that MudBlazor is awesome!" />
+            </MudForm>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Register</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+    <MudPaper Class="pa-4 justify-center my-4 mud-text-align-center">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(()=>form2.Validate())">Validate</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(()=>form2.Reset())" Class="mx-2">Reset</MudButton>
+        <MudButton Variant="Variant.Filled" OnClick="@(()=>form2.ResetValidation())">Reset Validation</MudButton>
+    </MudPaper>
+
+    <MudExpansionPanels>
+        <MudExpansionPanel Text="@($"Show Errors ({errors.Length})")">
+            @foreach (var error in errors)
+            {
+                <MudText Color="@Color.Error">@error</MudText>
+            }
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+</div>
+
+<MudDivider Class="my-3" />
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Radio </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Radio buttons allow the user to select a single choice from a group of options. </MudText>
+<MudGrid Spacing="1">
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">RadioGroup</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudForm>
+            <MudRadioGroup @bind-SelectedOption="@SelectedOption">
+                <MudRadio Option="@("Radio 1")" Color="Color.Primary">Primary</MudRadio>
+                <MudRadio Option="@("Radio 2")" Color="Color.Secondary">Secondary</MudRadio>
+                <MudRadio Option="@("Radio 3")">Default</MudRadio>
+                <MudRadio Option="@("Radio 4")" Color="Color.Primary" Disabled="true">Disabled</MudRadio>
+            </MudRadioGroup>
+        </MudForm>
+
+        <div class="d-flex align-center">
+            <MudButton Variant="Variant.Outlined" OnClick="Reset">Reset</MudButton>
+            <MudText Class="ml-4">Selected Option: @SelectedOption</MudText>
+        </div>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Dense</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudRadioGroup @bind-SelectedOption="Dense_Radio">
+            <MudRadio Option="true" Color="Color.Primary" Dense="true">Dense</MudRadio>
+            <MudRadio Option="false" Color="Color.Secondary" Dense="false">Normal</MudRadio>
+        </MudRadioGroup>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Sizes</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudRadioGroup @bind-SelectedOption="Radio_Size">
+            <MudRadio Option="1" Color="Color.Primary" Size="Size.Small">Small</MudRadio>
+            <MudRadio Option="2" Color="Color.Secondary" Size="Size.Medium">Medium</MudRadio>
+            <MudRadio Option="3" Color="Color.Tertiary" Size="Size.Large">Large</MudRadio>
+        </MudRadioGroup>
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3"/>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Switch </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Similar to a checkbox but visually different, the switch lets the user switch between two values with the tap of a button. </MudText>
+<MudGrid Spacing="1">
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Basic switches</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudSwitch @bind-Checked="@Basic_Switch1" />
+        <MudSwitch @bind-Checked="@Basic_Switch2" Color="Color.Primary" />
+        <MudSwitch @bind-Checked="@Basic_Switch3" Color="Color.Secondary" />
+        <MudSwitch T="bool" Disabled="true" />
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Switch with label</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudSwitch @bind-Checked="@Label_Switch1" Label="Info" Color="Color.Info" />
+        <MudSwitch @bind-Checked="@Label_Switch2" Label="Success" Color="Color.Success" />
+        <MudSwitch @bind-Checked="@Label_Switch3" Label="Warning" Color="Color.Warning" />
+        <MudSwitch T="bool" Disabled="true" Label="Disabled" />
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Thumb Icon</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="12" md="4" Class="d-flex justify-center">
+                <MudSwitch @bind-Checked="@_checked1" ThumbIcon="@Icons.Custom.Brands.MudBlazor">Basic</MudSwitch>
+            </MudItem>
+            <MudItem xs="12" md="4" Class="d-flex justify-center">
+                <MudSwitch @bind-Checked="@_checked2" ThumbIcon="@Icons.Custom.Brands.MudBlazor" ThumbIconColor="Color.Info">Colored</MudSwitch>
+            </MudItem>
+            <MudItem xs="12" md="4" Class="d-flex justify-center">
+                <MudSwitch @bind-Checked="@_checked3"
+                           ThumbIcon="@(_checked3==true ? Icons.Material.Filled.Done : Icons.Material.Filled.Close)"
+                           ThumbIconColor="@(_checked3==true ? Color.Success : Color.Error)">Changing</MudSwitch>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">ReadOnly mode</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudSwitch ReadOnly="@ReadOnly" @bind-Checked="@SwitchValue" Label="@(SwitchValue ? "On" : "Off")" />
+
+        <MudSelect @bind-Value="@SwitchValue" Label="Change Switch value">
+            <MudSelectItem Value="@(false)">False</MudSelectItem>
+            <MudSelectItem Value="@(true)">True</MudSelectItem>
+        </MudSelect>
+
+        <MudSwitch @bind-Checked="@ReadOnly" Label="@(ReadOnly ? "ReadOnly Mode" : "Edit Mode")" />
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3" />
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Text Field </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Text field components are used for receiving user provided information. </MudText>
+<MudGrid Spacing="1">
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Basic Text Field's</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="TextValue" Label="Standard" Variant="Variant.Text"></MudTextField>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="TextValue" Label="Filled" Variant="Variant.Filled"></MudTextField>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="TextValue" Label="Outlined" Variant="Variant.Outlined"></MudTextField>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Dense</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="TextValue" Label="Standard" Variant="Variant.Text" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="TextValue" Label="Filled" Variant="Variant.Filled" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="TextValue" Label="Outlined" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Form Props</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="HelperText" Label="With Helper" HelperText="Some helping Text" Variant="Variant.Text" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="Disabled" Label="Disabled" Variant="Variant.Text" Disabled="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="Password" Label="Password" InputType="InputType.Password" Variant="Variant.Text" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="ReadOnly1" Label="Read Only" ReadOnly="true" Variant="Variant.Text" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="HelperText" Label="With Helper" HelperText="Some helping Text" Variant="Variant.Filled" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="Disabled" Label="Disabled" Variant="Variant.Filled" Disabled="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="Password" Label="Password" InputType="InputType.Password" Variant="Variant.Filled" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="ReadOnly1" Label="Read Only" ReadOnly="true" Variant="Variant.Filled" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="HelperText" Label="With Helper" HelperText="Some helping Text" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="Disabled" Label="Disabled" Variant="Variant.Outlined" Disabled="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="Password" Label="Password" InputType="InputType.Password" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudTextField @bind-Value="ReadOnly1" Label="Read Only" ReadOnly="true" Variant="Variant.Outlined" />
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Helper Text On Focus</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="OnFocus Helper" HelperText="Some helping text" HelperTextOnFocus="true" Variant="Variant.Text" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="With Helper" HelperText="Some helping text" Variant="Variant.Text" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="OnFocus Helper" HelperText="Some helping text" HelperTextOnFocus="true" Variant="Variant.Filled" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="With Helper" HelperText="Some helping text" Variant="Variant.Filled" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="OnFocus Helper" HelperText="Some helping text" HelperTextOnFocus="true" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="With Helper" HelperText="Some helping text" Variant="Variant.Outlined" />
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Counter</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="12" md="6">
+                <MudTextField T="string" Counter="25" HelperText="This field uses Counter prop" Immediate="true" Validation="@(new Func<string, IEnumerable<string>>(MaxCharacters))" Label="Regular" Variant="Variant.Text" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudTextField T="string" Counter="25" MaxLength="25" HelperText="This field uses Counter and MaxLength prop" Immediate="true" Validation="@(new Func<string, IEnumerable<string>>(MaxCharacters))" Label="Limited" Variant="Variant.Text" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudTextField T="string" Counter="0" HelperText="This field has Counter set to 0" Immediate="true" Label="Counter" Variant="Variant.Text" />
+            </MudItem>
+
+            <MudItem xs="12" md="6">
+                <MudTextField T="string" MaxLength="10" HelperText="This field uses MaxLength prop" Immediate="true" Label="Max Length" Variant="Variant.Text" />
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Adornments</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudGrid>
+            <MudItem xs="12" sm="12" md="12">
+                <MudTextField @bind-Value="Amount" Label="Amount" Variant="Variant.Text" Adornment="Adornment.Start" AdornmentText="Kr" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Amount" Label="Amount" Variant="Variant.Text" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Weight" HelperText="Weight" Variant="Variant.Text" Adornment="Adornment.End" AdornmentText="Kg" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Password1" Label="Password" Variant="Variant.Text" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Amount" Label="Amount" Variant="Variant.Filled" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Weight" HelperText="Weight" Variant="Variant.Filled" Adornment="Adornment.End" AdornmentText="Kg" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Password1" Label="Password" Variant="Variant.Filled" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Amount" Label="Amount" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Weight" HelperText="Weight" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="Kg" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="Password1" Label="Password" Variant="Variant.Outlined" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" />
+            </MudItem>
+        </MudGrid>
+    </MudItem>
+
+</MudGrid>
+
+@code {
+
+    //1. Auto Complete
+    private bool resetValueOnEmptyText;
+    private bool coerceText;
+    private bool coerceValue;
+    private string value1, value2;
+    private string[] states =
+    {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming",
+    };
+
+    private async Task<IEnumerable<string>> Search1(string value)
+    {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+            return states;
+        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    private async Task<IEnumerable<string>> Search2(string value)
+    {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, don't return values (drop-down will not open)
+        if (string.IsNullOrEmpty(value))
+            return new string[0];
+        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+
+    //Validation
+    private MudForm form;
+    private bool success1;
+    private bool success2;
+    private Choice choice1 = new();
+    private Choice choice2 = new();
+    private Choice choice3 = new();
+    private EditContext editContext1;
+    private EditContext editContext2;
+
+    protected override void OnInitialized()
+    {
+        editContext1 = new EditContext(choice1);
+        editContext2 = new EditContext(choice2);
+    }
+
+    private static string[] states2 =
+    {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming",
+    };
+
+    private async Task<IEnumerable<string>> SearchAsync(string value)
+    {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+        {
+            return states;
+        }
+
+        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    private IEnumerable<string> Validate(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            yield return "The State field is required";
+            yield break;
+        }
+
+        if (!states.Contains(value))
+        {
+            yield return "This is an incorrect value";
+        }
+    }
+
+    public class Choice
+    {
+        [Required]
+        [State]
+        public string State { get; set; }
+    }
+
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
+    public sealed class StateAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (!states2.Contains(value))
+            {
+                return new ValidationResult("This is an incorrect value", new[] { validationContext.MemberName });
+            }
+
+            return null;
+        }
+    }
+
+
+    //2. Checkbox
+    public bool Basic_CheckBox1 { get; set; } = true;
+    public bool Basic_CheckBox2 { get; set; } = false;
+    public bool Basic_CheckBox3 { get; set; } = false;
+
+    public bool Label_CheckBox1 { get; set; } = true;
+    public bool Label_CheckBox2 { get; set; } = false;
+    public bool Label_CheckBox3 { get; set; } = false;
+
+    public bool CheckBox1 { get; set; } = true;
+    public bool CheckBox2 { get; set; } = false;
+    public bool CheckBox3 { get; set; } = false;
+
+    public bool Dense_CheckBox { get; set; } = true;
+
+    public bool Size_CheckBox1 { get; set; } = true;
+    public bool Size_CheckBox2 { get; set; } = false;
+    public bool Size_CheckBox3 { get; set; } = false;
+
+    //3. Form
+    bool success;
+    string[] errors = { };
+    MudTextField<string> pwField1;
+    MudForm form2;
+
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+        if (pw.Length < 8)
+            yield return "Password must be at least of length 8";
+        if (!Regex.IsMatch(pw, @"[A-Z]"))
+            yield return "Password must contain at least one capital letter";
+        if (!Regex.IsMatch(pw, @"[a-z]"))
+            yield return "Password must contain at least one lowercase letter";
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return "Password must contain at least one digit";
+    }
+
+    private string PasswordMatch(string arg)
+    {
+        if (pwField1.Value != arg)
+            return "Passwords don't match";
+        return null;
+    }
+
+    //4. Radio
+    public string SelectedOption { get; set; }
+    private void Reset()
+    {
+        SelectedOption = null;
+    }
+
+    public bool Dense_Radio { get; set; } = true;
+    public int Radio_Size { get; set; } = 2;
+
+    //5. Switch
+    public bool Basic_Switch1 { get; set; } = false;
+    public bool Basic_Switch2 { get; set; } = true;
+    public bool Basic_Switch3 { get; set; } = true;
+
+    public bool Label_Switch1 { get; set; } = false;
+    public bool Label_Switch2 { get; set; } = true;
+    public bool Label_Switch3 { get; set; } = true;
+
+    bool _checked1 = false;
+    bool _checked2 = false;
+    bool _checked3 = false;
+
+    public bool SwitchValue { get; set; } = true;
+    public bool ReadOnly { get; set; } = true;
+
+    //6. Text Field
+    public string TextValue { get; set; }
+    public string HelperText { get; set; }
+    public string Disabled { get; set; }
+    public string Password { get; set; }
+    public string ReadOnly1 { get; set; } = "Can't change me";
+
+    private IEnumerable<string> MaxCharacters(string ch)
+    {
+        if (!string.IsNullOrEmpty(ch) && 25 < ch?.Length)
+            yield return "Max 25 characters";
+    }
+
+    public double? Amount { get; set; }
+    public int? Weight { get; set; }
+    public string Password1 { get; set; } = "superstrong123";
+
+    bool isShow;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    void ButtonTestclick()
+    {
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+}
+
+

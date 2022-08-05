@@ -1,0 +1,140 @@
+﻿@page "/components/expansion"
+@using DCMS.Application.Models
+@inject Microsoft.Extensions.Localization.IStringLocalizer<ExpansionPanel> _localizer
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Simple Usage </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> There are five severity levels that each set a different icon and a color. </MudText>
+<MudExpansionPanels Class="my-3">
+    <MudExpansionPanel Text="Panel One" MaxHeight="150">
+        Panel One Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Two" MaxHeight="500">
+        Panel Two Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Three" MaxHeight="1000">
+        Panel Three Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Four">
+        Panel Four Content
+    </MudExpansionPanel>
+</MudExpansionPanels>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Multiple Expanded Panels </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> The default variant is normal. In addition to that, outlined and filled is available. </MudText>
+<MudExpansionPanels Class="my-3" MultiExpansion="true">
+    <MudExpansionPanel Text="Panel One">
+        Panel One Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Two">
+        Panel Two Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Three">
+        Panel Three Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Four">
+        Panel Four Content
+    </MudExpansionPanel>
+</MudExpansionPanels>
+
+
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Disabled </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Taking up too much space? Set the Dense property to true. It removes the vertical padding and lowers the horizontal. </MudText>
+<MudExpansionPanels Class="my-3">
+    <MudExpansionPanel Text="Panel One">
+        Panel One Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Two" Disabled="true">
+        Panel Two Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Three">
+        Panel Three Content
+    </MudExpansionPanel>
+</MudExpansionPanels>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Padding </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> The padding of the panels can be controlled with DisableGutters and Dense. These can be set individually per panel or applied on all panels by setting them on the parent. </MudText>
+<MudExpansionPanels Class="my-3">
+    <MudExpansionPanel Text="Dense" Dense="true">
+        Dense Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Gutters" DisableGutters="true">
+        Gutters Content
+    </MudExpansionPanel>
+</MudExpansionPanels>
+<MudExpansionPanels Dense="true" DisableGutters="true" Class="mt-6">
+    <MudExpansionPanel Text="Dense & Gutters from parent">
+        Dense & Gutters Content
+    </MudExpansionPanel>
+</MudExpansionPanels>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Borders </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption">
+    The DisableBorders property removes all borders around the panel.
+    For a flatter UI design, this might be preferred along with Elevation set to 0.
+</MudText>
+<MudExpansionPanels Class="my-3" DisableBorders="true" Elevation="0">
+    <MudExpansionPanel Text="Panel One">
+        Panel One Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Two">
+        Panel Two Content
+    </MudExpansionPanel>
+    <MudExpansionPanel Text="Panel Three">
+        Panel Three Content
+    </MudExpansionPanel>
+</MudExpansionPanels>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Customizing the Header and Icon </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> By default, the alert is set to rounded corners by your theme's default value. If you need a square Alert but don't want to change the theme, you can set the Square property to true. </MudText>
+<div class="my-3 mx-auto" style="max-width: 400px;">
+    <MudExpansionPanels>
+        <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.Info" class="mr-3"></MudIcon>
+                    <MudText>Panel header as <strong>RenderFragment</strong></MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                Panel Content
+            </ChildContent>
+        </MudExpansionPanel>
+        <MudExpansionPanel Text="The icon of this panel is hidden" HideIcon="true">
+            Panel Content
+        </MudExpansionPanel>
+        <MudExpansionPanel HideIcon="true">
+            <TitleContent>
+                <div class="d-flex">
+                    <MudText Class="mt-1">Inbox</MudText>
+                    <MudBadge Content="3" Color="Color.Primary" Overlap="true" Class="d-flex ml-auto">
+                        <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Default" />
+                    </MudBadge>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                Panel Content
+            </ChildContent>
+        </MudExpansionPanel>
+        <MudExpansionPanel @bind-IsExpanded="isOpen" HideIcon="true">
+            <TitleContent>
+                <div class="d-flex">
+                    <MudText>Overriding standard icon with own icon</MudText>
+                    <MudIcon Icon="@(isOpen ? Icons.Material.Filled.Close : Icons.Material.Filled.Add)" class="ml-auto"></MudIcon>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                Panel Content
+            </ChildContent>
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+</div>
+
+@code
+{
+    bool isOpen;
+}
+
+
+
+

@@ -1,0 +1,282 @@
+﻿@page "/components/buttons"
+@using DCMS.Application.Models
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Buttons> _localizer
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Filled Buttons </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Filled Buttons have elevation (box shadow) and is raised on click by default. </MudText>
+<MudGrid Class="my-3" Spacing="1">
+    <MudItem xs="12">
+        <MudButton Variant="Variant.Filled">Default</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary">Primary</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Secondary">Secondary</MudButton>
+        <MudButton Variant="Variant.Filled" Disabled="true">Disabled</MudButton>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText>Elevation can be removed with the DisableElevation bool.</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary">Disable elevation</MudButton>
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3" />
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Text Buttons </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Text Buttons have no elevation, background or border and only hover effect is used. The Color property only applies to the text. </MudText>
+<MudGrid Class="my-3" Spacing="1">
+    <MudItem xs="12">
+        <MudButton Variant="Variant.Text">Default</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">Primary</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Secondary">Secondary</MudButton>
+        <MudButton Variant="Variant.Text" Disabled="true">Disabled</MudButton>
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3"/>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Outlined Buttons </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Outlined Buttons are similar to Text Buttons except for the border that inherits its color from the set Color property. </MudText>
+<MudGrid Class="my-3" Spacing="1">
+    <MudItem xs="12">
+        <MudButton Variant="Variant.Outlined">Default</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Primary">Primary</MudButton>
+        <MudButton Variant="Variant.Outlined" Color="Color.Secondary">Secondary</MudButton>
+        <MudButton Variant="Variant.Outlined" Disabled="true">Disabled</MudButton>
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3"/>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> FullWidth </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> FullWidth buttons extend to 100% of available width. </MudText>
+<MudGrid Class="my-3">
+    <MudItem md="4" xs="12">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true">Full Width Button</MudButton>
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3"/>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Sizes </MudText>
+<MudContainer>
+    <MudButton Variant="Variant.Text" Size="Size.Small" Class="ma-2">Small</MudButton>
+    <MudButton Variant="Variant.Text" Size="Size.Medium" Class="ma-2">Medium</MudButton>
+    <MudButton Variant="Variant.Text" Size="Size.Large" Class="ma-2">Large</MudButton>
+</MudContainer>
+<MudContainer>
+    <MudButton Variant="Variant.Outlined" Size="Size.Small" Color="Color.Secondary" Class="ma-2">Small</MudButton>
+    <MudButton Variant="Variant.Outlined" Size="Size.Medium" Color="Color.Secondary" Class="ma-2">Medium</MudButton>
+    <MudButton Variant="Variant.Outlined" Size="Size.Large" Color="Color.Secondary" Class="ma-2">Large</MudButton>
+</MudContainer>
+<MudContainer>
+    <MudButton Variant="Variant.Filled" Size="Size.Small" Color="Color.Primary" Class="ma-2">Small</MudButton>
+    <MudButton Variant="Variant.Filled" Size="Size.Medium" Color="Color.Primary" Class="ma-2">Medium</MudButton>
+    <MudButton Variant="Variant.Filled" Size="Size.Large" Color="Color.Primary" Class="ma-2">Large</MudButton>
+</MudContainer>
+<MudContainer>
+    <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Small" Class="ma-2"></MudIconButton>
+    <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Medium" Class="ma-2"></MudIconButton>
+    <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Large" Class="ma-2"></MudIconButton>
+</MudContainer>
+
+<MudDivider Class="my-3"/>
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Customized Buttons </MudText>
+<MudButton Class="my-3" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.ArrowDownward" Style="background-color: yellowgreen; color: white; width: 200px; height: 60px;">
+    Download Now
+</MudButton>
+
+<MudDivider Class="my-3" />
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Link Button </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Set the Link parameter and the MudButton will render an anchor element. If you also set the Target parameter to _blank, the component will add rel="noopener" automatically. If you set the Disabled parameter to true, the component will render a button with no href attribute. </MudText>
+<MudButton Class="my-3" Link="https://github.com/MudBlazor/MudBlazor"
+           Target="_blank"
+           Variant="Variant.Filled"
+           EndIcon="@Icons.Custom.Brands.GitHub"
+           Color="Color.Primary"
+           Disabled=@disabled>
+    GitHub Link
+</MudButton>
+<MudButton Class="my-3" Link="https://github.com/MudBlazor/MudBlazor"
+           Target="_blank"
+           Variant="Variant.Text"
+           EndIcon="@Icons.Custom.Brands.GitHub"
+           Color="Color.Secondary"
+           Style="text-transform:none"
+           Disabled=@disabled>
+    GitHub Link
+</MudButton>
+<MudButton Class="my-3" Link="https://github.com/MudBlazor/MudBlazor"
+           Target="_blank"
+           Variant="Variant.Outlined"
+           EndIcon="@Icons.Custom.Brands.GitHub"
+           Color="Color.Tertiary"
+           Disabled=@disabled>
+    GitHub Link
+</MudButton>
+<br />
+<MudSwitch Class="my-3" Color="Color.Primary" @bind-Checked=@(disabled) Label="Disable" />
+
+<MudDivider Class="my-3" />
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Link Button </MudText>
+<MudButton Disabled="@_processing" OnClick="ProcessSomething" Variant="Variant.Filled" Color="Color.Primary">
+    @if (_processing)
+    {
+        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+        <MudText Class="ms-2">Processing</MudText>
+    }
+    else
+    {
+        <MudText>Click me</MudText>
+    }
+</MudButton>
+
+<MudDivider Class="my-3"></MudDivider>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> FAB Buttons </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> A floating action button (FAB). </MudText>
+<MudGrid Class="my-3" Spacing="1">
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Simple FAB</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.Add" aria-label="add" />
+        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Edit" aria-label="edit" />
+        <MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.ShoppingCart" DisableElevation="true" aria-label="add to shopping cart" />
+        <MudFab Icon="@Icons.Material.Filled.Navigation" Label="Navigation" />
+        <MudFab Icon="@Icons.Material.Filled.Save" Disabled="true" aria-label="save" />
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Size FAB</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudContainer>
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Small" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Large" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Medium" IconSize="Size.Small" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Medium" IconSize="Size.Medium" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Medium" IconSize="Size.Large" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Large" IconSize="Size.Small" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Large" IconSize="Size.Medium" Class="ma-2" />
+            <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Add" Size="Size.Large" IconSize="Size.Large" Class="ma-2" />
+        </MudContainer>
+        <MudContainer>
+            <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.ShoppingCart" Size="Size.Small" IconSize="Size.Small" Label="To cart" Class="ma-2" />
+            <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.ShoppingCart" Size="Size.Medium" IconSize="Size.Medium" Label="To cart" Class="ma-2" />
+            <MudFab Color="Color.Primary" Icon="@Icons.Material.Filled.ShoppingCart" Size="Size.Large" IconSize="Size.Large" Label="To cart" Class="ma-2" />
+        </MudContainer>
+    </MudItem>
+</MudGrid>
+
+<MudDivider Class="my-3"></MudDivider>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Button Group </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> The MudButtonGroup component can be used to group related MudButtons </MudText>
+<MudGrid Class="my-3" Spacing="1">
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Basic button group</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Text">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Sizes and colors</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudButtonGroup Color="Color.Default" Size="Size.Small" Variant="Variant.Outlined">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+
+        <MudButtonGroup Color="Color.Secondary" Size="Size.Medium" Variant="Variant.Outlined">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+
+        <MudButtonGroup Color="Color.Primary" Size="Size.Large" Variant="Variant.Outlined">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Vertical button group</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" VerticalAlign="true">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" VerticalAlign="true">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Text" VerticalAlign="true">
+            <MudButton>One</MudButton>
+            <MudButton>Two</MudButton>
+            <MudButton>Three</MudButton>
+        </MudButtonGroup>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Icon buttons</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined">
+            <MudIconButton Icon="@Icons.Material.Filled.AccessAlarm"></MudIconButton>
+            <MudToggleIconButton Icon="@Icons.Material.Filled.AlarmOff" Color="@Color.Error"
+                                 ToggledIcon="@Icons.Material.Filled.AlarmOn" ToggledColor="@Color.Success" />
+            <MudButton StartIcon="@Icons.Material.Filled.AlarmAdd" IconColor="Color.Warning">Add alarm</MudButton>
+        </MudButtonGroup>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.subtitle1">Custom styles</MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" OverrideStyles="_overrideStyles">
+            <MudButton Color="Color.Primary" Variant="Variant.Outlined">One</MudButton>
+            <MudButton Color="Color.Warning" Variant="Variant.Outlined">Two</MudButton>
+            <MudButton Color="Color.Secondary" Variant="Variant.Outlined">Three</MudButton>
+        </MudButtonGroup>
+
+        <MudSwitch @bind-Checked="@_overrideStyles" Label="Override styles" Color="Color.Primary" />
+    </MudItem>
+</MudGrid>
+
+@code{
+    bool disabled = false;
+    private bool _processing = false;
+    private bool _overrideStyles;
+
+    async Task ProcessSomething()
+    {
+        _processing = true;
+        await Task.Delay(2000);
+        _processing = false;
+    }
+}
+

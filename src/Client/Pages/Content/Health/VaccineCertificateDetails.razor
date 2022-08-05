@@ -1,0 +1,110 @@
+﻿@page "/certificate-details"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<VaccineCertificateDetails> _localizer
+
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+
+<MudPaper Elevation="25" Class="px-4 mx-n4 mb-n10 mt-5 pt-5 pb-10" Style="border-radius: 25px 25px 0px 0px; background-color: #006E52; background-image: url(/images/medical/bg_covid_qr_green.webp); background-size: cover !important; " Outlined="false">
+    <MudGrid Class="mb-5" Spacing="3">
+        <MudItem xs="12">
+            <MudText Typo="Typo.h6" Align="Align.Center" Style="@($" color:{Colors.Shades.White}; font-weight: 700;")">Digital Certificate</MudText>
+            <MudText Typo="Typo.subtitle1" Align="Align.Center" Style="@($" color:{Colors.Shades.White}; font-weight: 700;")">for COVID-19 Vaccination</MudText>
+        </MudItem>
+
+        <MudItem xs="12">
+            <div class="d-flex justify-center py-2 px-1">
+                <MudPaper Class="pa-2 mx-2 rounded-lg">
+                    <MudCardMedia Image="@ImgSrc" Style="height:100px; width:100px;" />
+                </MudPaper>
+            </div>
+        </MudItem>
+    </MudGrid>
+
+    <MudCard Class="rounded-lg">
+        <MudCardContent>
+            <MudGrid Spacing="2">
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="FullName" Label="Full name" ReadOnly="true" Variant="Variant.Outlined" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="DoB" Label="Date of birth" ReadOnly="true" Variant="Variant.Outlined" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="ContactNo" Label="Contact number" ReadOnly="true" Variant="Variant.Outlined" />
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="Address" Label="Address" ReadOnly="true" Variant="Variant.Outlined" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+
+    <MudCard Class="my-3 rounded-lg">
+        <MudCardContent>
+            <MudGrid Spacing="2">
+                <MudItem xs="12">
+                    <MudText Typo="Typo.subtitle1" Style="@($"font-weight: 700;")">Has been vaccinated for Covid-19</MudText>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudCard Elevation="6" Class="rounded-lg">
+                        <MudCardContent Class="d-flex flex-row flex-wrap" Style="height:200px;">
+                            <div class="align-self-center pa-3">
+                                <MudText Typo="Typo.h4" Align="Align.Center" Style="font-weight: 800;" Color="@Color.Default">28</MudText>
+                                <MudText Typo="Typo.body2" Align="Align.Center" Style="font-weight: 500;" Color="@Color.Default">07/2021</MudText>
+                            </div>
+                            <div class="d-flex flex-column justify-space-between px-3">
+                                <div>
+                                    <MudText Typo="Typo.body1" Style="font-weight: 600;" Color="@Color.Default">COVID-19 Vaccine</MudText>
+                                    <MudText Typo="Typo.body1" Style="font-weight: 600;" Color="@Color.Default">AstraZeneca</MudText>
+                                </div>
+                                <div>
+                                    <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Facility</MudText>
+                                    <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Univesity Malaya</MudText>
+                                </div>
+                                <div>
+                                    <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Dose</MudText>
+                                    <MudAvatar Size="Size.Small" Color="Color.Primary">1</MudAvatar>
+                                </div>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudCard Elevation="6" Class="rounded-lg">
+                        <MudCardContent Class="d-flex flex-row flex-wrap" Style="height:200px;">
+                            <div class="align-self-center pa-3">
+                                <MudText Typo="Typo.h4" Align="Align.Center" Style="font-weight: 800;" Color="@Color.Default">28</MudText>
+                                <MudText Typo="Typo.body2" Align="Align.Center" Style="font-weight: 500;" Color="@Color.Default">07/2021</MudText>
+                            </div>
+                            <div class="d-flex flex-column justify-space-between px-3">
+                                <div>
+                                    <MudText Typo="Typo.body1" Style="font-weight: 600;" Color="@Color.Default">COVID-19 Vaccine</MudText>
+                                    <MudText Typo="Typo.body1" Style="font-weight: 600;" Color="@Color.Default">AstraZeneca</MudText>
+                                </div>
+                                <div>
+                                    <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Facility</MudText>
+                                    <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Univesity Malaya</MudText>
+                                </div>
+                                <div>
+                                    <MudText Typo="Typo.body2" Style="font-weight: 500;" Color="@Color.Default">Dose</MudText>
+                                    <MudAvatar Size="Size.Small" Color="Color.Primary">2</MudAvatar>
+                                </div>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+</MudPaper>
+}

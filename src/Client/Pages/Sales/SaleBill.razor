@@ -1,0 +1,375 @@
+﻿@page "/sales/salebill"
+
+@using System.Net.Http.Json
+@using DCMS.Application.Models.Sale;
+
+@inject HttpClient httpClient
+
+<MudPaper Elevation="0" Class="py-2">
+	<MudBreadcrumbs Class="py-1" Items="_breadcrumbs" Separator="/"> </MudBreadcrumbs>
+</MudPaper>
+
+@if (!_loaded)
+{
+	<Spinner />
+}
+else
+{
+
+	@*过滤器*@
+
+	<MudPaper Elevation="0" Class="pa-4 my-4">
+		<MudGrid>
+			<MudItem xs="12" sm="6" md="3">
+				@*<MudTextField @bind-Value="@element.Name" Label="客户" Variant="Variant.Outlined" Margin="Margin.Dense" />*@
+				<MudAutocomplete T="string"
+							 Label="客户"
+							 @bind-Value="@element.Name"
+							 Variant="Variant.Outlined"
+							 Margin="Margin.Dense"
+							 SearchFunc="@Search1"
+							 ResetValueOnEmptyText="@resetValueOnEmptyText"
+							 AdornmentIcon="@Icons.Material.Filled.Search"
+							 CoerceText="@coerceText"
+							 CoerceValue="@coerceValue" />
+			</MudItem>
+			<MudItem xs="12" sm="6" md="3">
+
+				<MudAutocomplete T="string"
+							 Label="业务员"
+							 @bind-Value="@element.Name"
+							 Variant="Variant.Outlined"
+							 Margin="Margin.Dense"
+							 SearchFunc="@Search1"
+							 ResetValueOnEmptyText="@resetValueOnEmptyText"
+							 CoerceText="@coerceText"
+							 CoerceValue="@coerceValue" />
+			</MudItem>
+			<MudItem xs="12" sm="6" md="3">
+				<MudTextField @bind-Value="@element.Name" Label="单号" Variant="Variant.Outlined" Margin="Margin.Dense" />
+			</MudItem>
+			<MudItem xs="12" sm="6" md="3">
+				<MudAutocomplete T="string"
+							 Label="仓库"
+							 @bind-Value="@element.Name"
+							 Variant="Variant.Outlined"
+							 Margin="Margin.Dense"
+							 SearchFunc="@Search1"
+							 ResetValueOnEmptyText="@resetValueOnEmptyText"
+							 CoerceText="@coerceText"
+							 CoerceValue="@coerceValue" />
+			</MudItem>
+		</MudGrid>
+		<MudGrid>
+			<MudItem xs="12" sm="6" md="3">
+				<MudAutocomplete T="string"
+							 Label="片区"
+							 @bind-Value="@element.Name"
+							 Variant="Variant.Outlined"
+							 Margin="Margin.Dense"
+							 SearchFunc="@Search1"
+							 ResetValueOnEmptyText="@resetValueOnEmptyText"
+							 CoerceText="@coerceText"
+							 CoerceValue="@coerceValue" />
+			</MudItem>
+			<MudItem xs="12" sm="6" md="3">
+				@*<MudTextField @bind-Value="@element.Changed" Format="yyyy/MM/dd" Label="开始时间" Variant="Variant.Outlined" Margin="Margin.Dense" />*@
+				<MudTextField T="DateTime?" Format="yyyy-MM-dd" Label="开始时间" InputType="InputType.Date" Variant="Variant.Outlined" Margin="Margin.Dense" />
+			</MudItem>
+			<MudItem xs="12" sm="6" md="3">
+				@*	<MudTextField @bind-Value="@element.Changed" Format="yyyy/MM/dd" Label="结束时间" Variant="Variant.Outlined" Margin="Margin.Dense" />*@
+				<MudTextField T="DateTime?" Format="yyyy-MM-dd" Label="结束时间" InputType="InputType.Date" Variant="Variant.Outlined" Margin="Margin.Dense" />
+			</MudItem>
+			<MudItem xs="12" sm="6" md="3">
+				<MudAutocomplete T="string"
+							 Label="片区"
+							 @bind-Value="@element.Name"
+							 Variant="Variant.Outlined"
+							 Margin="Margin.Dense"
+							 SearchFunc="@Search1"
+							 ResetValueOnEmptyText="@resetValueOnEmptyText"
+							 CoerceText="@coerceText"
+							 CoerceValue="@coerceValue" />
+			</MudItem>
+		</MudGrid>
+		<MudGrid>
+			<MudItem xs="12" sm="6" md="3">
+				<MudCheckBox @bind-Checked="@CheckBox1" Label="是否审核"></MudCheckBox>
+				<MudCheckBox @bind-Checked="@CheckBox1" Label="按审核时间"></MudCheckBox>
+			</MudItem>
+			<MudItem xs="12" sm="6" md="3">
+				<MudButton Variant="Variant.Filled" FullWidth="true" StartIcon="@Icons.Material.Filled.Search" Color="Color.Primary">查询</MudButton>
+			</MudItem>
+
+
+		</MudGrid>
+	</MudPaper>
+
+
+	@*数据表格*@
+
+	<MudTable Items="_bills"
+		  MultiSelection="true"
+		  @bind-SelectedItems="selectedItems"
+		  Striped="true"
+		  Bordered="false"
+		  Dense="true"
+		  HorizontalScrollbar="true"
+		  Hover="true">
+
+		<ToolBarContent>
+			<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary" Class="mr-2">添加</MudButton>
+			<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" Class="mr-2">删除</MudButton>
+			<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Info" Class="mr-2">打印</MudButton>
+			@*			<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PictureAsPdf" Color="Color.Warning" Class="mr-2">导出</MudButton>*@
+
+			<MudMenu StartIcon="@Icons.Material.Filled.PictureAsPdf" EndIcon="@Icons.Filled.KeyboardArrowDown" Label="导出" Color="Color.Warning" Variant="Variant.Filled" Class="mr-2">
+				<MudMenuItem>PDF</MudMenuItem>
+				<MudMenuItem>CSV</MudMenuItem>
+				<MudMenuItem>XLSX</MudMenuItem>
+			</MudMenu>
+
+			<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" Color="Color.Success" Class="mr-2" @onclick="@(() => LoadDataAsync())">刷新</MudButton>
+			<MudSpacer />
+		</ToolBarContent>
+
+		<ColGroup>
+			<col style="width: 60px;text-align: center" />
+			<col style="width: 60px;" />
+			<col style="width: 150px;" />
+			<col style="width: 100px;" />
+			<col style="width: 100px;" />
+			<col style="width: 100px;" />
+			<col style="width: 100px;" />
+			<col style="width: 100px;" />
+			<col style="width: 150px;" />
+			<col style="width: 150px;" />
+			<col style="width: 100px;" />
+			<col style="width: 280px;" />
+			<col style="width: 60px;" />
+			<col style="width: 100px;" />
+			<col style="width: 100px;" />
+		</ColGroup>
+
+		<HeaderContent>
+			<MudTh><MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.MoreVert" /></MudTh>
+			<MudTh><MudTableSortLabel SortBy="new Func<SaleReservationBillModel, object>(x=>x.BillNumber)">单号</MudTableSortLabel></MudTh>
+			<MudTh>客户</MudTh>
+			<MudTh>业务员</MudTh>
+			<MudTh>送货员</MudTh>
+			<MudTh>仓库</MudTh>
+			<MudTh Style="text-align: right">总金额</MudTh>
+			<MudTh Style="text-align: right">应收金额</MudTh>
+			<MudTh Style="text-align: right">优惠金额</MudTh>
+			<MudTh>打印</MudTh>
+			<MudTh>交易时间</MudTh>
+			<MudTh>状态</MudTh>
+			<MudTh>来源</MudTh>
+			<MudTh>操作</MudTh>
+		</HeaderContent>
+
+		<RowTemplate>
+			<MudTd>
+				<MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.MoreVert" OnClick="@(() => ShowBtnPress(context.Id))" />
+			</MudTd>
+			<MudTd DataLabel="BillNumber">
+				<MudLink Href="#">@context.BillNumber</MudLink>
+			</MudTd>
+			<MudTd DataLabel="TerminalId">
+				<MudTooltip Text="@context.TerminalId.ToString()" Arrow="true" Placement="Placement.Top">
+					@context.TerminalId
+				</MudTooltip>
+			</MudTd>
+			<MudTd DataLabel="BusinessUserId">
+				<MudTooltip Text="@context.TerminalId.ToString()" Arrow="true" Placement="Placement.Top">
+					@context.BusinessUserId
+				</MudTooltip>
+			</MudTd>
+			<MudTd DataLabel="DeliveryUserId">
+				<MudTooltip Text="@context.DeliveryUserId.ToString()" Arrow="true" Placement="Placement.Top">
+					@context.DeliveryUserId
+				</MudTooltip>
+			</MudTd>
+			<MudTd DataLabel="WareHouseId">@context.WareHouseId</MudTd>
+			<MudTd DataLabel="SumAmount" Style="text-align: right">@context.SumAmount</MudTd>
+			<MudTd DataLabel="ReceivableAmount" Style="text-align: right">@context.ReceivableAmount</MudTd>
+			<MudTd DataLabel="PreferentialAmount" Style="text-align: right">@context.PreferentialAmount</MudTd>
+			<MudTd DataLabel="PrintNum">@context.PrintNum</MudTd>
+			<MudTd DataLabel="TransactionDate">@context.TransactionDate</MudTd>
+			<MudTd DataLabel="IsArchive">
+				<MudSwitch @bind-Checked="@context.IsArchive" Color="Color.Primary" />
+			</MudTd>
+			<MudTd DataLabel="Operation">
+				@if (context.Operation == 1)
+				{
+				<MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Android" />
+				}
+				else 
+				{
+				<MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.LaptopWindows" />
+				}
+		</MudTd>
+		<MudTd>
+			<MudIconButton Variant="Variant.Filled" Color="Color.Primary" Size="@Size.Small" Icon="@Icons.Outlined.ViewColumn" />
+		</MudTd>
+	</RowTemplate>
+
+	<ChildRowContent>
+		@if ((context.IsArchive ?? false))
+			{
+			<MudTr>
+				<td colspan="15">
+					<MudPaper Class="pa-4" Elevation="0">
+						<MudText Align="Align.Left"><b>已支付金额:</b> @($"{context.OweCash.ToString()}")</MudText>
+						<MudText Align="Align.Left"><b>打印数:</b> @($"{context.PrintNum.ToString()}")</MudText>
+						<MudText Align="Align.Left"><b>交易时间:</b> @($"{context.TransactionDate.ToString()}")</MudText>
+					</MudPaper>
+				</td>
+			</MudTr>
+			}
+	</ChildRowContent>
+
+
+	<PagerContent>
+		<TablePager />
+	</PagerContent>
+</MudTable>
+
+
+	<div class="d-flex flex-wrap mt-4">
+		<MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">密集</MudSwitch>
+		<MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">稀疏</MudSwitch>
+		<MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">边框</MudSwitch>
+	</div>
+}
+
+
+@code
+{
+
+
+	private string _searchString;
+	private bool _readOnly;
+	private bool _isCellEditMode;
+	private List<string> _events = new();
+	private bool _editTriggerRowClick;
+
+	private bool _dense = false;
+	private bool _striped = true;
+	private bool _bordered = false;
+
+
+	Atom element = new Atom { Name = "", Mass = 1.00794, Electrons = 1, Changed = DateTime.Today };
+	public bool CheckBox1 { get; set; } = true;
+
+
+	private HashSet<SaleReservationBillModel> selectedItems = new HashSet<SaleReservationBillModel>();
+
+	private bool resetValueOnEmptyText;
+	private bool coerceText;
+	private bool coerceValue;
+	private string value1, value2;
+	private string[] states =
+					{
+		"Alabama", "Alaska", "American Samoa", "Arizona",
+		"Arkansas", "California", "Colorado", "Connecticut",
+		"Delaware", "District of Columbia", "Federated States of Micronesia",
+		"Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+		"Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+		"Louisiana", "Maine", "Marshall Islands", "Maryland",
+		"Massachusetts", "Michigan", "Minnesota", "Mississippi",
+		"Missouri", "Montana", "Nebraska", "Nevada",
+		"New Hampshire", "New Jersey", "New Mexico", "New York",
+		"North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+		"Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+		"Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+		"Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+		"Washington", "West Virginia", "Wisconsin", "Wyoming",
+	};
+
+
+
+
+	private async Task<IEnumerable<string>> Search1(string value)
+	{
+		// In real life use an asynchronous function for fetching data from an api.
+		await Task.Delay(5);
+
+		// if text is null or empty, show complete list
+		if (string.IsNullOrEmpty(value))
+			return states;
+		return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+	}
+
+	private async Task<IEnumerable<string>> Search2(string value)
+	{
+		// In real life use an asynchronous function for fetching data from an api.
+		await Task.Delay(5);
+
+		// if text is null or empty, don't return values (drop-down will not open)
+		if (string.IsNullOrEmpty(value))
+			return new string[0];
+		return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+	}
+
+
+	private List<BreadcrumbItem> _breadcrumbs = new List<BreadcrumbItem>
+	{
+		new BreadcrumbItem("首页", href: "/"),
+		new BreadcrumbItem("销售", href: "/"),
+		new BreadcrumbItem("销售订单", href: "/Sale/SalereservationBill", disabled: true)
+	};
+
+
+	public class Atom
+	{
+		public string Name { get; set; }
+		public double Mass { get; set; }
+		public int Electrons { get; set; }
+		public DateTime Changed { get; set; }
+	}
+
+	private void Reset()
+	{
+		element = new Atom { Name = "Hydrogen", Mass = 1.00794, Electrons = 1, Changed = DateTime.Today };
+		StateHasChanged();
+	}
+
+	AggregateDefinition<SaleReservationBillModel> _sumAmountFormat = new AggregateDefinition<SaleReservationBillModel>
+		{
+			Type = AggregateType.Sum,
+			DisplayFormat = "￥: {value}"
+			//CustomAggregate = x =>
+			// {
+			//	 var sum = x.Sum(z => z.SumAmount);
+			//	 return $"￥: {sum.ToString("C0")}";
+			// }
+		};
+
+
+	// events
+	void StartedEditingItem(SaleReservationBillModel item)
+	{
+		_events.Insert(0, $"Event = StartedEditingItem, Data = {System.Text.Json.JsonSerializer.Serialize(item)}");
+	}
+
+	void CancelledEditingItem(SaleReservationBillModel item)
+	{
+		_events.Insert(0, $"Event = CancelledEditingItem, Data = {System.Text.Json.JsonSerializer.Serialize(item)}");
+	}
+
+	void CommittedItemChanges(SaleReservationBillModel item)
+	{
+		_events.Insert(0, $"Event = CommittedItemChanges, Data = {System.Text.Json.JsonSerializer.Serialize(item)}");
+	}
+
+	void RowClicked(DataGridRowClickEventArgs<SaleReservationBillModel> args)
+	{
+		_events.Insert(0, $"Event = RowClick, Index = {args.RowIndex}, Data = {System.Text.Json.JsonSerializer.Serialize(args.Item)}");
+	}
+
+	void SelectedItemsChanged(HashSet<SaleReservationBillModel> items)
+	{
+		_events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
+	}
+}

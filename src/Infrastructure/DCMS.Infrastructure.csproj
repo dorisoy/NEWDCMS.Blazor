@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>DCMS.Infrastructure</RootNamespace>
+    <AssemblyName>DCMS.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations-Back\**" />
+    <Compile Remove="Migrations-MSSQL\**" />
+    <Compile Remove="Migrations-MYSQL\**" />
+    <EmbeddedResource Remove="Migrations-Back\**" />
+    <EmbeddedResource Remove="Migrations-MSSQL\**" />
+    <EmbeddedResource Remove="Migrations-MYSQL\**" />
+    <None Remove="Migrations-Back\**" />
+    <None Remove="Migrations-MSSQL\**" />
+    <None Remove="Migrations-MYSQL\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repositories\BrandRepository.cs" />
+    <Compile Remove="Repositories\DocumentRepository.cs" />
+    <Compile Remove="Repositories\DocumentTypeRepository.cs" />
+    <Compile Remove="Repositories\ProductRepository.cs" />
+    <Compile Remove="Services\ChatService.cs" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <Compile Remove="Constants\**" />
+    <Compile Remove="Identity\**" />
+    <Compile Remove="Persistence\**" />
+    <EmbeddedResource Remove="Constants\**" />
+    <EmbeddedResource Remove="Identity\**" />
+    <EmbeddedResource Remove="Persistence\**" />
+    <None Remove="Constants\**" />
+    <None Remove="Identity\**" />
+    <None Remove="Persistence\**" />
+  </ItemGroup>-->
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+    <PackageReference Include="EPPlus" Version="6.0.3" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.28" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.17.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.17.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application\DCMS.Application.csproj" />
+  </ItemGroup>
+
+</Project>

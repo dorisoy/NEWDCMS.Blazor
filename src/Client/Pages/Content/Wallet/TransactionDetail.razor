@@ -1,0 +1,140 @@
+﻿@page "/wallet/transactiondetail"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<TransactionDetail> _localizer
+@inject IDialogService DialogService
+
+
+@*<MudBreadcrumbs Items="_routes"></MudBreadcrumbs>*@
+
+<MudCard Elevation="25" Class="rounded-lg">
+    <MudCardContent>
+        <MudGrid Class="mb-2" Spacing="3">
+            <MudItem xs="12">
+                <MudPaper Elevation="0" Class="d-flex pa-0">
+                    <MudPaper Elevation="0" Class="pa-0 ml-0 mr-2 align-self-center">
+                        <MudIconButton Icon="fas fa-arrow-down" Color="Color.Info" Class="mr-2 pa-2 rounded-lg" Variant="Variant.Filled" Size="Size.Medium"></MudIconButton>
+                    </MudPaper>
+                    <MudPaper Elevation="0" Class="pa-0 mr-auto align-self-center">
+                        <MudText Typo="Typo.h6" Style="font-weight: 600;">Payment Received</MudText>
+                        <MudText Typo="Typo.body1" Color="@Color.Primary">Your transaction details here.</MudText>
+                    </MudPaper>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider Class="mb-1"></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Amount</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">$1.299.50</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider ></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Sender</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">John Doe</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider ></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Send Via</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Payoneer</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider ></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Unique ID</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">#1342-3456</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider ></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Date</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Oct 10, 2021</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider ></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Time</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">07:30 AM UTC Time</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider ></MudDivider>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Style="font-weight: 600;" Typo="Typo.body1">Notes</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.body1">Thank you so much for your business</MudText>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudDivider Class="mb-3"></MudDivider>
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudContainer Fixed="true" Class="px-0">
+                    <MudButton FullWidth="true" Class="rounded-lg" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Theme.Palette.SuccessDarken};")"> Download PDF </MudButton>
+                </MudContainer>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<MudPaper Elevation="0" Class="px-4 mx-n4 mt-5 mb-n5 py-5 mud-theme-primary" Outlined="false" Square="true">
+    <MudText Typo="Typo.h6" Style="font-weight: 600; text-align: center;">Contact Information</MudText>
+    <MudText Typo="Typo.body2" Style="text-align: center;">If something not right, please contact us for instant support </MudText>
+
+    <MudCard Class="rounded-lg my-5">
+        <MudCardContent>
+            <MudGrid>
+
+                <MudItem xs="6">
+                    <MudText Typo="Typo.h6" Style="font-weight: 600;">DCMS.Blazor</MudText>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudText Typo="Typo.h6" Style="font-weight: 600; text-align: right;" Color="@Color.Error">Mobile PWA</MudText>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider></MudDivider>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudContainer Fixed="true" Class="px-0">
+                        <MudButton FullWidth="true" Class="rounded-lg" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Theme.Palette.SuccessDarken};")">Contact For Support</MudButton>
+                    </MudContainer>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+</MudPaper>

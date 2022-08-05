@@ -1,0 +1,72 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Profile> _localizer
+
+<MudGrid>
+    <MudItem xs="12" sm="4" md="4">
+        <MudCard Class="rounded-lg" Elevation="25">
+            <MudCardContent>
+                <div class="d-flex justify-center mb-4">
+                    @if (!string.IsNullOrEmpty(@ImageDataUrl))
+                    {
+                        <MudAvatar Image="@ImageDataUrl" Style="height:150px; width:150px;"> </MudAvatar>
+                    }
+                    else
+                    {
+                        <MudAvatar Color="Color.Secondary" Style="height:150px; width:150px;">@_firstLetterOfName</MudAvatar>
+                    }
+                </div>
+                <MudText Typo="Typo.h6" Align="Align.Center">@_profileModel.UserRealName @_profileModel.UserRealName</MudText>
+                <MudText Align="Align.Center">@_profileModel.Email</MudText>
+            </MudCardContent>
+            <MudCardActions Class="d-flex justify-space-around">
+                <InputFile id="fileInput" OnChange="UploadFiles" hidden />
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           Size="Size.Small"
+                           StartIcon="@Icons.Filled.CloudUpload"
+                           for="fileInput">
+                    @_localizer["Upload Image"]
+                </MudButton>
+                @if (!string.IsNullOrEmpty(@ImageDataUrl))
+                {
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Error"
+                               StartIcon="@Icons.Filled.Delete"
+                               Size="Size.Small"
+                               OnClick="DeleteAsync">
+                        @_localizer["Delete Image"]
+                    </MudButton>
+                }
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="8" md="8">
+        <EditForm Model="@_profileModel" OnValidSubmit="UpdateProfileAsync">
+            <FluentValidationValidator @ref="_fluentValidationValidator" />
+            <MudCard Class="rounded-lg" Elevation="25">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText>@_localizer["Profile Details"]</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudGrid>
+                        <MudItem xs="12" md="6">
+                            <MudTextField @bind-Value="@_profileModel.UserRealName" For="@(() => _profileModel.UserRealName)" Label="@_localizer["First Name"]" Variant="Variant.Outlined" Margin="Margin.Dense"/>
+                        </MudItem>
+    
+                        <MudItem xs="12" md="6">
+                            <MudTextField @bind-Value="@_profileModel.PhoneNumber" For="@(() => _profileModel.PhoneNumber)" Label="@_localizer["Phone Number"]" Variant="Variant.Outlined" Margin="Margin.Dense"/>
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField @bind-Value="@_profileModel.Email" Label="@_localizer["Email"]" For="@(() => _profileModel.Email)" Variant="Variant.Outlined" InputType="InputType.Email" Disabled=true Margin="Margin.Dense"/>
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions Class="pb-4 pl-4">
+                    <MudButton Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Class="ml-auto" ButtonType="ButtonType.Submit">@_localizer["Save Changes"]</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </EditForm>
+    </MudItem>
+</MudGrid>

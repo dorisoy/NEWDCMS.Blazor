@@ -1,0 +1,103 @@
+@namespace DCMS.Web.Pages.Dashboard.Home
+
+
+@using AntDesign.Charts
+
+@page "/"
+
+
+<GridContent>
+	<Row Type="flex" Gutter="24">
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-bottom: 24px;">
+			<ChartCard CardTitle="今日销售"
+					   Total="$ 126,560"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniArea />
+				</ChildContent>
+			</ChartCard>
+		</AntDesign.Col>
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-bottom: 24px;">
+			<ChartCard CardTitle="今日订单"
+					   Total="8846"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniArea />
+				</ChildContent>
+			</ChartCard>
+		</AntDesign.Col>
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-bottom: 24px;">
+			<ChartCard CardTitle="今日新增客户"
+					   Total="6560"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniBar />
+				</ChildContent>
+  
+			</ChartCard>
+		</AntDesign.Col>
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-bottom: 24px;">
+			<ChartCard CardTitle="今日拜访客户"
+					   Total="78%"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniProgress 
+						Percent="78" 
+						StrokeWidth="8" 
+						Target="80" 
+						Color="#13C2C2" />
+				</ChildContent>
+   
+			</ChartCard>
+		</AntDesign.Col>
+	</Row>
+
+	<SalesCard />
+
+	 <Row Type="flex" Gutter="24">
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-top: 24px;">
+		<ChartCard CardTitle="今日订单"
+					   Total="8846"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniArea />
+				</ChildContent>
+			</ChartCard>
+		</AntDesign.Col>
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-top: 24px;">
+			 <ChartCard CardTitle="今日订单"
+					   Total="8846"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniArea />
+				</ChildContent>
+			</ChartCard>
+		</AntDesign.Col>
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-top: 24px;">
+			<ChartCard CardTitle="今日新增客户"
+					   Total="6560"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniBar />
+				</ChildContent>
+  
+			</ChartCard>
+		</AntDesign.Col>
+		<AntDesign.Col Xs="24" Sm="12" Md="12" Lg="12" Xl="6" Style="margin-top: 24px;">
+			<ChartCard CardTitle="今日拜访客户"
+					   Total="78%"
+					   ContentHeight="46">
+				<ChildContent>
+					<MiniProgress 
+						Percent="78" 
+						StrokeWidth="8" 
+						Target="80" 
+						Color="#13C2C2" />
+				</ChildContent>
+   
+			</ChartCard>
+		</AntDesign.Col>
+	</Row>
+
+
+</GridContent>

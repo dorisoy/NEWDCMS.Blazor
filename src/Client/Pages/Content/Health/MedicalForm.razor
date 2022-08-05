@@ -1,0 +1,203 @@
+﻿@page "/medical-form"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<MedicalForm> _localizer
+
+<style>
+    .rounded-15 {
+        border-radius: 15px;
+    }
+
+    .first-card {
+        background-color: #E66B00;
+        background-image: linear-gradient(315deg, #E66B00 0, #FFCC00 100%)
+    }
+
+    .second-card {
+        background-color: #17D4FF;
+        background-image: linear-gradient(135deg, #17D4FF 0, #0061B5 100%);
+    }
+
+    .third-card {
+        /*background-color: #ED3700;
+        background-image: linear-gradient(135deg, #ED3700 0, #870008 100%);*/
+        background-color: #e1358f;
+        background-image: linear-gradient(315deg, #e1358f 0, #7e6ce7 100%)
+    }
+</style>
+
+<MudGrid>
+    <MudItem xs="12">
+        <MudPaper Elevation="0" Style="background-color: transparent" Class="d-flex pa-0 ">
+            <MudPaper Elevation="0" Style="background-color: transparent" Class="pa-0 mr-0 align-self-center">
+                <MudAvatar Image="/images/pictures/faces/3s.png" Style="height: 50px; width: 50px;"> </MudAvatar>
+            </MudPaper>
+            <MudPaper Elevation="0" Style="background-color: transparent" Class="pa-0 ml-3 mr-auto align-self-center">
+                <MudText Typo="Typo.subtitle1" Style="font-weight: 400;">Welcome back,</MudText>
+                <MudText Color="Color.Default" Typo="Typo.subtitle1" Class="mt-n2" Style="font-weight: 600;">John Alex Doe</MudText>
+            </MudPaper>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudPaper Elevation="25" Class="px-4 mx-n4 mb-n10 mt-5 pt-5 pb-10" Style="border-radius: 30px 30px 0px 0px; background-color: #E8EAF6;" Outlined="false">
+    <MudGrid Class="mb-5" Spacing="3">
+        <MudItem xs="12">
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" Color="Color.Primary">Medical Form</MudText>
+            <MudText Typo="Typo.caption">Please fill your medical detail.  </MudText>
+        </MudItem>
+    </MudGrid>
+
+    <MudCard Class="my-3 rounded-lg">
+        <MudCardContent Class="px-0">
+            <MudCheckBox T="bool" Required="true" RequiredError="You must agree"
+                         Label="On behalf of" />
+            <MudExpansionPanels Elevation="0" Class="px-0">
+                <MudExpansionPanel Class="px-0">
+                    <TitleContent>
+                        <div class="d-flex">
+                            <MudIcon Icon="@Icons.Material.Filled.Person" class="mr-3"></MudIcon>
+                            <MudText><strong>JOHN ALEX DOE</strong></MudText>
+                        </div>
+                    </TitleContent>
+                    <ChildContent>
+                        <MudGrid Class="px-0">
+                            <MudItem xs="12">
+                                <MudSelect T="string" Label="Payment type" Strict="true" Variant="Variant.Outlined" Margin="Margin.Dense" Format="F2" OffsetY="true">
+                                    <MudSelectItem Value="@("Credit Card")" />
+                                    <MudSelectItem Value="@("Paypal")" />
+                                    <MudSelectItem Value="@("Payoneer")" />
+                                    <MudSelectItem Value="@("Strip")" />
+                                </MudSelect>
+                            </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField @bind-Value="FullName" Label="Full name" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField @bind-Value="IDNumber" Label="ID No" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField @bind-Value="PhoneNo" Label="Phone number" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField @bind-Value="Address" Label="Address" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                            </MudItem>
+                        </MudGrid>
+                    </ChildContent>
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+        </MudCardContent>
+    </MudCard>
+
+    <MudCard Class="my-3 rounded-lg">
+        <MudCardContent>
+            <MudText Typo="Typo.body1">Please fill your medical detail.</MudText>
+            <div class="d-flex mt-3">
+                <MudForm>
+                    <MudRadioGroup @bind-SelectedOption="@SelectedOption1">
+                        <MudRadio Option="@("No")" Color="Color.Primary">No</MudRadio>
+                        <MudRadio Option="@("Yes")" Color="Color.Primary">Yes</MudRadio>
+                    </MudRadioGroup>
+                </MudForm>
+            </div>
+        </MudCardContent>
+    </MudCard>
+
+    <MudCard Class="my-3 rounded-lg">
+        <MudCardContent>
+            <MudText Typo="Typo.body1">Please fill your medical detail.</MudText>
+            <div class="d-flex mt-3">
+                <MudForm>
+                    <MudRadioGroup @bind-SelectedOption="@SelectedOption2">
+                        <MudRadio Option="@("No")" Color="Color.Primary">No</MudRadio>
+                        <MudRadio Option="@("Yes")" Color="Color.Primary">Yes</MudRadio>
+                    </MudRadioGroup>
+                </MudForm>
+            </div>
+        </MudCardContent>
+    </MudCard>
+
+    <MudCard Class="my-3 rounded-lg">
+        <MudCardContent>
+            <MudText Typo="Typo.body1">Please fill your medical detail.</MudText>
+            <div class="d-flex mt-3">
+                <MudForm>
+                    <MudRadioGroup @bind-SelectedOption="@SelectedOption3">
+                        <MudRadio Option="@("No")" Color="Color.Primary">No</MudRadio>
+                        <MudRadio Option="@("Yes")" Color="Color.Primary">Yes</MudRadio>
+                    </MudRadioGroup>
+                </MudForm>
+            </div>
+        </MudCardContent>
+    </MudCard>
+
+    <MudCard Class="my-3 rounded-lg">
+        <MudCardContent>
+            <MudText Typo="Typo.body1">Please fill your medical detail.</MudText>
+            <div class="d-flex mt-3">
+                <MudForm>
+                    <MudRadioGroup @bind-SelectedOption="@SelectedOption4">
+                        <MudRadio Option="@("No")" Color="Color.Primary">No</MudRadio>
+                        <MudRadio Option="@("Yes")" Color="Color.Primary">Yes</MudRadio>
+                    </MudRadioGroup>
+                </MudForm>
+            </div>
+        </MudCardContent>
+    </MudCard>
+
+    <MudCard Class="my-3 rounded-lg">
+        <MudCardContent>
+            <MudText Typo="Typo.body1">Please fill your medical detail.</MudText>
+            <MudSimpleTable Elevation="0" Style="overflow-x: auto;">
+                <thead Style="@($" color:{Colors.Blue.Accent1};")">
+                    <tr>
+                        <th></th>
+                        <th>Yes</th>
+                        <th>No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lorem ipsum dolor sit amet</td>
+                        <td>
+                            <MudRadio Option="@("Radio 1")" Color="Color.Primary"></MudRadio>
+                        </td>
+                        <td>
+                            <MudRadio Option="@("Radio 2")" Color="Color.Primary"></MudRadio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lorem ipsum dolor sit amet</td>
+                        <td>
+                            <MudRadio Option="@("Radio 3")" Color="Color.Primary"></MudRadio>
+                        </td>
+                        <td>
+                            <MudRadio Option="@("Radio 4")" Color="Color.Primary"></MudRadio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lorem ipsum dolor sit amet</td>
+                        <td>
+                            <MudRadio Option="@("Radio 5")" Color="Color.Primary"></MudRadio>
+                        </td>
+                        <td>
+                            <MudRadio Option="@("Radio 6")" Color="Color.Primary"></MudRadio>
+                        </td>
+                    </tr>
+                </tbody>
+            </MudSimpleTable>
+        </MudCardContent>
+    </MudCard>
+
+    <MudContainer Fixed="true" Class="px-0">
+        <MudButton FullWidth="true" Class="rounded-lg" Variant="Variant.Filled" Style="@($"color:{Colors.Shades.White}; background:{Theme.Palette.SuccessDarken};")">Submit</MudButton>
+    </MudContainer>
+</MudPaper>
+
+@code {
+    public string SelectedOption1 { get; set; }
+    public string SelectedOption2 { get; set; }
+    public string SelectedOption3 { get; set; }
+    public string SelectedOption4 { get; set; }
+}

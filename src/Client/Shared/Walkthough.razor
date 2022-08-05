@@ -1,0 +1,131 @@
+﻿@page "/walkthough"
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+@inherits LayoutComponentBase
+
+<style>
+    .wk-container {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .first-card {
+        background-color: rgb(0,82,204);
+        background-image: linear-gradient(315deg, rgba(0,82,204,1) 0%, rgba(38,132,255,1) 100%);
+    }
+
+    .second-card {
+        background-color: #f6be65;
+        background-image: linear-gradient(135deg, #f6be65 0, #e6603a 100%);
+    }
+
+    .third-card {
+        background-color: #e1358f;
+        background-image: linear-gradient(315deg, #e1358f 0, #7e6ce7 100%)
+    }
+</style>
+<MudCarousel Class="wk-container" Style="width: 100%; height: 100%;" ShowArrows="true" ShowDelimiters="true" AutoCycle="false" TData="object">
+    <DelimiterTemplate Context="selected">
+        <div Class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">
+            <span class="mud-icon-button-label">
+                <MudIcon Icon="@(selected ? "fas fa-circle" : "far fa-circle")" Style="color: #ffffff; font-size: 1rem !important;" />
+            </span>
+        </div>
+    </DelimiterTemplate>
+    <ChildContent>
+        <MudCarouselItem Transition="Transition.Slide" >
+            <MudCard Outlined="false" Class="wk-container first-card border-0 d-flex flex-column justify-center">
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudCardMedia Image="/images/walkthough/wk_1_l.png" Class="mb-5 align-self-center" Style="height:360px; width:600px;" />
+                </MudHidden>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="false" Class="px-5">
+                    <MudCardMedia Image="/images/walkthough/wk_1_s.png" Class="mb-5 align-self-center" Style="height:226px; width:374px;" />
+                </MudHidden>
+                <MudCardContent Class="pa-4">
+                    <MudGrid Spacing="0">
+                        <MudItem xs="0" md="0" lg="3" xl="4"></MudItem>
+                        <MudItem xs="12" md="12" lg="6" xl="4">
+                            <MudText Typo="Typo.h6" Style="font-weight: 700; color: #F7941E" Align="Align.Center">
+                                DCMS.Blazor
+                            </MudText>
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600; color: #ffffff" Align="Align.Center">Beautfiful Mobile Intefaces</MudText>
+                            <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Center" Style="font-weight: 500; color: #ffffff">
+                                Welcome to DCMS.Blazor. A beautifully crafted Mobile PWA & Site Template made to run incredibly fast and be extremely easy to edit and customize.
+                            </MudText>
+                        </MudItem>
+                        <MudItem xs="0" md="0" lg="3" xl="4"></MudItem>
+                    </MudGrid>
+                </MudCardContent>
+            </MudCard>
+        </MudCarouselItem>
+        <MudCarouselItem Transition="Transition.Slide">
+            <MudCard Outlined="false" Class="wk-container second-card border-0 d-flex flex-column justify-center">
+                <MudCardContent Class="pa-4">
+                    <MudGrid Spacing="0">
+                        <MudItem xs="0" md="0" lg="3" xl="4"></MudItem>
+                        <MudItem xs="12" md="12" lg="6" xl="4">
+                            <MudText Typo="Typo.h6" Style="font-weight: 700; color: #0052cc " Align="Align.Center">
+                                Material Design
+                            </MudText>
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600; color: #ffffff " Align="Align.Center">Component framework for Blazor</MudText>
+                            <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Center" Style="font-weight: 500; color: #ffffff">
+                                Based on MudBlazor with an emphasis on ease of use and clear structure. It is perfect for .NET developers who want to rapidly build web applications without having to struggle with CSS and Javascript
+                            </MudText>
+                        </MudItem>
+                        <MudItem xs="0" md="0" lg="3" xl="4"></MudItem>
+                    </MudGrid>
+                </MudCardContent>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudCardMedia Image="/images/walkthough/wk_2_l.png" Class="mt-5 align-self-center" Style="height:360px; width:600px;" />
+                </MudHidden>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="false" Class="px-5">
+                    <MudCardMedia Image="/images/walkthough/wk_2_s.png" Class="mt-5 align-self-center" Style="height:226px; width:374px;" />
+                </MudHidden>
+            </MudCard>
+        </MudCarouselItem>
+        <MudCarouselItem Transition="Transition.Slide">
+            <MudCard Outlined="false" Class="wk-container third-card border-0 d-flex flex-column justify-center">
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                    <MudCardMedia Image="/images/walkthough/wk_3_l.png" Class="mb-5 align-self-center" Style="height:360px; width:600px;" />
+                </MudHidden>
+                <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="false" Class="px-5">
+                    <MudCardMedia Image="/images/walkthough/wk_3_s.png" Class="mb-5 align-self-center" Style="height:226px; width:374px;" />
+                </MudHidden>
+                <MudCardContent Class="pa-4">
+                    <MudGrid Spacing="0">
+                        <MudItem xs="0" md="0" lg="3" xl="4"></MudItem>
+                        <MudItem xs="12" md="12" lg="6" xl="4">
+                            <MudText Typo="Typo.h6" Style="font-weight: 700; color: #2684FF " Align="Align.Center">
+                                And Much More
+                            </MudText>
+                            <MudText Typo="Typo.subtitle1" Style="font-weight: 600; color: #ffffff " Align="Align.Center">Explore DCMS.Blazor! It's super powerful!</MudText>
+                            <MudText Typo="Typo.body1" Class="mt-3" Align="Align.Center" Style="font-weight: 500; color: #ffffff ">
+                                There are so many features, we can't describe them all! Start exploring and get DCMS.Blazor Now!
+                            </MudText>
+                        </MudItem>
+                        <MudItem xs="0" md="0" lg="3" xl="4"></MudItem>
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton OnClick="ExploreAsync" Variant="Variant.Filled" Size="Size.Medium" Color="Color.Primary" Class="ma-2">EXPLORE NOW</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudCarouselItem>
+    </ChildContent>
+</MudCarousel>
+
+@code{
+    public MudTheme Theme = new MudTheme();
+
+    [CascadingParameter] public MainLayout Parent { get; set; }
+
+    private async Task ExploreAsync()
+    {
+        Parent.IsFirstVisit = !Parent.IsFirstVisit;
+        await _clientPreferenceService.ChangeFirstVisitAsync(Parent.IsFirstVisit);
+        await InvokeAsync(StateHasChanged);
+        _NavigationManager.NavigateTo("/");
+    }
+}

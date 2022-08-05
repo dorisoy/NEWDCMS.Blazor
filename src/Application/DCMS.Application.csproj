@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>DCMS.Application</RootNamespace>
+    <AssemblyName>DCMS.Application</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;8618;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;8618;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\Brands\**" />
+    <Compile Remove="Features\Documents\**" />
+    <Compile Remove="Features\DocumentTypes\**" />
+    <Compile Remove="Features\Products\Commands\**" />
+    <Compile Remove="Features\Products\Queries\**" />
+    <Compile Remove="Validators\Features\Brands\**" />
+    <Compile Remove="Validators\Features\Documents\**" />
+    <Compile Remove="Validators\Features\DocumentTypes\**" />
+    <Compile Remove="Validators\Features\Products\**" />
+    <EmbeddedResource Remove="Features\Brands\**" />
+    <EmbeddedResource Remove="Features\Documents\**" />
+    <EmbeddedResource Remove="Features\DocumentTypes\**" />
+    <EmbeddedResource Remove="Features\Products\Commands\**" />
+    <EmbeddedResource Remove="Features\Products\Queries\**" />
+    <EmbeddedResource Remove="Validators\Features\Brands\**" />
+    <EmbeddedResource Remove="Validators\Features\Documents\**" />
+    <EmbeddedResource Remove="Validators\Features\DocumentTypes\**" />
+    <EmbeddedResource Remove="Validators\Features\Products\**" />
+    <None Remove="Features\Brands\**" />
+    <None Remove="Features\Documents\**" />
+    <None Remove="Features\DocumentTypes\**" />
+    <None Remove="Features\Products\Commands\**" />
+    <None Remove="Features\Products\Queries\**" />
+    <None Remove="Validators\Features\Brands\**" />
+    <None Remove="Validators\Features\Documents\**" />
+    <None Remove="Validators\Features\DocumentTypes\**" />
+    <None Remove="Validators\Features\Products\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Mappings\BrandProfile.cs" />
+    <Compile Remove="Mappings\DocumentProfile.cs" />
+    <Compile Remove="Mappings\DocumentTypeProfile.cs" />
+    <Compile Remove="Mappings\ProductProfile.cs" />
+    <Compile Remove="Specifications\Catalog\BrandFilterSpecification.cs" />
+    <Compile Remove="Specifications\Catalog\ProductFilterSpecification.cs" />
+  </ItemGroup>
+  <ItemGroup>
+	<PackageReference Include="AutoMapper" Version="11.0.1" />
+	<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="LazyCache" Version="2.4.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.18" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\DCMS.Domain.csproj" />
+    <ProjectReference Include="..\Shared\DCMS.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Products\" />
+    <Folder Include="Specifications\Catalog\" />
+  </ItemGroup>
+
+</Project>

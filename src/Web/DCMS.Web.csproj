@@ -1,0 +1,341 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+	<TargetFramework>net6.0</TargetFramework>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	<NoWarn>1701;1702;8601;8618;8603;0649;0414;BL0005;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<NoWarn>1701;1702;8601;8618;8603;0649;0414;BL0005;</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<Compile Remove="Pages\SaleReports\**" />
+	<Compile Remove="wwwroot\theme\**" />
+	<Content Remove="Pages\SaleReports\**" />
+	<Content Remove="wwwroot\theme\**" />
+	<EmbeddedResource Remove="Pages\SaleReports\**" />
+	<EmbeddedResource Remove="wwwroot\theme\**" />
+	<None Remove="Pages\SaleReports\**" />
+	<None Remove="wwwroot\theme\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
+	<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.4" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.4" />
+	<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.4" PrivateAssets="all" />
+	<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+	<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.4" />
+	<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+	<PackageReference Include="Serilog.Sinks.BrowserConsole" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Folder Include="Pages\Finances\AdvancePayment\Components\" />
+	<Folder Include="Pages\Finances\AdvanceReceipt\Components\" />
+	<Folder Include="Pages\Finances\BalanceSheet\Components\" />
+	<Folder Include="Pages\Finances\ClosingAccounts\Components\" />
+	<Folder Include="Pages\Finances\CostContract\Components\" />
+	<Folder Include="Pages\Finances\CostExpenditure\Components\" />
+	<Folder Include="Pages\Finances\FinancialIncome\Components\" />
+	<Folder Include="Pages\Finances\LedgerDetails\Components\" />
+	<Folder Include="Pages\Finances\PaymentReceipt\Components\" />
+	<Folder Include="Pages\Finances\ProfitSheet\Components\" />
+	<Folder Include="Pages\Finances\ReceiptCash\Components\" />
+	<Folder Include="Pages\Finances\RecordingVoucher\Components\" />
+	<Folder Include="Pages\Finances\TrialBalance\Components\" />
+	<Folder Include="Pages\Purchases\PurchaseBill\Components\" />
+	<Folder Include="Pages\Purchases\PurchaseReturnBill\Components\" />
+	<Folder Include="Pages\Report\FundReport\Components\" />
+	<Folder Include="Pages\Report\MarketReport\Components\" />
+	<Folder Include="Pages\Report\PurchaseReport\Components\" />
+	<Folder Include="Pages\Report\SaleReport\Components\" />
+	<Folder Include="Pages\Report\StaffReport\Components\" />
+	<Folder Include="Pages\Report\StockReport\Components\" />
+	<Folder Include="Pages\Report\VisitStore\Components\" />
+	<Folder Include="Pages\Sales\CarGoodBill\Components\" />
+	<Folder Include="Pages\Sales\ChangeReservation\Components\" />
+	<Folder Include="Pages\Sales\DispatchBill\Components\" />
+	<Folder Include="Pages\Sales\ExchangeBill\Components\" />
+	<Folder Include="Pages\Sales\FinanceReceiveAccount\Components\" />
+	<Folder Include="Pages\Sales\PickingBill\Components\" />
+	<Folder Include="Pages\Sales\ReturnBill\Components\" />
+	<Folder Include="Pages\Sales\ReturnReservationBill\Components\" />
+	<Folder Include="Pages\Setting\Accounting\Components\" />
+	<Folder Include="Pages\Setting\Setting\Components\" />
+	<Folder Include="Pages\WareHouse\Allocation\Components\" />
+	<Folder Include="Pages\WareHouse\CombinationProduct\Components\" />
+	<Folder Include="Pages\WareHouse\CostAdjustment\Components\" />
+	<Folder Include="Pages\WareHouse\InventoryAllTask\Components\" />
+	<Folder Include="Pages\WareHouse\InventoryProfitLoss\Components\" />
+	<Folder Include="Pages\WareHouse\ScrapProduct\Components\" />
+	<Folder Include="Pages\WareHouse\SplitProduct\Components\" />
+	<Folder Include="Pages\WareHouse\WareHouse\Components\" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Include="Pages\Account\Login\Login.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\AntDesign.Authentication\AntDesign.Authentication.csproj" />
+	<ProjectReference Include="..\AntDesign.Charts\AntDesign.Charts.csproj" />
+	<ProjectReference Include="..\AntDesign.ProLayout\AntDesign.ProLayout.csproj" />
+	<ProjectReference Include="..\AntDesign\components\AntDesign.csproj" />
+	<ProjectReference Include="..\Domain\DCMS.Domain.csproj" />
+	<ProjectReference Include="..\Shared\DCMS.Shared.csproj" />
+	<ProjectReference Include="..\Web.Infrastructure\DCMS.Web.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Content Update="Pages\Account\Branch\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Account\Permission\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Account\UserRole\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Account\User\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Assessment\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Brand\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Campaign\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Category\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Channel\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\GiveQuota\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\LineTier\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Manufacturer\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\PercentagePlan\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Percentage\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Product\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Rank\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Receivable\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\SpecificationAttribute\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\Terminal\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Archives\TierPricePlan\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\AdvancePayment\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\AdvanceReceipt\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\BalanceSheet\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\ClosingAccounts\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\CostContract\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\CostExpenditure\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\FinancialIncome\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\LedgerDetails\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\PaymentReceipt\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\ProfitSheet\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\ReceiptCash\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\RecordingVoucher\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Finances\TrialBalance\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Purchases\PurchaseBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Purchases\PurchaseReturnBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Report\FundReport\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Report\MarketReport\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Report\PurchaseReport\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Report\SaleReport\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Report\StaffReport\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Report\StockReport\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Report\VisitStore\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\CarGoodBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\ChangeReservation\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\DispatchBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\ExchangeBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\FinanceReceiveAccount\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\PickingBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\ReturnBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\ReturnReservationBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\SaleBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Sales\SaleReservationBill\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Setting\Accounting\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\Setting\Setting\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\Allocation\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\CombinationProduct\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\CostAdjustment\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\InventoryAllTask\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\InventoryProfitLoss\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\ScrapProduct\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\SplitProduct\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+	<Content Update="Pages\WareHouse\WareHouse\Index.razor">
+	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	</Content>
+  </ItemGroup>
+
+
+
+	<!--这是重建-不要清理生成的文件，因为这会破坏重建行为-->
+	<Target Name="ShouldCleanGeneratedFiles" BeforeTargets="BeforeRebuild">
+		<PropertyGroup>
+			<CleanGeneratedFiles>false</CleanGeneratedFiles>
+		</PropertyGroup>
+	</Target>
+
+
+	<Target Name="ToolRestore">
+		<Exec Command="dotnet tool restore" StandardOutputImportance="high" />
+	</Target>
+	
+	<Target Name="CleanGeneratedFiles" BeforeTargets="Clean" Condition="'$(CleanGeneratedFiles)' != 'false'">
+		<ItemGroup>
+			<FilesToClean Include="./wwwroot/css/DCMS.Web.min.css" />
+		</ItemGroup>
+		<Delete Files="@(FilesToClean)" />
+	</Target>
+
+	<Target Name="WebCompiler" DependsOnTargets="ToolRestore;CombineJS">
+		<!--compile and minify less-->
+		<Exec Command="dotnet webcompiler ./style/DCMS.Web.less -c excubowebcompiler.json" StandardOutputImportance="high" StandardErrorImportance="high" />
+	</Target>
+
+	<Target Name="IncludeGeneratedStaticFiles" DependsOnTargets="WebCompiler">
+		<Error Condition="!Exists('wwwroot/css/DCMS.Web.min.css')" Text="Missing mytest.min.css in wwwroot" />
+		<ItemGroup>
+			<Content Include="wwwroot/css/DCMS.Web.min.css" Condition="!Exists('wwwroot/css/DCMS.Web.min.css')" />
+		</ItemGroup>
+	</Target>
+
+	<ItemGroup>
+		<!--For automatic compile on save of the scss use
+	cd ./src/MudBlazor
+	dotnet watch webcompiler ./style/DCMS.Web.scss -c excubowebcompiler.json
+	-->
+		<Watch Include="**/*.less" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Watch Remove="Pages\SaleReports\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Watch Remove="Style\Account\Account.less" />
+	  <Watch Remove="Style\Account\Branch.less" />
+	  <Watch Remove="Style\Account\Login.less" />
+	  <Watch Remove="Style\Account\Permission.less" />
+	  <Watch Remove="Style\Account\User.less" />
+	  <Watch Remove="Style\Account\UserRole.less" />
+	</ItemGroup>
+
+</Project>

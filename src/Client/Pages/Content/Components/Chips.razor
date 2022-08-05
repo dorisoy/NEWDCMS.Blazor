@@ -1,0 +1,102 @@
+﻿@page "/components/chips"
+@using DCMS.Application.Models
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Chips> _localizer
+
+<MudText Color="Color.Default" Class="mt-1 mb-1" Typo="Typo.h6"> Filled Chips </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> The Chips, when disabled, differ from other components. Instead of using the disabled color, the opacity is lowered. </MudText>
+<MudChip>Default</MudChip>
+<MudChip Color="Color.Primary">Primary</MudChip>
+<MudChip Color="Color.Secondary">Secondary</MudChip>
+<MudChip Color="Color.Info">Info</MudChip>
+<MudChip Color="Color.Success">Success</MudChip>
+<MudChip Color="Color.Warning">Warning</MudChip>
+<MudChip Color="Color.Error">Error</MudChip>
+<MudChip Color="Color.Dark">Dark</MudChip>
+<MudDivider Class="my-3"/>
+<MudChip Disabled="true">Default</MudChip>
+<MudChip Disabled="true" Color="Color.Primary">Primary</MudChip>
+<MudChip Disabled="true" Color="Color.Secondary">Secondary</MudChip>
+<MudChip Disabled="true" Color="Color.Info">Info</MudChip>
+<MudChip Disabled="true" Color="Color.Success">Success</MudChip>
+<MudChip Disabled="true" Color="Color.Warning">Warning</MudChip>
+<MudChip Disabled="true" Color="Color.Error">Error</MudChip>
+<MudChip Disabled="true" Color="Color.Dark">Dark</MudChip>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Text Chips </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Text Chips also differ from other components where it has transparent background instead of fully transparent. </MudText>
+<MudChip Variant="Variant.Text">Default</MudChip>
+<MudChip Variant="Variant.Text" Color="Color.Primary">Primary</MudChip>
+<MudChip Variant="Variant.Text" Color="Color.Secondary">Secondary</MudChip>
+<MudChip Variant="Variant.Text" Color="Color.Info">Info</MudChip>
+<MudChip Variant="Variant.Text" Color="Color.Success">Success</MudChip>
+<MudChip Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
+<MudChip Variant="Variant.Text" Color="Color.Error">Error</MudChip>
+<MudChip Variant="Variant.Text" Color="Color.Dark">Dark</MudChip>
+<MudDivider Class="my-3"/>
+<MudChip Disabled="true" Variant="Variant.Text">Default</MudChip>
+<MudChip Disabled="true" Variant="Variant.Text" Color="Color.Primary">Primary</MudChip>
+<MudChip Disabled="true" Variant="Variant.Text" Color="Color.Secondary">Secondary</MudChip>
+<MudChip Disabled="true" Variant="Variant.Text" Color="Color.Info">Info</MudChip>
+<MudChip Disabled="true" Variant="Variant.Text" Color="Color.Success">Success</MudChip>
+<MudChip Disabled="true" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
+<MudChip Disabled="true" Variant="Variant.Text" Color="Color.Error">Error</MudChip>
+<MudChip Disabled="true" Variant="Variant.Text" Color="Color.Dark">Dark</MudChip>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Outlined Chips </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> This looks and feels like outlined normaly do with a border and slightly transparent background on hover. </MudText>
+<MudChip Variant="Variant.Outlined">Default</MudChip>
+<MudChip Variant="Variant.Outlined" Color="Color.Primary">Primary</MudChip>
+<MudChip Variant="Variant.Outlined" Color="Color.Secondary">Secondary</MudChip>
+<MudChip Variant="Variant.Outlined" Color="Color.Info">Info</MudChip>
+<MudChip Variant="Variant.Outlined" Color="Color.Success">Success</MudChip>
+<MudChip Variant="Variant.Outlined" Color="Color.Warning">Warning</MudChip>
+<MudChip Variant="Variant.Outlined" Color="Color.Error">Error</MudChip>
+<MudChip Variant="Variant.Outlined" Color="Color.Dark">Dark</MudChip>
+<MudDivider Class="my-3"/>
+<MudChip Disabled="true" Variant="Variant.Outlined">Default</MudChip>
+<MudChip Disabled="true" Variant="Variant.Outlined" Color="Color.Primary">Primary</MudChip>
+<MudChip Disabled="true" Variant="Variant.Outlined" Color="Color.Secondary">Secondary</MudChip>
+<MudChip Disabled="true" Variant="Variant.Outlined" Color="Color.Info">Info</MudChip>
+<MudChip Disabled="true" Variant="Variant.Outlined" Color="Color.Success">Success</MudChip>
+<MudChip Disabled="true" Variant="Variant.Outlined" Color="Color.Warning">Warning</MudChip>
+<MudChip Disabled="true" Variant="Variant.Outlined" Color="Color.Error">Error</MudChip>
+<MudChip Disabled="true" Variant="Variant.Outlined" Color="Color.Dark">Dark</MudChip>
+
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Closable </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> You can change the close icon with the CloseIcon prop. </MudText>
+<MudChip Color="Color.Default" OnClose="Closed">Closable</MudChip>
+<MudChip Color="Color.Error" OnClose="Closed">Closable</MudChip>
+<MudChip Color="Color.Primary" OnClose="Closed" CloseIcon="@Icons.Material.Filled.AlarmAdd">Closable</MudChip>
+<MudChip Color="Color.Success" OnClose="Closed" CloseIcon="@Icons.Material.Filled.AlarmOn">Closable</MudChip>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Icons </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> You can disable the alert icons with the bool NoIcon set to true. </MudText>
+<MudChip Icon="@Icons.Material.Filled.Dangerous" IconColor="Color.Error">Extensions</MudChip>
+<MudChip Icon="@Icons.Material.Filled.Extension" Color="Color.Dark">Extensions</MudChip>
+<MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Primary">Account</MudChip>
+<MudChip Icon="@Icons.Material.Filled.FlightTakeoff" Color="Color.Secondary">Your flight times</MudChip>
+<MudChip Icon="@Icons.Material.Filled.VerifiedUser" Color="Color.Info">Verified User</MudChip>
+
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Label </MudText>
+<MudText Color="Color.Default" Typo="Typo.caption"> Label Chips use the default theme border-radius. </MudText>
+<MudChip Label="true">Default</MudChip>
+<MudChip Icon="@Icons.Custom.Brands.MudBlazor" Label="true" Color="Color.Primary">MudBlazor</MudChip>
+<MudChip Icon="@Icons.Custom.Brands.Twitter" Label="true" Color="Color.Info" OnClose="Closed">New Tweets</MudChip>
+<MudChip Icon="@Icons.Custom.Uncategorized.Radioactive" Label="true" Color="Color.Warning" Style="color:black;">Radioactive Areas</MudChip>
+
+<MudText Color="Color.Default" Class="mt-5 mb-1" Typo="Typo.h6"> Size </MudText>
+<MudChip Size="Size.Small">Small</MudChip>
+<MudChip Size="Size.Medium">Medium</MudChip>
+<MudChip Size="Size.Large">Large</MudChip>
+
+@code {
+    void Closed(MudChip chip)
+    {
+        // react to chip closed
+    }
+
+}
+
+

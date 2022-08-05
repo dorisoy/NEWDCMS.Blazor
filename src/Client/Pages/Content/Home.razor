@@ -1,0 +1,190 @@
+﻿@page "/home"
+@page "/"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Home> _localizer
+
+
+<MudGrid Class="my-5" Spacing="2">
+	<MudItem xs="6" sm="6" md="3">
+		<MudCard Elevation="25" Class="py-3 d-flex flex-row rounded-lg" @onclick="@(() => NavigateToDashboardPage())">
+			<MudIconButton Icon="@Icons.Filled.PointOfSale" Color="Color.Info" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>
+			<MudPaper Elevation="0" Class="pa-0 align-self-center">
+				<MudText Typo="Typo.subtitle1" Style="font-size: 30px;font-weight:bold" Color="@Color.Default">3443.99</MudText>
+				<MudText Typo="Typo.caption" Style="font-size: 14px;font-weight:bold" Color="@Color.Primary" Class="mud-text-primary">今日销售额 </MudText>
+			</MudPaper>
+		</MudCard>
+
+	</MudItem>
+	<MudItem xs="6" sm="6" md="3">
+		<MudCard Elevation="25" Class="py-3 d-flex flex-row rounded-lg">
+			<MudIconButton Icon="@Icons.Filled.LocalPrintshop" Color="Color.Info" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>
+			<MudPaper Elevation="0" Class="pa-0 align-self-center">
+				<MudText Typo="Typo.subtitle1" Style="font-size: 30px;font-weight:bold" Color="@Color.Default">455.0</MudText>
+				<MudText Typo="Typo.caption" Style="font-size: 14px;font-weight:bold" Color="@Color.Primary" Class="mud-text-primary">今日订单数 </MudText>
+			</MudPaper>
+		</MudCard>
+	</MudItem>
+	<MudItem xs="6" sm="6" md="3">
+		<MudCard Elevation="25" Class="py-3 d-flex flex-row rounded-lg">
+			<MudIconButton Icon="@Icons.Filled.SupervisedUserCircle" Color="Color.Info" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>
+			<MudPaper Elevation="0" Class="pa-0 align-self-center">
+				<MudText Typo="Typo.subtitle1" Style="font-size: 30px;font-weight:bold" Color="@Color.Default">564</MudText>
+				<MudText Typo="Typo.caption" Style="font-size: 14px;font-weight:bold" Color="@Color.Primary" Class="mud-text-primary">今日新增客户数 </MudText>
+			</MudPaper>
+		</MudCard>
+	</MudItem>
+	<MudItem xs="6" sm="6" md="3">
+		<MudCard Elevation="25" Class="py-3 d-flex flex-row rounded-lg">
+			<MudIconButton Icon="@Icons.Filled.Storefront" Color="Color.Info" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>
+			<MudPaper Elevation="0" Class="pa-0 align-self-center">
+				<MudText Typo="Typo.subtitle1" Style="font-size: 30px;font-weight:bold" Color="@Color.Default">1238</MudText>
+				<MudText Typo="Typo.caption" Style="font-size: 14px;font-weight:bold" Color="@Color.Primary" Class="mud-text-primary">今日拜访客户数 </MudText>
+			</MudPaper>
+		</MudCard>
+	</MudItem>
+</MudGrid>
+
+<div class="d-flex flex-row justify-space-between mt-5 mb-2">
+	<div class="d-flex">
+		<MudIconButton Icon="fas fa-gem" Color="Color.Primary" Size="Size.Small"></MudIconButton>
+		<MudText Color="Color.Default" Class="mx-2" Style="font-weight: 500;" Typo="Typo.subtitle1">统计分析</MudText>
+	</div>
+	<MudText Color="Color.Primary" Class="align-self-center" Typo="Typo.subtitle2">全部</MudText>
+</div>
+
+
+
+<MudGrid Class="mb-5" Spacing="2">
+	<MudItem xs="6" sm="6" md="6">
+		<MudCard Elevation="25" Class="rounded-lg" >
+			<MudCardContent Class="d-flex flex-column px-3 py-2" >
+			
+				<MudChart ChartType="ChartType.Line" ChartSeries="@Series" XAxisLabels="@XAxisLabels" Width="100%" Height="300px" ChartOptions="options"></MudChart>
+
+
+			</MudCardContent>
+		</MudCard>
+	</MudItem>
+
+
+	<MudItem xs="6" sm="6" md="6">
+		<MudCard Elevation="25" Class="rounded-lg" >
+			<MudCardContent Class="d-flex flex-column px-3 py-2" >
+				<MudChart ChartType="ChartType.Pie" InputData="@data" @bind-SelectedIndex="Index" InputLabels="@labels" Width="300px" Height="300px" />
+			</MudCardContent>
+		</MudCard>
+	</MudItem>
+
+
+	<MudItem xs="6" sm="6" md="6">
+		<MudCard Elevation="25" Class=" rounded-lg" >
+			<MudCardContent Class="d-flex flex-column align-self-center flex-wrap px-3 py-2" >
+			<MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels2" Width="100%" Height="300px"></MudChart>
+			</MudCardContent>
+		</MudCard>
+	</MudItem>
+
+
+	<MudItem xs="6" sm="6" md="6">
+		<MudCard Elevation="25" Class="rounded-lg">
+			<MudCardContent Class="d-flex flex-column align-self-center flex-wrap px-3 py-2" >
+			<MudChart ChartType="ChartType.Donut" Width="300px" Height="300px" InputData="@data2" InputLabels="@labels2">
+	<CustomGraphics>
+		<text class="donut-inner-text" x="47%" y="35%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">总计</text>
+		<text class="donut-inner-text" x="47%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@data2.Sum().ToString()</text>
+	</CustomGraphics>
+</MudChart>
+			</MudCardContent>
+		</MudCard>
+	</MudItem>
+</MudGrid>
+
+
+@code {
+	private ChartOptions options = new ChartOptions();
+	public List<ChartSeries> Series = new List<ChartSeries>()
+	{
+		new ChartSeries() { Name = "销售", Data = new double[] { 90, 79, 72, 69, 62, 62, 55, 65, 70 } },
+		new ChartSeries() { Name = "拜访", Data = new double[] { 35, 41, 35, 51, 49, 62, 69, 91, 148 } },
+	};
+	public string[] XAxisLabels = { "史绪安", "蒋世兴", "王长华", "魏文昌", "陈文林", "王骞谋", "肖刚", "刘静", "肖义" };
+
+	Random random = new Random();
+	protected override void OnInitialized()
+	{
+		options.InterpolationOption = InterpolationOption.NaturalSpline;
+		options.YAxisFormat = "c2";
+	}
+
+	public void RandomizeData()
+	{
+		var new_series = new List<ChartSeries>()
+		{
+			new ChartSeries() { Name = "销售", Data = new double[9] },
+			new ChartSeries() { Name = "拜访", Data = new double[9] },
+		};
+		for (int i = 0; i < 9; i++)
+		{
+			new_series[0].Data[i] = random.NextDouble() * 100;
+			new_series[1].Data[i] = random.NextDouble() * 100;
+		}
+		Series = new_series;
+		StateHasChanged();
+	}
+
+	void OnClickMenu(InterpolationOption interpolationOption)
+	{
+		options.InterpolationOption = interpolationOption;
+		StateHasChanged();
+	}
+
+	//pie
+	private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+	int dataSize = 4;
+	double[] data = { 77, 25, 20, 5 };
+	string[] labels = { "销售单", "订单", "退货单", "收款单", "调拨单" };
+
+
+
+	//bar
+	public List<ChartSeries> Series2 = new List<ChartSeries>()
+	{
+		new ChartSeries() { Name = "拜访终端", Data = new double[] { 40, 20, 25, 27, 46, 60, 48, 80, 15 } },
+		new ChartSeries() { Name = "销售开单", Data = new double[] { 19, 24, 35, 13, 28, 15, 13, 16, 31 } },
+		new ChartSeries() { Name = "新增终端", Data = new double[] { 8, 6, 11, 13, 4, 16, 10, 16, 18 } },
+	};
+	public string[] XAxisLabels2 = { "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月" };
+
+
+
+	//donut
+	 public double[] data2 = { 25, 77, 28, 5 };
+	public string[] labels2 = { "雪花", "喜力", "青岛", "哇哈哈" };
+
+
+	//void RandomizeData()
+	//{
+	//    var new_data = new double[dataSize];
+	//    for (int i = 0; i < new_data.Length; i++)
+	//        new_data[i] = random.NextDouble() * 100;
+	//    data = new_data;
+	//    StateHasChanged();
+	//}
+
+	//void AddDataSize()
+	//{
+	//    if (dataSize < 20)
+	//    {
+	//        dataSize = dataSize + 1;
+	//        RandomizeData();
+	//    }
+	//}
+	//void RemoveDataSize()
+	//{
+	//    if (dataSize > 0)
+	//    {
+	//        dataSize = dataSize - 1;
+	//        RandomizeData();
+	//    }
+	//}
+
+}

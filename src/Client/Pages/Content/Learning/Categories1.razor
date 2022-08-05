@@ -1,0 +1,55 @@
+﻿@page "/learning-categories1"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Categories1> _localizer
+
+@if (!_loaded)
+{
+    <Spinner></Spinner>
+}
+else
+{
+    <MudPaper Elevation="3" Height="150" Class="px-4 mx-n4 mt-n10 py-10 mud-theme-primary" Style="border-radius: 0px 0px 45px 45px;" Outlined="false">
+        <MudPaper Elevation="0" Class="py-0">
+
+        </MudPaper>
+    </MudPaper>
+
+    <MudCard Elevation="25" Class="mt-n10 py-3 d-flex flex-row rounded-xl justify-space-between">
+        <div class="pa-3 align-self-center">
+           <MudText Style="font-weight: 500;" Typo="Typo.h6" Color="@Color.Default">Pro Certification</MudText>
+           <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Primary" Class="mud-text-primary">Get Professional Certification for your Skillset </MudText>
+        </div>
+        <MudIconButton Icon="fas fa-award" Color="Color.Tertiary" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton> 
+    </MudCard>
+
+    <MudCard Elevation="25" Class="mt-3 py-3 d-flex flex-row rounded-xl justify-space-between">
+        <div class="pa-3 align-self-center">
+           <MudText Style="font-weight: 500;" Typo="Typo.h6" Color="@Color.Default">Typography</MudText>
+           <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Primary" Class="mud-text-primary">Understand Typography and Master Fonts </MudText>
+        </div>
+        <MudIconButton Icon="fas fa-swatchbook" Color="Color.Warning" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>
+    </MudCard>
+
+    <MudCard Elevation="25" Class="mt-3 py-3 d-flex flex-row rounded-xl justify-space-between">
+        <div class="pa-3 align-self-center">
+           <MudText Style="font-weight: 500;" Typo="Typo.h6" Color="@Color.Default">Blazor WebAssembly</MudText>
+           <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Primary" Class="mud-text-primary">Data Structures and Algorithms </MudText>
+        </div>
+        <MudIconButton Icon="fas fa-code" Color="Color.Info" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>
+    </MudCard>
+
+    <MudCard Elevation="25" Class="mt-3 py-3 d-flex flex-row rounded-xl justify-space-between">
+        <div class="pa-3 align-self-center">
+            <MudText Style="font-weight: 500;" Typo="Typo.h6" Color="@Color.Default">SEO &amp; Ranking</MudText>
+            <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Primary" Class="mud-text-primary">Learn how to Rank Pages Higher </MudText>
+        </div>
+        <MudIconButton Icon="fas fa-globe" Color="Color.Secondary" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton> 
+    </MudCard>
+
+    <MudCard Elevation="25" Class="my-3 py-3 d-flex flex-row rounded-xl justify-space-between">
+        <div class="pa-3 align-self-center">
+           <MudText Style="font-weight: 500;" Typo="Typo.h6" Color="@Color.Default">Near You</MudText>
+           <MudText Typo="Typo.caption" Style="font-weight: 300;" Color="@Color.Primary" Class="mud-text-primary">Find Live Courses Near You </MudText>
+        </div>
+        <MudIconButton Icon="fas fa-map-marker-alt" Color="Color.Error" Class="ma-3 pa-3" Size="Size.Large"></MudIconButton>
+    </MudCard>
+}

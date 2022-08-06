@@ -1,5 +1,5 @@
-# DCMS
-注意：Wesley 已经正式更名为 DCMS啦！
+# DCMS.Blazor
+
 
 DCMS基于Saas的经销商快消解决方案，皆在满足区域营销管理业务快速变化需求，系统基于Docker + .Net core + Mysql Inner db cluster 的分布式微服务框架,提供高性能RPC远程服务调用，采用Zookeeper、Consul作为surging服务的注册中心，集成了哈希，随机，轮询，压力最小优先作为负载均衡的算法，RPC集成采用的是netty框架，采用异步传输，客户端APP 采用 Android Xamarin/ Xamarin.Forms 支持Android 5.0 以上 所有Android 最新版本。,DCMS 基于Saas的轻量级新零售快消CRM/ERP系统， 系统为经销商量身定制的全业务流程渠道分销管理系统（手机APP称为经销商管家），帮助经销商解决 业务信息化和数据化问题，提升管理效率，实现减员增效。
 
@@ -141,6 +141,11 @@ DCMS基于Saas的经销商快消解决方案，皆在满足区域营销管理业
 >
 > > [Node.js 10+](https://nodejs.org/en/)、[TypeScript 4.0 +](https://www.typescriptlang.org/)、[Vue.js 2.6+](https://cn.vuejs.org/)、[Vue CLI](https://cli.vuejs.org/zh/guide/)、[Vuex](https://vuex.vuejs.org/zh/)、[VueRouter](https://router.vuejs.org/zh/)、[Element-UI](https://element.eleme.cn/#/zh-CN/component/installation)
 
+> Blazor
+>
+> > [ant-design-blazor v0.11.0 ](https://github.com/ant-design-blazor/ant-design-blazor)
+
+
 > Android/IOS 客户端
 >
 > > [Acr.UserDialogs](https://)、
@@ -170,7 +175,6 @@ DCMS基于Saas的经销商快消解决方案，皆在满足区域营销管理业
 [Xamarin.Forms.PancakeView](https://)、
 [ZXing.Net.Mobile](https://)、
 [ZXing.Net.Mobile.Forms](https://)
-
 
 
 ## 销售模块

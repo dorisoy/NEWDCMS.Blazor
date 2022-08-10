@@ -1,0 +1,55 @@
+name: Release
+
+env:
+  NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  release-and-publish-package:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'ant-design-blazor'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.300
+
+      - name: Setup .NET 5
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.100
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.101
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+
+      - name: Package and publish to Nuget📦
+        id: pack
+        run: |
+          VERSION=`git describe --tags`
+          echo "Publishing Version: ${VERSION}"
+          npm install
+          dotnet build
+          dotnet pack components/AntDesign.csproj /p:PackageVersion=$VERSION /p:ContinuousIntegrationBuild=true -c Release -o publish
+          dotnet pack tests/AntDesign.TestKit/AntDesign.TestKit.csproj /p:PackageVersion=$VERSION /p:ContinuousIntegrationBuild=true -c Release -o publish
+          dotnet pack src/AntDesign.Components.Authentication/AntDesign.Components.Authentication.csproj /p:PackageVersion=$VERSION /p:ContinuousIntegrationBuild=true -c Release -o publish
+          dotnet nuget push 'publish/*.nupkg' -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY --skip-duplicate
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: package
+          path: publish/
+          retention-days: 5

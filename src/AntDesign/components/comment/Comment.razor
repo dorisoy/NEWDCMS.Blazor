@@ -1,0 +1,78 @@
+﻿@namespace AntDesign
+@inherits AntDomComponentBase
+
+<CascadingValue Value="this" IsFixed="@true">
+    <div class="@ClassMapper.Class" style="@Style" id="@Id" @ref="Ref">
+        <div class="ant-comment-inner">
+            @if ((Avatar != null || AvatarTemplate != null) && (Content != null || ContentTemplate != null))
+            {
+                <div class="ant-comment-avatar">
+                    @if (AvatarTemplate != null)
+                    {
+                        @AvatarTemplate
+                    }
+                    else
+                    {
+                        <Avatar Src="@Avatar" />
+
+                    }
+                </div>
+                <div class="ant-comment-content">
+                    <div class="ant-comment-content-author">
+                        @if (Author != null || AuthorTemplate != null)
+                        {
+                            <span class="ant-comment-content-author-name">
+
+                                @if (AuthorTemplate != null)
+                                {
+                                    @AuthorTemplate
+                                }
+                                else
+                                {
+                                    <a>@Author</a>
+                                }
+                            </span>
+                        }
+
+                        @if (Datetime != null || DatetimeTemplate != null)
+                        {
+                            <span class="ant-comment-content-author-time">
+                                @if (DatetimeTemplate != null)
+                                {
+                                    @DatetimeTemplate
+                                }
+                                else
+                                {
+                                    <span>@Datetime</span>
+                                }
+                            </span>
+                        }
+                    </div>
+                    <div class="ant-comment-content-detail">
+                        @if (ContentTemplate != null)
+                        {
+                            @ContentTemplate
+
+                        }
+                        else
+                        {
+                            <p>@Content</p>
+                        }
+                    </div>
+                    @if (Actions.Count > 0)
+                    {
+                        <ul class="ant-comment-actions">
+                            @foreach (RenderFragment action in Actions)
+                            {
+                                <li>@action</li>
+                            }
+                        </ul>
+                    }
+                </div>
+            }
+        </div>
+        <div class="ant-comment-nested">
+            @ChildContent
+        </div>
+    </div>
+</CascadingValue>

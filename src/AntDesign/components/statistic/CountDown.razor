@@ -1,0 +1,26 @@
+﻿@namespace AntDesign
+@inherits StatisticComponentBase<DateTime>
+@using AntDesign.Core.Helpers;
+
+<div class="@ClassMapper.Class" style="@Style" @ref="Ref" id="@Id">
+    <div class="ant-statistic-title">
+        @if (TitleTemplate != null)@TitleTemplate else @Title
+    </div>
+    <div class="ant-statistic-content" style="@ValueStyle">
+        @if (PrefixTemplate != null || Prefix != null)
+        {
+            <span class="ant-statistic-content-prefix">
+                @if (PrefixTemplate != null)@PrefixTemplate else @Prefix
+            </span>
+        }
+        <span class="ant-statistic-content-value">
+            @(Formatter<TimeSpan>.Format(_countDown, Format))
+        </span>
+        @if (SuffixTemplate != null || Suffix != null)
+        {
+            <span class="ant-statistic-content-suffix">
+                @if (SuffixTemplate != null)@SuffixTemplate else @Suffix
+            </span>
+        }
+    </div>
+</div>

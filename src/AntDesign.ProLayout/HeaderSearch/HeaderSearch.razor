@@ -1,0 +1,8 @@
+@namespace ProLayout
+@inherits AntDomComponentBase
+
+<div class="@ClassMapper.Class" @onclick="@(async args => await SetSearchMode(true))">
+	<Icon Type="search" Theme="outline" Style="cursor: pointer;font-size:18px" />
+	<!--todo: auto complete not working-->
+
+</div>

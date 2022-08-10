@@ -1,0 +1,131 @@
+﻿@namespace AntDesign.Internal
+@typeparam TValue
+@inherits DatePickerPanelBase<TValue>
+
+@{
+    var calendar = CultureInfo.Calendar;
+
+    DateTime monthFirstDayDate = new DateTime(PickerValue.Year, PickerValue.Month, 1, 0, 0, 0);
+    int monthFirstDayOfWeek = (int)calendar.GetDayOfWeek(monthFirstDayDate);
+
+    // sunday should be 7
+    if (monthFirstDayOfWeek == 0)
+    {
+        monthFirstDayOfWeek = DayOfWeekHelper.GetDiffForDayOfWeek(Locale.FirstDayOfWeek);
+    }
+
+    int diffDay = (int) Locale.FirstDayOfWeek - monthFirstDayOfWeek;
+    DateTime startDate;
+    int skipDays = 0;
+    if (monthFirstDayDate == DateTime.MinValue)
+    {
+        startDate = monthFirstDayDate;
+        skipDays = monthFirstDayOfWeek - (int)Locale.FirstDayOfWeek;
+    }
+    else
+    {
+        startDate = monthFirstDayDate.AddDays(diffDay);
+    }
+}
+
+<div class='@($"{PrefixCls}-panel")' @ref="Ref">
+    <DatePickerTemplate TValue="TValue"
+                        @attributes="GetAttributes()"
+                           MaxRow="6"
+                           MaxCol="7"
+                           ViewStartDate="startDate"
+                           ShowFooter="@ShowToday"
+                           GetRowClass="GetRowClass"
+                           IsInView="date => DateHelper.IsSameMonth(date, PickerValue)"
+                           IsToday="date => DateHelper.IsSameDay(date, DatePicker.CurrentDate)"
+                           IsSelected="date => !IsWeek && DateHelper.IsSameDay(date, Value)"
+                           GetColTitle='date => date.ToString(Locale.Lang.DateFormat, CultureInfo)'
+                           OnRowSelect="OnRowSelect"
+                           OnValueSelect="OnValueSelect"
+                           GetNextColValue="date => DateHelper.AddDaysSafely(date, 1)"
+                           SkipDays="skipDays">
+        <RenderPickerHeader>
+            <DatePickerHeader TValue="TValue"
+                              @attributes="GetAttributes()"
+                              ShowSuperPreChange="@(!(IsRange && PickerIndex == 1))"
+                              ShowPreChange="@(!(IsRange && PickerIndex == 1))"
+                              ShowNextChange="@(!(IsRange && PickerIndex == 0))"
+                              ShowSuperNextChange="@(!(IsRange && PickerIndex == 0))"/>
+        </RenderPickerHeader>
+        <RenderTableHeader>
+            <tr>
+                @if (IsWeek)
+                {
+                    <th></th>
+                }
+                @foreach(string weekDay in Locale.Lang.ShortWeekDays)
+                {                    
+                    <th>@(weekDay)</th>
+                }
+            </tr>
+        </RenderTableHeader>
+        <RenderFirstCol>
+            @if (IsWeek)
+            {				
+                <td class="@(PrefixCls)-cell @(PrefixCls)-cell-weak">
+                    @DateHelper.GetWeekOfYear(context, Locale.FirstDayOfWeek)
+                </td>
+            }
+        </RenderFirstCol>
+        <RenderColValue Context="currentColDate">
+            @currentColDate.Day
+        </RenderColValue>
+    </DatePickerTemplate>
+</div>
+
+@if (RenderExtraFooter != null && !IsRange)
+{
+    <div class="@(PrefixCls)-footer">
+        <div class="@(PrefixCls)-footer-extra">
+            @RenderExtraFooter
+        </div>
+    </div>
+}
+
+@if (ShowToday && !IsRange && Picker != DatePickerType.Time)
+{
+    <div class="@(PrefixCls)-footer">
+        <a class="@(PrefixCls)-today-btn"
+           @onclick="e => { OnSelectDate(DateTime.Now); Close(); }">
+            @Locale.Lang.Today
+        </a>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public bool IsWeek { get; set; } = false;
+
+    [Parameter]
+    public bool ShowToday { get; set; } = false;
+
+    private string GetRowClass(DateTime viewDate)
+    {
+        string selectedRowClass = IsWeek && DateHelper.IsSameWeek(viewDate, Value, Locale.FirstDayOfWeek) ? $"{PrefixCls}-week-panel-row-selected" : "";
+        string rowClass = IsWeek ? $"{PrefixCls}-week-panel-row" : "";
+
+        return $"{rowClass} {selectedRowClass}";
+    }
+
+    private void OnRowSelect(DateTime viewDate)
+    {
+        if (IsWeek)
+        {
+            OnSelectDate(viewDate);
+        }
+    }
+
+    private void OnValueSelect(DateTime viewDate)
+    {
+        if (!IsWeek)
+        {
+            OnSelectDate(viewDate);
+        }
+    }
+}

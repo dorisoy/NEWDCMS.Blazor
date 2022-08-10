@@ -1,0 +1,506 @@
+@using AntDesign.Charts
+@using Title = AntDesign.Charts.Title
+
+<Text>Undone</Text>
+<Tabs>
+    <TabPane Key="1" Tab="Example 1">
+        <AntDesign.Charts.Column Data="data1" Config="config1" OnCreateAfter="onCreateAfter1" />
+    </TabPane>
+
+    <TabPane Key="2" Tab="Example 2">
+        <AntDesign.Charts.Column Data="data2" Config="config2" OnCreateAfter="onCreateAfter2" />
+    </TabPane>
+
+    <TabPane Key="3" Tab="Example 3">
+        <AntDesign.Charts.Column Data="data3" Config="config3" OnCreateAfter="onCreateAfter3" />
+    </TabPane>
+
+    <TabPane Key="4" Tab="Example 4">
+        <AntDesign.Charts.Column Data="data4" Config="config4" OnCreateAfter="onCreateAfter4" />
+    </TabPane>
+
+    <TabPane Key="5" Tab="Example 5">
+        <AntDesign.Charts.Column Data="data5" Config="config5" OnCreateAfter="onCreateAfter5" />
+    </TabPane>
+
+    <TabPane Key="6" Tab="Example 6">
+        <AntDesign.Charts.Column Data="data6" Config="config6" OnCreateAfter="onCreateAfter6" />
+    </TabPane>
+</Tabs>
+
+@code{
+
+    #region Example 1
+
+    object[] data1 =
+    {
+        new
+        {
+            year = "1991",
+            value = 31
+        },
+        new
+        {
+            year = "1992",
+            value = 41
+        },
+        new
+        {
+            year = "1993",
+            value = 35
+        },
+        new
+        {
+            year = "1994",
+            value = 55
+        },
+        new
+        {
+            year = "1995",
+            value = 49
+        },
+        new
+        {
+            year = "1996",
+            value = 15
+        },
+        new
+        {
+            year = "1997",
+            value = 17
+        },
+        new
+        {
+            year = "1998",
+            value = 29
+        },
+        new
+        {
+            year = "1999",
+            value = 33
+        }
+    };
+
+    ColumnConfig config1 = new ColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Set active state"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "Set the single value active state."
+        },
+        XField = "year",
+        YField = "value"
+    };
+
+    public void onCreateAfter1(IChartComponent chart)
+    {
+        chart.SetActive(new {name = "year", exp = "1994"},
+            new
+            {
+                FillStyle = "#5AD8A6",
+                FillOpacity = 0.8
+            });
+    }
+
+    #endregion Example 1
+
+    #region Example 2
+
+    object[] data2 =
+    {
+        new
+        {
+            year = "1991",
+            value = 31
+        },
+        new
+        {
+            year = "1992",
+            value = 41
+        },
+        new
+        {
+            year = "1993",
+            value = 35
+        },
+        new
+        {
+            year = "1994",
+            value = 55
+        },
+        new
+        {
+            year = "1995",
+            value = 49
+        },
+        new
+        {
+            year = "1996",
+            value = 15
+        },
+        new
+        {
+            year = "1997",
+            value = 17
+        },
+        new
+        {
+            year = "1998",
+            value = 29
+        },
+        new
+        {
+            year = "1999",
+            value = 33
+        }
+    };
+
+    ColumnConfig config2 = new ColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Set active state"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "Set the active state in batch (multi-value)."
+        },
+        XField = "year",
+        YField = "value"
+    };
+
+    public void onCreateAfter2(IChartComponent chart)
+    {
+        chart.SetActive(new { name = "year", exp = "1994" },
+            new
+            {
+                FillStyle = "#5AD8A6",
+                FillOpacity = 0.8
+            });
+    }
+
+    #endregion Example 2
+
+    #region Example 3
+
+    object[] data3 =
+    {
+        new
+        {
+            year = "1991",
+            value = 31
+        },
+        new
+        {
+            year = "1992",
+            value = 41
+        },
+        new
+        {
+            year = "1993",
+            value = 35
+        },
+        new
+        {
+            year = "1994",
+            value = 55
+        },
+        new
+        {
+            year = "1995",
+            value = 49
+        },
+        new
+        {
+            year = "1996",
+            value = 15
+        },
+        new
+        {
+            year = "1997",
+            value = 17
+        },
+        new
+        {
+            year = "1998",
+            value = 29
+        },
+        new
+        {
+            year = "1999",
+            value = 33
+        }
+    };
+
+    ColumnConfig config3 = new ColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Set disable state"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "Set the disable state in batch(multi - value)."
+        },
+        XField = "year",
+        YField = "value"
+    };
+
+    public void onCreateAfter3(IChartComponent chart)
+    {
+        chart.SetActive(new { name = "year", exp = "1994" },
+            new
+            {
+                FillStyle = "#ccc",
+            });
+    }
+
+    #endregion Example 3
+
+    #region Example 4
+
+    object[] data4 =
+    {
+        new
+        {
+            year = "1991",
+            value = 31
+        },
+        new
+        {
+            year = "1992",
+            value = 41
+        },
+        new
+        {
+            year = "1993",
+            value = 35
+        },
+        new
+        {
+            year = "1994",
+            value = 55
+        },
+        new
+        {
+            year = "1995",
+            value = 49
+        },
+        new
+        {
+            year = "1996",
+            value = 15
+        },
+        new
+        {
+            year = "1997",
+            value = 17
+        },
+        new
+        {
+            year = "1998",
+            value = 29
+        },
+        new
+        {
+            year = "1999",
+            value = 33
+        }
+    };
+
+    ColumnConfig config4 = new ColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Set disable state"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "Set the single value disable state."
+        },
+        XField = "year",
+        YField = "value"
+    };
+
+    public void onCreateAfter4(IChartComponent chart)
+    {
+        chart.SetActive(new { name = "year", exp = "1994" },
+            new
+            {
+                FillStyle = "#ccc",
+            });
+    }
+
+    #endregion Example 4
+
+    #region Example 5
+
+    object[] data5 =
+    {
+        new
+        {
+            year = "1991",
+            value = 31
+        },
+        new
+        {
+            year = "1992",
+            value = 41
+        },
+        new
+        {
+            year = "1993",
+            value = 35
+        },
+        new
+        {
+            year = "1994",
+            value = 55
+        },
+        new
+        {
+            year = "1995",
+            value = 49
+        },
+        new
+        {
+            year = "1996",
+            value = 15
+        },
+        new
+        {
+            year = "1997",
+            value = 17
+        },
+        new
+        {
+            year = "1998",
+            value = 29
+        },
+        new
+        {
+            year = "1999",
+            value = 33
+        }
+    };
+
+    ColumnConfig config5 = new ColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Set selected state"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "Set the single value selected state."
+        },
+        XField = "year",
+        YField = "value"
+    };
+
+    public void onCreateAfter5(IChartComponent chart)
+    {
+        chart.SetActive(new { name = "year", exp = "1994" },
+            new
+            {
+                Stroke = "black",
+                LineWidth = 2,
+
+            });
+    }
+
+    #endregion Example 5
+
+    #region Example 6
+
+    object[] data6 =
+    {
+        new
+        {
+            year = "1991",
+            value = 31
+        },
+        new
+        {
+            year = "1992",
+            value = 41
+        },
+        new
+        {
+            year = "1993",
+            value = 35
+        },
+        new
+        {
+            year = "1994",
+            value = 55
+        },
+        new
+        {
+            year = "1995",
+            value = 49
+        },
+        new
+        {
+            year = "1996",
+            value = 15
+        },
+        new
+        {
+            year = "1997",
+            value = 17
+        },
+        new
+        {
+            year = "1998",
+            value = 29
+        },
+        new
+        {
+            year = "1999",
+            value = 33
+        }
+    };
+
+    ColumnConfig config6 = new ColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Set selected state"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "Set single value selected state"
+        },
+        XField = "year",
+        YField = "value"
+    };
+
+    public void onCreateAfter6(IChartComponent chart)
+    {
+        chart.SetActive(new { name = "year", exp = "1994" },
+            new
+            {
+                Stroke = "black",
+                LineWidth = 2,
+            });
+    }
+
+    #endregion Example 6
+
+}

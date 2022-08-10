@@ -1,0 +1,51 @@
+﻿@namespace AntDesign
+@inherits OverlayTrigger
+
+@using AntDesign.Internal
+
+@if (ChildContent != null)
+{
+    <div class="@ClassMapper.Class" @ref="@Ref" Id="@Id" style="display: inline-flex; @Style"
+         @onclick="OnClickDiv"
+         @onmouseenter="OnTriggerMouseEnter"
+         @onmouseleave="OnTriggerMouseLeave"
+         @oncontextmenu="OnTriggerContextmenu"
+         @onfocusin="OnTriggerFocusIn"
+         @onfocusout="OnTriggerFocusOut"
+         @oncontextmenu:preventDefault>
+        @ChildContent
+    </div>
+}
+@if (Unbound != null)
+{
+    @Unbound(RefBack)
+}
+
+
+<CascadingValue Value="this" Name="Trigger" IsFixed="@true">
+    <CascadingValue Value="@ArrowPointAtCenter" Name="ArrowPointAtCenter">
+        <Overlay @ref="_overlay"
+                 HideMillisecondsDelay="10"
+                 WaitForHideAnimMilliseconds="100"
+                 OnOverlayMouseEnter="OnOverlayMouseEnter"
+                 OnOverlayMouseLeave="OnOverlayMouseLeave"
+                 OnOverlayMouseUp="OnOverlayMouseUp">
+            <div class="ant-popover-content">
+                <div class="ant-popover-arrow">
+                    <span class="ant-popover-arrow-content"></span>
+                </div>
+                <div class="ant-popover-inner" role="tooltip">
+                    @if (TitleTemplate != null || !string.IsNullOrWhiteSpace(Title))
+                    {
+                        <div class="ant-popover-title">
+                            @if (TitleTemplate != null)@TitleTemplate else @Title
+                        </div>
+                    }
+                    <div class="ant-popover-inner-content">
+                        @if (ContentTemplate != null)@ContentTemplate else @Content
+                    </div>
+                </div>
+            </div>
+        </Overlay>
+    </CascadingValue>
+</CascadingValue>

@@ -1,0 +1,26 @@
+@namespace ProLayout
+@inherits AntDomComponentBase
+
+<Dropdown 
+          Style="display: inherit; width: inherit;"
+          Placement="Placement.BottomRight"
+          OverlayClassName="container">
+    <Overlay>
+        <Menu Class="menu" OnMenuItemClicked="OnItemSelected" DefaultSelectedKeys="@(new[] { SelectedLocale })">
+            @foreach (var locale in Locales)
+            {
+                <MenuItem Key="@locale">
+                    <span role="img" aria-label="@LanguageLabels[locale]">
+                        @LanguageIcons[locale]
+                    </span>
+                    @LanguageLabels[locale]
+                </MenuItem>
+            }
+        </Menu>
+    </Overlay>
+    <Unbound>
+        <span class="dropDown" @ref="@context.Current">
+            <Icon Type="global" Theme="outline" />
+        </span>
+    </Unbound>
+</Dropdown>

@@ -1,0 +1,50 @@
+﻿@namespace AntDesign
+@inherits DatePickerBase<TValue>
+@typeparam TValue
+@using AntDesign.Internal;
+
+<CascadingValue Value='$"{PrefixCls}-dropdown"' Name="PrefixCls">
+    <OverlayTrigger @ref="@_dropDown"
+                    Visible="Open"
+                    IsButton="@true"
+                    BoundaryAdjustMode="@BoundaryAdjustMode"
+                    Disabled="IsDisabled(0)"
+                    PopupContainerSelector="@PopupContainerSelector"
+                    OnVisibleChange="OverlayVisibleChange"
+                    OverlayEnterCls="ant-slide-up-enter ant-slide-up-enter-active ant-slide-up"
+                    OverlayLeaveCls="ant-slide-up-leave ant-slide-up-leave-active ant-slide-up"
+                    Trigger="new[] { Trigger.Click }">
+        <Overlay>
+            <div class="@(PrefixCls)-panel-container" @onclick="@PickerClicked">
+                <div class="@_panelClassMapper.Class">
+                    <DatePickerPanelChooser TValue="TValue" DatePicker="@this" OnSelect="async (date, index) => await OnSelect(date)" />
+                </div>
+            </div>
+        </Overlay>
+        <Unbound>
+            <div class="@ClassMapper.Class"
+                 @ref="@context.Current"
+                 style="@Style"
+                 Id="@Id">
+                <DatePickerInput @ref="_inputStart"
+                                 PrefixCls="@PrefixCls"
+                                 Size="@Size"
+                                 Disabled="IsDisabled(0)"
+                                 Value="@GetInputValue(0)"
+                                 Placeholder="@_placeholders[0]"
+                                 ReadOnly="@InputReadOnly"
+                                 AutoFocus="@AutoFocus"
+                                 OnClick="async e => { await OnInputClick(); }"
+                                 OnKeyDown="@OnKeyDown"
+                                 OnInput="e => OnInput(e, 0)"
+                                 OnBlur="e => OnBlur(0)"
+                                 Onfocus="e => AutoFocus = true"
+                                 ShowTime="@(Picker == DatePickerType.Time)"
+                                 OnClickClear="e => ClearValue(0)"
+                                 HtmlInputSize="@HtmlInputSize"
+                                 SuffixIcon="@SuffixIcon"
+                                 AllowClear="@AllowClear" />
+            </div>
+        </Unbound>
+    </OverlayTrigger>
+</CascadingValue>

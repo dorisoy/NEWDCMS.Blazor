@@ -1,0 +1,18 @@
+﻿@namespace AntDesign
+@inherits ComponentBase
+@typeparam TItem
+
+<span class="ant-tree-indent" aria-hidden="true">
+    @for (int i = TreeLevel; i > 0; i--)
+    {
+        if (TreeComponent.IndentTemplate != null)
+        {
+            @TreeComponent.IndentTemplate(SelfNode)
+        }
+        else
+        {
+            var node = GetParentNode(SelfNode, i);
+            <span class="ant-tree-indent-unit ant-tree-indent-unit-start @(node.IsLastNode?"ant-tree-indent-unit-end":"")"></span>
+        }
+    }
+</span>

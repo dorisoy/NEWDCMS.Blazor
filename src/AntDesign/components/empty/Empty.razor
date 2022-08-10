@@ -1,0 +1,37 @@
+﻿@namespace AntDesign
+@inherits AntDomComponentBase
+
+<div class="@ClassMapper.Class" @ref="@Ref" style="@Style" id="@Id">
+    <div class="@(PrefixCls)-image" style="@ImageStyle">
+        @if (ImageTemplate != null)
+        {
+            @ImageTemplate
+        }
+        else if (string.IsNullOrEmpty(Image) == false)
+        {
+            string alt = Description.TryPickT0(out string des, out _) ? des : LocaleProvider.CurrentLocale.Empty.Description;
+
+            <img alt="@alt" src="@Image" />
+        }
+        else if (Simple)
+        {
+            <EmptySimpleImg />
+        }
+        else
+        {
+            <EmptyDefaultImg />
+        }
+    </div>
+
+    @if (DescriptionTemplate != null)
+    {
+        <p class="@(PrefixCls)-description">@DescriptionTemplate</p>
+    }
+    else if (Description.IsT1 == false || Description.AsT1 == true)
+    {
+        <p class="@(PrefixCls)-description">@Description.AsT0</p>
+    }
+    <div class="@(PrefixCls)-footer">
+        @ChildContent
+    </div>
+</div>

@@ -1,0 +1,78 @@
+@namespace AntDesign
+@inherits AntDomComponentBase
+
+<CascadingValue Value="this" IsFixed="@true">
+    <div class="@ClassMapper.Class" style="@Style" id="@Id" @ref="Ref">
+        @if (TitleTemplate != null || Title != null || Extra != null || CardTabs != null)
+        {
+            <div class="ant-card-head">
+
+                <div class="ant-card-head-wrapper">
+                    @if (TitleTemplate != null || Title != null)
+                    {
+                        <div class="ant-card-head-title">
+                            @if (TitleTemplate != null)
+                            {
+                                @TitleTemplate
+                            }
+                            else
+                            {
+                                @Title
+                            }
+                        </div>
+                        @if (Extra != null)
+                        {
+                            <div class="ant-card-extra">
+                                @Extra
+                            </div>
+                        }
+                    }
+                </div>
+
+                @if (CardTabs != null)
+                {
+                    @CardTabs
+                }
+            </div>
+        }
+
+        @if (Cover != null)
+        {
+            <div class="ant-card-cover">
+                @Cover
+            </div>
+        }
+
+        @if (Body != null || ChildContent != null)
+        {
+            <div class="ant-card-body" style="@BodyStyle">
+                @if (!Loading)
+                {
+                    @Body
+                    @ChildContent
+                }
+                else
+                {
+                    <CardLoading></CardLoading>
+                }
+            </div>
+        }
+        @if (ActionTemplate != null)
+        {
+            <ul class="ant-card-actions">
+                @ActionTemplate
+            </ul>
+        }
+        else if (Actions.Count > 0)
+        {
+            <ul class="ant-card-actions">
+                @foreach (var action in Actions)
+                {
+                    <li style="@($"width:{100 / Actions.Count}%") ">
+                        <span>@action</span>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</CascadingValue>

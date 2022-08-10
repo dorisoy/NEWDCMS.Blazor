@@ -1,0 +1,264 @@
+@using AntDesign.Charts
+@using Title = AntDesign.Charts.Title
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+
+    <Tabs ActiveKeyChanged="OnTabChanged">
+        <TabPane Key="1">
+            <TabTemplate>Example 1</TabTemplate>
+            <ChildContent>
+                <Line @ref="chart1" Data="data1" Config="config1" />
+            </ChildContent>
+        </TabPane>
+
+        <TabPane Key="2">
+            <TabTemplate>Example 2</TabTemplate>
+            <ChildContent>
+                <Line @ref="chart2" Data="data2" Config="config2" />
+            </ChildContent>
+        </TabPane>
+
+        <TabPane Key="3">
+            <TabTemplate>Example 3</TabTemplate>
+            <ChildContent>
+                <Line @ref="chart3" Data="data3" Config="config3" />
+            </ChildContent>
+        </TabPane>
+
+        <TabPane Key="4">
+            <TabTemplate>Example 4</TabTemplate>
+            <ChildContent>
+                <Line @ref="chart4" Data="data4" Config="config4" />
+            </ChildContent>
+        </TabPane>
+    </Tabs>
+
+@code{
+
+    IChartComponent chart1;
+    FertilityItem[] data1;
+
+    IChartComponent chart2;
+    FertilityItem[] data2;
+
+    IChartComponent chart3;
+    FertilityItem[] data3;
+
+    IChartComponent chart4;
+    FertilityItem[] data4;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        OnTabChanged("1");
+    }
+
+    private async void OnTabChanged(string activeKey)
+    {
+        if (activeKey == "1")
+        {
+            data1 = await ChartsDemoData.FertilityItemAsync(NavigationManager, HttpClient);
+            await chart1.ChangeData(data1);
+        }
+        else if(activeKey == "2")
+        {
+            data2 = await ChartsDemoData.FertilityItemAsync(NavigationManager, HttpClient);
+            await chart2.ChangeData(data2);
+        }
+        else if (activeKey == "3")
+        {
+            data3 = await ChartsDemoData.FertilityItemAsync(NavigationManager, HttpClient);
+            await chart3.ChangeData(data3);
+        }
+        else if (activeKey == "4")
+        {
+            data4 = await ChartsDemoData.FertilityItemAsync(NavigationManager, HttpClient);
+            await chart4.ChangeData(data4);
+        }
+        else
+        {
+
+        }
+    }
+
+    #region Example 1
+
+    readonly LineConfig config1 = new LineConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Configure the number of coordinate axis ticks"
+        },
+        ForceFit = true,
+        Padding = "auto",
+        XField = "year",
+        YField = "value",
+        SeriesField = "country",
+        XAxis = new ValueCatTimeAxis
+        {
+            Type = "dateTime",
+            TickCount = 5
+        }
+    };
+
+    #endregion
+
+    #region Example 2
+
+    readonly LineConfig config2 = new LineConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Configure the maximum and minimum axis values"
+        },
+        Description = new Description
+        {
+            Visible = true,
+        },
+        ForceFit = true,
+        Padding = "auto",
+        XField = "year",
+        YField = "value",
+        SeriesField = "country",
+        XAxis = new ValueCatTimeAxis
+        {
+            Visible = true,
+            Type = "dateTime",
+            TickCount = 5
+        },
+        YAxis = new ValueAxis
+        {
+            Visible = true,
+            Min = 3,
+            Max = 7,
+        }
+    };
+
+    #endregion
+
+    #region Example 3
+
+    readonly LineConfig config3 = new LineConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Configure axis title"
+        },
+        ForceFit = true,
+        Padding = "auto",
+        XField = "year",
+        YField = "value",
+        SeriesField = "country",
+        XAxis = new ValueCatTimeAxis
+        {
+            Visible = true,
+            Type = "dateTime",
+            Title = new BaseAxisTitle
+            {
+                Text = "x-axis title",
+            },
+        },
+        YAxis = new ValueAxis
+        {
+            Visible = true,
+            Title = new BaseAxisTitle
+            {
+                Text = "y-axis title"
+            }
+        }
+    };
+
+    #endregion
+
+    #region Example 4
+
+    readonly LineConfig config4 = new LineConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Configure axis style"
+        },
+        Description = new Description
+        {
+            Visible = true,
+        },
+        ForceFit = true,
+        Padding = "auto",
+        XField = "year",
+        YField = "value",
+        SeriesField = "country",
+        XAxis = new ValueCatTimeAxis
+        {
+            Visible = true,
+            Type = "time",
+            Mask = "YYYY",
+            Grid = new BaseAxisGrid
+            {
+                Visible = true,
+                //style ???
+            },
+            Line = new BaseAxisLine
+            {
+                Visible = true,
+                Style = new LineStyle
+                {
+                    Stroke = "black",
+                    LineWidth = 1,
+                },
+            },
+            TickLine = new BaseAxisTickLine
+            {
+                Visible = true,
+                Style = new LineStyle
+                {
+                    Stroke = "black",
+                    LineWidth = 1,
+                }
+            },
+        },
+        YAxis = new ValueAxis
+        {
+            Visible = true,
+            Grid = new BaseAxisGrid
+            {
+                Visible = true,
+                //style ???
+            },
+            Line = new BaseAxisLine
+            {
+                Visible = true,
+                Style = new LineStyle
+                {
+                    Stroke = "black",
+                    LineWidth = 1,
+                },
+            },
+            TickLine = new BaseAxisTickLine
+            {
+                Visible = true,
+                Style = new LineStyle
+                {
+                    Stroke = "black",
+                    LineWidth = 1,
+                }
+            },
+            Label = new BaseAxisLabel
+            {
+                Visible = true,
+                Style = new TextStyle
+                {
+                    Fill = "black"
+                }
+            }
+        },
+
+    };
+
+    #endregion
+
+}

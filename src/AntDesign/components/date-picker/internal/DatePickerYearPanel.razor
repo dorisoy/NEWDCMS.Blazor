@@ -1,0 +1,57 @@
+﻿@namespace AntDesign.Internal
+@typeparam TValue
+@inherits DatePickerPanelBase<TValue>
+@using System.Globalization;
+
+@{
+    var calendar = CultureInfo.InvariantCulture.Calendar;
+
+    int startYear = PickerValue.Year / 10 * 10 - 1;
+    DateTime startDate;
+    if (startYear > 0)
+        startDate = new DateTime(startYear, 1, 1);
+    else
+        startDate = DateTime.MinValue;
+
+    int yearIndex = 0;
+}
+<div class='@($"{PrefixCls}-panel")' @ref="Ref">
+    <DatePickerTemplate @attributes="GetAttributes()"
+                        TValue="TValue"
+                        MaxRow="MAX_ROW"
+                        MaxCol="MAX_COL"
+                        ViewStartDate="startDate"
+                        IsInView="date => IsInView(date, startDate)"
+                        IsToday="date => DateHelper.IsSameYear(date, DatePicker.CurrentDate)"
+                        IsSelected="date => DateHelper.IsSameYear(date, Value)"
+                        GetColTitle='date => date.ToString(Locale.Lang.YearFormat, CultureInfo)'
+                        OnValueSelect="date => OnSelectYear(date)"
+                        GetNextColValue="date => DateHelper.AddYearsSafely(date, 1)">
+        <RenderPickerHeader>
+            <DatePickerHeader @attributes="GetAttributes()"
+                              TValue="TValue"
+                              SuperChangeDateInterval="10"
+                              ShowPreChange="@false"
+                              ShowNextChange="@false"
+                              ShowSuperPreChange="@(!(IsRange && PickerIndex == 1))"
+                              ShowSuperNextChange="@(!(IsRange && PickerIndex == 0))" />
+        </RenderPickerHeader>
+        <RenderColValue Context="currentColDate">
+            @{yearIndex++;}
+            @currentColDate.Year
+        </RenderColValue>
+    </DatePickerTemplate>
+</div>
+
+@code {
+    private const int MAX_ROW = 4;
+    private const int MAX_COL = 3;
+    private const int FIRST_YEAR_INDEX = 0;
+    private const int LAST_YEAR_INDEX = MAX_ROW * MAX_COL - 1;
+
+    private bool IsInView(DateTime date, DateTime startDate)
+    {
+        return date.Year != DateHelper.AddYearsSafely(startDate, FIRST_YEAR_INDEX).Year
+        && date.Year != DateHelper.AddYearsSafely(startDate, LAST_YEAR_INDEX).Year;
+    }
+}

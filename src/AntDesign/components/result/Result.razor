@@ -1,0 +1,36 @@
+﻿@namespace AntDesign
+@inherits AntDomComponentBase
+
+<div class="@ClassMapper.Class" style="@Style" @ref="Ref">
+    @if (IsShowIcon)
+    {
+        <div class="@IconClassMapper.Class">
+            @if (IsImage)
+            {
+                @((MarkupString)_svgImage)
+            }
+            else
+            {
+                @BuildIcon
+            }
+        </div>
+    }
+    <div class="ant-result-title">
+        @if (TitleTemplate != null)@TitleTemplate else @Title
+    </div>
+    <div class="ant-result-subtitle">
+        @if (SubTitleTemplate != null)@SubTitleTemplate else @SubTitle
+    </div>
+    @if (ChildContent != null)
+    {
+        <div class="ant-result-content">
+            @ChildContent
+        </div>
+    }
+    @if (Extra != null)
+    {
+        <div class="ant-result-extra">
+            @Extra
+        </div>
+    }
+</div>

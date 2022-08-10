@@ -1,0 +1,212 @@
+@using AntDesign.Charts
+@using Title = AntDesign.Charts.Title
+
+    <Tabs>
+        <TabPane Key="1">
+            <TabTemplate>Example 1</TabTemplate>
+            <ChildContent>
+                <Donut Data="data1" Config="config1" />
+            </ChildContent>
+        </TabPane>
+
+        <TabPane Key="2">
+            <TabTemplate>Example 2</TabTemplate>
+            <ChildContent>
+                <Donut Data="data2" Config="config2" />
+            </ChildContent>
+        </TabPane>
+
+        <TabPane Key="3">
+            <TabTemplate>Example 3</TabTemplate>
+            <ChildContent>
+                <Donut Data="data3" Config="config3" />
+            </ChildContent>
+        </TabPane>
+    </Tabs>
+
+@code{
+
+    #region Example 1
+
+    readonly object[] data1 =
+    {
+        new
+        {
+            type = "Category One",
+            value = 27
+        },
+        new
+        {
+            type = "Category Two",
+            value = 25
+        },
+        new
+        {
+            type = "Category Three",
+            value = 18
+        },
+        new
+        {
+            type = "Category Four",
+            value = 15
+        },
+        new
+        {
+            type = "分类五",
+            value = 10
+        },
+        new
+        {
+            type = "other",
+            value = 5
+        }
+    };
+
+    readonly DonutConfig config1 = new DonutConfig
+    {
+        ForceFit = true,
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Donut Diagram"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "The outer radius of the ring graph determines the size of the ring graph, and the inner radius determines the thickness of the ring graph."
+        },
+        Radius = 0.8,
+        Padding = "auto",
+        AngleField = "value",
+        ColorField = "type"
+    };
+
+    #endregion Example 1
+
+    #region Example 2
+
+    readonly object[] data2 =
+    {
+        new
+        {
+            type = "Category One",
+            value = 27
+        },
+        new
+        {
+            type = "Category Two",
+            value = 25
+        },
+        new
+        {
+            type = "Category Three",
+            value = 18
+        },
+        new
+        {
+            type = "Category Four",
+            value = 15
+        },
+        new
+        {
+            type = "分类五",
+            value = 10
+        },
+        new
+        {
+            type = "other",
+            value = 5
+        }
+    };
+
+    readonly DonutConfig config2 = new DonutConfig
+    {
+        ForceFit = true,
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Donut Chart"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "The ring chart indicator card can replace the tooltip and display the detailed information of each category in the hollowed-out part of the ring chart."
+        },
+        Radius = 0.8,
+        Padding = "auto",
+        AngleField = "value",
+        ColorField = "type",
+        Statistic = new DonutViewConfigStatistic
+        {
+            Visible = true,
+        }
+    };
+
+    #endregion Example 2
+
+    #region Example 3
+
+    readonly object[] data3 =
+    {
+        new
+        {
+            type = "Category One",
+            value = 15
+        },
+        new
+        {
+            type = "Category Two",
+            value = 14
+        },
+        new
+        {
+            type = "Category Three",
+            value = 18
+        },
+        new
+        {
+            type = "Category Four",
+            value = 27
+        },
+
+    };
+
+    readonly DonutConfig config3 = new DonutConfig
+    {
+        Theme = new
+        {
+            backgroundStyle= new
+            {
+                fill = "#2d74f7",
+            },
+        },
+        ForceFit = true,
+
+        Radius = 0.8,
+        Padding = "auto",
+        Color = new string[] { "#5a93fc", "#90b6fd", "#c8dbfe", "#ffffff" },
+        AngleField = "value",
+        ColorField = "type",
+        Statistic = new DonutViewConfigStatistic
+        {
+            Visible = true,
+            Content = new DonutStatisticContent
+            {
+                Value = "32%",
+                Name = "Texi & delivery"
+            }
+        },
+        Label = new PieLabelConfig
+        {
+            Visible = true,
+        },
+        Legend = new Legend
+        {
+            Visible = true,
+            Position = "bottom-center"
+        },
+    };
+
+    #endregion Example 3
+
+}

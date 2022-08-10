@@ -1,0 +1,114 @@
+﻿@namespace AntDesign
+@inherits AntDomComponentBase
+@using AntDesign.Internal
+
+<div class="@(PrefixCls)-header"
+     style="@Style"
+     id="@Id"
+     @ref="@Ref">
+    @{
+        int startYear = Calendar.Value.AddYears(-10).Year;
+        int endYear = Calendar.Value.AddYears(10).Year;
+
+        if (Calendar.ValidRange != null)
+        {
+            startYear = Calendar.ValidRange[0].Year;
+            endYear = Calendar.ValidRange[1].Year;
+        }
+
+        string yearFormat = Calendar.Locale.Lang.YearFormat;
+    }
+    <Select Class=@($"{PrefixCls}-year-select")
+            @bind-Value="@_yearValue"
+            Size=@(Calendar.FullScreen ? AntSizeLDSType.Default : AntSizeLDSType.Small)
+            DefaultValue=@Calendar.Value.Year
+            TItemValue="int"
+            TItem="string"
+            Style="width: unset;"
+            SortByLabel="@SortDirection.Ascending"
+            OnSelectedItemChanged="@(async (item) => await OnSelectYear(item))">
+            <SelectOptions>
+                @for (int year = startYear; year <= endYear; year++)
+                {
+                    DateTime yearDate = new DateTime(year, 1, 1);
+                    <SelectOption @key="@yearDate.Year" TItemValue="int" TItem="string" Value=@yearDate.Year Label="@(yearDate.ToString(yearFormat, Calendar.CultureInfo))" />
+                }
+            </SelectOptions>        
+    </Select>
+
+    @if (Calendar.Mode == DatePickerType.Month)
+    {
+        int startMonth = 1;
+        int endMonth = 12;
+
+        if (Calendar.ValidRange != null)
+        {
+            startMonth = Calendar.Value.Year == Calendar.ValidRange[0].Year ? Calendar.ValidRange[0].Month : startMonth;
+            endMonth = Calendar.Value.Year == Calendar.ValidRange[1].Year ? Calendar.ValidRange[1].Month : endMonth;
+        }
+
+        string monthFormat = Calendar.Locale.Lang.MonthFormat;
+
+        <Select class=@($"{PrefixCls}-month-select")
+                @bind-Value="@_monthValue"
+                Size=@(Calendar.FullScreen ? AntSizeLDSType.Default : AntSizeLDSType.Small)
+                DefaultValue=@Calendar.Value.Month
+                Style="width: unset;"
+                TItemValue="int"
+                TItem="string"
+                OnSelectedItemChanged="@(async (item) => await OnSelectMonth(item))">
+                <SelectOptions>
+                    @for (int month = startMonth; month <= endMonth; month++)
+                    {
+                        DateTime monthDate = new DateTime(1, month, 1);
+                        <SelectOption @key="@monthDate.Month" TItemValue="int" TItem="string" Value=@monthDate.Month Label="@(monthDate.ToString(monthFormat, Calendar.CultureInfo))" />
+                    }
+                </SelectOptions>            
+        </Select>
+    }
+
+    <RadioGroup class=@($"{PrefixCls}-mode-switch")
+                Size=@(Calendar.FullScreen ? AntSizeLDSType.Default : AntSizeLDSType.Small)
+                Value="@Calendar.Mode"
+                OnChange="OnModeChange" TValue="string">
+        <Radio RadioButton Value="@DatePickerType.Month">@(Calendar.Locale.Lang.Month)</Radio>
+        <Radio RadioButton Value="@DatePickerType.Year">@(Calendar.Locale.Lang.Year)</Radio>
+    </RadioGroup>
+</div>
+
+@code
+{
+    [CascadingParameter(Name = "PrefixCls")]
+    public string PrefixCls { get; set; }
+
+    [CascadingParameter(Name = "Calendar")]
+    public Calendar Calendar { get; set; }
+
+    private DateTime currentDate;
+    private int _yearValue;
+    private int _monthValue;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        currentDate = Calendar.Value;
+    }
+
+    private void OnModeChange(string value)
+    {
+        Calendar.ChangePickerType(value);
+    }
+
+    private async Task OnSelectYear(string value)
+    {      
+        int year = Convert.ToInt32(value);
+        await Calendar.ChangeValue(DateHelper.CombineNewDate(Calendar.Value, year: year));
+    }
+
+    private async Task OnSelectMonth(string value)
+    {
+        int month = Convert.ToInt32(value);
+        await Calendar.ChangeValue(DateHelper.CombineNewDate(Calendar.Value, month: month));
+    }
+}

@@ -1,0 +1,42 @@
+﻿@namespace AntDesign
+@inherits AntDomComponentBase
+@using AntDesign.Internal;
+
+<Row class="@ClassMapper.Class" style="@Style" id="@Id">
+    @if (!string.IsNullOrEmpty(Label) || LabelTemplate != null)
+    {
+        <AntDesign.Col @attributes="GetLabelColAttributes()" Class="@_labelClassMapper.Class">
+            @if (LabelTemplate != null)
+            {
+                @LabelTemplate
+            }
+            else
+            {
+                <label class=@GetLabelClass() style="@LabelStyle">@(Label)</label>
+            }
+        </AntDesign.Col>
+    }
+
+    <AntDesign.Col @attributes="GetWrapperColAttributes()" Class=@($"{_prefixCls}-control")>
+        <div class=@($"{_prefixCls}-control-input")>
+            <div class=@($"{_prefixCls}-control-input-content")>
+                <CascadingValue Value="this" Name="FormItem" TValue="IFormItem" IsFixed="@true">
+                    @ChildContent
+                </CascadingValue>
+            </div>
+            @if (IsShowIcon)
+            {
+                <span class=@($"{_prefixCls}-children-icon")><Icon Type="@(_iconMap[ValidateStatus].type)" Theme="@(_iconMap[ValidateStatus].theme)" /></span>
+            }
+        </div>
+
+        @foreach (var message in _validationMessages)
+        {
+            <div class=@($"{_prefixCls}-explain {_prefixCls}-explain-{(_isValid ? "default" : "error")}")>
+                <div role="alert">
+                    @message
+                </div>
+            </div>
+        }
+    </AntDesign.Col>
+</Row>

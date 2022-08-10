@@ -1,0 +1,29 @@
+@namespace AntDesign
+@inherits AntDomComponentBase
+
+@if (Position == null || (Position == "shown" && !Overflow) || (Position == "hidden" && Overflow))
+{
+    <span class="@ClassMapper.Class" style="@_sizeStyles @Style" id="@Id" @ref="Ref">
+        @if (_hasIcon)
+        {
+            <Icon Type="@Icon" />
+        }
+        @if (_hasSrc)
+        {
+            <img src="@Src" srcset="@SrcSet" alt="@Alt" @onerror="ImgError" />
+        }
+        @if (_hasText)
+        {
+            <span class="ant-avatar-string" @ref="TextEl" style="@_textStyles">
+                @if (_childContent != null)
+                {
+                    @_childContent
+                }
+                else
+                {
+                    @_text
+                }
+            </span>
+        }
+    </span>
+}

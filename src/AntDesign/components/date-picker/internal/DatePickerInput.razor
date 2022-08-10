@@ -1,0 +1,159 @@
+﻿@namespace AntDesign.Internal
+@inherits AntDomComponentBase
+
+@if (!IsRange)
+{
+    <div class="@(PrefixCls)-input">
+        <input @ref="Ref"
+               @onclick="OnClick"
+               @onkeyup="OnKeyUp"
+               @onkeydown="@OnKeyDown"
+               @oninput="OnInput"
+               @onfocus="Onfocus"
+               @onblur="OnBlur"
+               @bind-value="@Value"
+               size="@HtmlInputSize"
+               disabled="@Disabled"
+               placeholder="@Placeholder"
+               readonly="@ReadOnly">
+        @if (ShowSuffixIcon)
+        {
+            @if (ShowClear())
+            {
+                <span class="@(PrefixCls)-clear" onclick="@OnClickClear">
+                    <Icon type="close-circle" theme="fill" />
+                </span>
+            }
+            <span class="@(PrefixCls)-suffix">
+
+                @if (SuffixIcon != null)
+                {
+                    @SuffixIcon
+                }
+                else if (ShowTime)
+                {
+                    <Icon type="clock-circle" />
+                }
+                else
+                {
+                    <Icon type="calendar" />
+                }
+
+            </span>
+        }
+    </div>
+}
+else
+{
+    <div class="@(PrefixCls)-input">
+        <input @ref="Ref"
+               @onclick="OnClick"
+               @onkeyup="OnKeyUp"
+               @onkeydown="@OnKeyDown"
+               @oninput="OnInput"
+               @onfocus="Onfocus"
+               @onblur="OnBlur"
+               @bind-value="@Value"
+               size="@HtmlInputSize"
+               disabled="@Disabled"
+               placeholder="@Placeholder"
+               readonly="@ReadOnly">
+    </div>
+    @if (ShowSuffixIcon)
+    {
+        @if (ShowClear())
+        {
+            <span class="@(PrefixCls)-clear" onclick="@OnClickClear">
+                <Icon type="close-circle" theme="fill" />
+            </span>
+        }
+        <span class="@(PrefixCls)-suffix">
+
+            @if (SuffixIcon != null)
+            {
+                @SuffixIcon
+            }
+            else if (ShowTime)
+            {
+                <Icon type="clock-circle" />
+            }
+            else
+            {
+                <Icon type="calendar" />
+            }
+        </span>
+    }
+
+}
+
+@code {
+    [Parameter]
+    public string PrefixCls { get; set; } = "ant-picker";
+
+    [Parameter]
+    public string Size { get; set; }
+
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public string Placeholder { get; set; }
+
+    [Parameter]
+    public bool ReadOnly { get; set; }
+
+    [Parameter]
+    public bool IsRange { get; set; } = false;
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public bool AutoFocus { get; set; }
+
+    [Parameter]
+    public bool ShowSuffixIcon { get; set; } = true;
+
+    [Parameter]
+    public bool ShowTime { get; set; } = false;
+
+    [Parameter]
+    public int HtmlInputSize { get; set; }
+
+    [Parameter]
+    public RenderFragment SuffixIcon { get; set; }
+
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+
+    [Parameter]
+    public EventCallback Onfocus { get; set; }
+
+    [Parameter]
+    public EventCallback OnBlur { get; set; }
+
+    [Parameter]
+    public EventCallback Onfocusout { get; set; }
+
+    [Parameter]
+    public EventCallback<KeyboardEventArgs> OnKeyUp { get; set; }
+
+    [Parameter]
+    public EventCallback<KeyboardEventArgs> OnKeyDown { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> OnInput { get; set; }
+
+    [Parameter]
+    public bool AllowClear { get; set; } = true;
+
+    [Parameter]
+    public EventCallback OnClickClear { get; set; }
+
+    public bool IsOnFocused { get; set; } = false;
+
+    public bool ShowClear()
+    {
+        return !Disabled && !String.IsNullOrEmpty(Value) && AllowClear;
+    }
+}

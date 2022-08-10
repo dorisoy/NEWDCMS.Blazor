@@ -1,0 +1,18 @@
+@namespace AntDesign
+@inherits AntDomComponentBase
+
+<span class="@ClassMapper.Class" style="@Style" id="@Id" @ref="Ref">
+    @if (Text != null || ChildContent != null)
+    {
+        <span class="ant-divider-inner-text">
+            @if (Text != null)
+            {
+                @Text
+            }
+            else
+            {
+                @ChildContent
+            }
+        </span>
+    }
+</span>

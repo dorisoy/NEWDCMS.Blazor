@@ -1,0 +1,28 @@
+@namespace AntDesign
+@inherits AntDomComponentBase
+
+<CascadingValue Value="this" IsFixed>
+    <ul class="@ClassMapper.Class" style="@Style" id="@Id" @ref="Ref">
+        @ChildContent
+
+        @foreach (var item in _displayItems)
+        {
+            <li class="@item.ItemClass" @ref="item.Ref" style="@item.Style" id="@item.Id">
+				@if (!string.IsNullOrEmpty(item.Label))
+				{
+					<div class="ant-timeline-item-label">@item.Label</div>
+				}
+                <div class="ant-timeline-item-tail"></div>
+                <div class="@item._headClassMapper.Class" style="@item.HeadStyle">
+                    @if (item.Dot != null)
+                    {
+                        @item.Dot
+                    }
+                </div>
+                <div class="ant-timeline-item-content">
+                    @item.ChildContent
+                </div>
+            </li>
+        }
+    </ul>
+</CascadingValue>

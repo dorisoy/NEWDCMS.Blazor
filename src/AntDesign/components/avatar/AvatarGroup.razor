@@ -1,0 +1,25 @@
+﻿@namespace AntDesign
+@inherits AntDomComponentBase
+
+<CascadingValue Value="this" IsFixed="@true">
+    <div class="@ClassMapper.Class">
+        <CascadingValue Value=@("shown") Name="position">
+            @ChildContent
+        </CascadingValue>
+        @if (_overflow)
+        {
+            <Popover Trigger="new[] { Trigger.Hover }"
+                     Placement=MaxPopoverPlacement
+                     OverlayClassName="@_popoverClassMapper.Class">
+                <ContentTemplate>
+                    <CascadingValue Value=@("hidden") Name="position">
+                        @ChildContent
+                    </CascadingValue>
+                </ContentTemplate>
+                <Unbound>
+                    <Avatar RefBack="@context" Style=@MaxStyle>@($"+{_shownAvatarList.Count - MaxCount}")</Avatar>
+                </Unbound>
+            </Popover>
+        }
+    </div>
+</CascadingValue>

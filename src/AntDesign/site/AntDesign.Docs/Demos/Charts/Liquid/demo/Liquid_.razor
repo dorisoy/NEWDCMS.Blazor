@@ -1,0 +1,63 @@
+@using AntDesign.Charts
+@using Title = AntDesign.Charts.Title
+
+    <Tabs>
+        <TabPane Key="1">
+            <TabTemplate>示例1</TabTemplate>
+            <ChildContent>
+                <Liquid TItem="string" Config="config1" />
+            </ChildContent>
+        </TabPane>
+
+        <TabPane Key="2">
+            <TabTemplate>示例2</TabTemplate>
+            <ChildContent>
+                <Liquid TItem="string" Config="config2" />
+            </ChildContent>
+        </TabPane>
+    </Tabs>
+
+@code{
+
+    #region 示例1
+
+    readonly LiquidConfig config1 = new LiquidConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "水波图"
+        },
+        Min = 0,
+        Max = 10000,
+        Value = 5639
+    };
+
+    #endregion 示例1
+
+    #region 示例2
+
+    readonly LiquidConfig config2 = new LiquidConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "水波图"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "水波图 - 百分比显示"
+        },
+        Min = 0,
+        Max = 10000,
+        Value = 5639,
+        Statistic = new LiquidStatisticStyle
+        {
+            //Formatter
+        }
+    };
+
+    #endregion 示例2
+
+}

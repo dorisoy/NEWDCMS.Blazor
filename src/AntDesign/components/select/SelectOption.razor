@@ -1,0 +1,38 @@
+﻿@using AntDesign.Select.Internal
+@namespace AntDesign
+@inherits AntDomComponentBase
+@typeparam TItemValue
+@typeparam TItem
+<div @ref="Ref"
+      @key="@this"
+      class="@ClassMapper.Class"
+      role="option"
+      aria-selected="@IsSelected"
+      style="@InnerStyle"
+      @onclick="@OnClick"
+      @onmouseenter="@OnMouseEnter">
+    <div class="@ClassPrefix-content">
+        @if (ItemTemplate != null)
+        {
+             @ItemTemplate(Model.Item)
+        }
+        else
+        {
+            @InternalLabel
+        }
+    </div>
+    @switch (SelectParent.SelectMode)
+    {
+        case SelectMode.Default:
+            <span class="@ClassPrefix-state" unselectable="on" aria-hidden="true" style="user-select: none;"></span>
+            break;
+        default:
+            if (IsSelected)
+            {
+                <span unselectable="on" aria-hidden="true" style="user-select: none;" class="@ClassPrefix-state">
+                    <Icon Type="check"></Icon>
+                </span>
+            }
+            break;
+    }
+</div>

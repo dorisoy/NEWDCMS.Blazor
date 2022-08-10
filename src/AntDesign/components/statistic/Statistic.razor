@@ -1,0 +1,38 @@
+﻿@namespace AntDesign
+@inherits StatisticComponentBase<TValue>
+@typeparam TValue
+
+@{
+    var SeparatedDecimal = SeparateDecimal();
+}
+
+<div class="@ClassMapper.Class" style="@Style" @ref="Ref" id="@Id">
+    <div class="ant-statistic-title">
+        @if (TitleTemplate != null)@TitleTemplate else @Title
+    </div>
+    <div class="ant-statistic-content" style="@ValueStyle">
+        @if (PrefixTemplate != null || Prefix != null)
+        {
+            <span class="ant-statistic-content-prefix">
+                @if (PrefixTemplate != null)@PrefixTemplate else @Prefix
+            </span>
+        }
+        <span class="ant-statistic-content-value">
+            <span class="ant-statistic-content-value-int">
+                @SeparatedDecimal.integerPart
+            </span>
+            @if (!string.IsNullOrEmpty(SeparatedDecimal.fractionalPart))
+            {
+                <span class="ant-statistic-content-value-decimal">
+                    @SeparatedDecimal.fractionalPart
+                </span>
+            }
+        </span>
+        @if (SuffixTemplate != null || Suffix != null)
+        {
+            <span class="ant-statistic-content-suffix">
+                @if (SuffixTemplate != null)@SuffixTemplate else @Suffix
+            </span>
+        }
+    </div>
+</div>

@@ -1,0 +1,24 @@
+@namespace ProLayout
+@inherits AntDomComponentBase
+
+<Dropdown 
+    Placement="@Placement.BottomRight"
+    OverlayClassName="container popover"
+    Trigger="_trigger"
+    Visible="Visible"
+    OverlayEnterCls="@(" ")">
+    <Overlay>
+        <Tabs Class="tabs">
+            <CascadingValue Value="this">
+                @ChildContent
+            </CascadingValue>
+        </Tabs>
+    </Overlay>
+    <Unbound>
+        <span @ref="@context.Current" class="@ClassMapper.Class">
+            <Badge Count="Count" Style="box-shadow: none;" Class="badge">
+                <Icon Type="bell" Theme="outline" Style="font-size:18px"/>
+            </Badge>
+        </span>
+    </Unbound>
+</Dropdown>

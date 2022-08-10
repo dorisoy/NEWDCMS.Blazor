@@ -1,0 +1,47 @@
+﻿@namespace AntDesign
+@inherits AntDomComponentBase
+
+<div class="@ClassMapper.Class">
+    <div class="@SlickSliderClassMapper.Class">
+        <div class="slick-list" @ref="Ref" style="@SlickListStyle">
+            <div class="slick-track" style="@TrackStyle">
+                @if (_slicks.Count > 0 && Effect == CarouselEffect.ScrollX)
+                {
+                    <div data-index="-1" class="slick-slide slick-cloned" tabindex="-1" aria-hidden="true" style="@SlickClonedStyle">
+                        <div>
+                            <div tabindex="-1" style="width: 100%; display: inline-block;">
+                                @_slicks.Last().ChildContent
+                            </div>
+                        </div>
+                    </div>
+                }
+                <CascadingValue Value="this" IsFixed="@true">
+                    @ChildContent
+                </CascadingValue>
+                @if (Effect == CarouselEffect.ScrollX)
+                {
+                    for (int i = 0; i < _slicks.Count; i++)
+                    {
+                        int index = i;
+                        <div data-index="@(i+_slicks.Count)" class="slick-slide slick-cloned" tabindex="-1" aria-hidden="true" style="@SlickClonedStyle">
+                            <div>
+                                <div tabindex="-1" style="width: 100%; display: inline-block;">
+                                    @_slicks[index].ChildContent
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <ul class="@($"slick-dots slick-dots-{DotPosition.ToString().ToLower()}")" style="display: block;">
+            @for (int i = 0; i < _slicks.Count; i++)
+            {
+                int index = i;
+                <li class="@(_slicks[index].Active?"slick-active":string.Empty)">
+                    <button @onclick="(e)=>Activate(_slicks[index])">@(index + 1)</button>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

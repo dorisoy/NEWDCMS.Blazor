@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6</TargetFrameworks>
+    <LangVersion>9.0</LangVersion>
+    <OutputType>Library</OutputType>
+    <IsPackable>true</IsPackable>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>.NET Foundation and Contributors</Copyright>
+    <NoWarn>CA2007</NoWarn>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>AntDesign.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The nuget package icon -->
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+    <None Include="logo.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ignore the tsconfig.json file in package -->
+    <Content Remove="tsconfig.json" />
+    <None Include="tsconfig.json" CopyToOutputDirectory="Never"></None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="locales\*.json" />
+    <EmbeddedResource Include="locales\*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="OneOf" Version="3.0.216" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="**\*.razor">
+      <Pack>false</Pack>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="DebugMessage" BeforeTargets="Build">
+    <Message Importance="high" Text="If you have modified the style, documentation or added a new demo, please rebuild the entire solution." />
+    <Message Importance="high" Text="如果您修改了样式、文档或者新增了Demo，请重新构建整个解决方案。" />
+  </Target>
+</Project>

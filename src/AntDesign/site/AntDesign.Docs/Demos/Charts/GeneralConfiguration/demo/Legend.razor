@@ -1,0 +1,243 @@
+@using AntDesign.Charts
+@using Title = AntDesign.Charts.Title
+@inject NavigationManager NavigationManager
+@inject HttpClient HttpClient
+
+<Tabs>
+    <TabPane Key="1">
+        <TabTemplate>Example 1</TabTemplate>
+        <ChildContent>
+            <StackedColumn Data="data1" Config="config1" />
+        </ChildContent>
+    </TabPane>
+
+    <TabPane Key="2">
+        <TabTemplate>Example 2</TabTemplate>
+        <ChildContent>
+            <StackedColumn Data="data2" Config="config2" />
+        </ChildContent>
+    </TabPane>
+</Tabs>
+
+@code{
+
+    object[] data2;
+
+    protected override async Task OnInitializedAsync()
+    {
+        data2 = await ChartsDemoData.FertilityItemAsync(NavigationManager, HttpClient);
+
+        await base.OnInitializedAsync();
+
+    }
+
+    #region Example 1
+
+    readonly object[] data1 =
+{
+        new
+        {
+            time = "16 Q1",
+            type = "Mobile game",
+            value = 0
+        },
+        new
+        {
+            time = "16 Q1",
+            type = "Mobile shopping",
+            value = 17.8
+        },
+        new
+        {
+            time = "16 Q1",
+            type = "Mobile marketing",
+            value = 69.4
+        },
+        new
+        {
+            time = "16 Q1",
+            type = "Shared bicycle",
+            value = 12.8
+        },
+        new
+        {
+            time = "16 Q2",
+            type = "Shared bicycle",
+            value = 0
+        },
+        new
+        {
+            time = "16 Q2",
+            type = "Mobile shopping",
+            value = 18.1
+        },
+        new
+        {
+            time = "16 Q2",
+            type = "Mobile marketing",
+            value = 70.7
+        },
+        new
+        {
+            time = "16 Q2",
+            type = "Shared bicycle",
+            value = 11.2
+        },
+        new
+        {
+            time = "16 Q3",
+            type = "Shared bicycle",
+            value = 0
+        },
+        new
+        {
+            time = "16 Q3",
+            type = "Mobile shopping",
+            value = 20.8
+        },
+        new
+        {
+            time = "16 Q3",
+            type = "Mobile marketing",
+            value = 67.4
+        },
+        new
+        {
+            time = "16 Q3",
+            type = "Shared bicycle",
+            value = 11.8
+        },
+        new
+        {
+            time = "16 Q4",
+            type = "Shared bicycle",
+            value = 0.1
+        },
+        new
+        {
+            time = "16 Q4",
+            type = "Mobile shopping",
+            value = 20.3
+        },
+        new
+        {
+            time = "16 Q4",
+            type = "Mobile marketing",
+            value = 69.2
+        },
+        new
+        {
+            time = "16 Q4",
+            type = "Shared bicycle",
+            value = 10.4
+        },
+        new
+        {
+            time = "17 Q1",
+            type = "Shared bicycle",
+            value = 0.4
+        },
+        new
+        {
+            time = "17 Q1",
+            type = "Mobile shopping",
+            value = 17.3
+        },
+        new
+        {
+            time = "17 Q1",
+            type = "Mobile marketing",
+            value = 68.3
+        },
+        new
+        {
+            time = "17 Q1",
+            type = "Shared bicycle",
+            value = 14
+        },
+        new
+        {
+            time = "17 Q2",
+            type = "Shared bicycle",
+            value = 1.2
+        },
+        new
+        {
+            time = "17 Q2",
+            type = "Mobile shopping",
+            value = 18.3
+        },
+        new
+        {
+            time = "17 Q2",
+            type = "Mobile marketing",
+            value = 68.6
+        },
+        new
+        {
+            time = "17 Q2",
+            type = "Shared bicycle",
+            value = 11.9
+        }
+    };
+
+    readonly StackedColumnConfig config1 = new StackedColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Specify legend position"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "The legend position supports 12 positions, which are left-top,left-center,left-bottom,right-top,right-top,right-bottom,top-left,top-center,top-bottom,bottom-left,bottom -center,bottom-right."
+        },
+        XField = "time",
+        YField = "value",
+        StackField = "type",
+        Legend = new AntDesign.Charts.Legend
+        {
+            Visible = true,
+            Position = "right-center"
+        }
+    };
+
+    #endregion Example 1
+
+    #region Example 2
+
+    readonly StackedColumnConfig config2 = new StackedColumnConfig
+    {
+        Title = new Title
+        {
+            Visible = true,
+            Text = "Set whether the legend turns pages"
+        },
+        Description = new Description
+        {
+            Visible = true,
+            Text = "When the number of legends is too large, the page will be turned by default, leaving more display space for the chart. This function can be turned off through configuration items."
+        },
+        ForceFit = true,
+        Padding = "auto",
+        XField = "year",
+        YField = "value",
+        //seriesField ???
+        //smooth ???
+        XAxis = new CatAxis
+        {
+            Visible = true,
+            Type = "time"
+        },
+        StackField = "type",
+        Legend = new AntDesign.Charts.Legend
+        {
+            Visible = true,
+            FlipPage = false,
+        }
+    };
+
+    #endregion Example 2
+
+}

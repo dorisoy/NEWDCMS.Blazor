@@ -1,0 +1,35 @@
+﻿@page "/counter/{Id:int}"
+@inherits ComponentBase
+@implements IReuseTabsPage
+
+
+<p>Current count: @currentCount</p>
+
+<Button Type="primary" @onclick="IncrementCount">Click me</Button>
+
+<br />
+<p @onclick="@(()=>GoTo($"/counter/{Id+1}"))">Go to @($"Counter {Id+1}")</p>
+
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    [Inject] private NavigationManager Navigation { get; set; }
+
+    private int currentCount = 0;
+
+    public RenderFragment GetPageTitle() =>
+    @<span>@($"Counter {Id}")</span>
+    ;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void GoTo(string url)
+    {
+        Navigation.NavigateTo(url);
+    }
+
+}

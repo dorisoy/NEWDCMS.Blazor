@@ -1,0 +1,194 @@
+﻿@namespace AntDesign.Internal
+@typeparam TValue
+@inherits DatePickerPanelBase<TValue>
+
+@{
+	var calendar = CultureInfo.Calendar;
+
+    DateTime monthFirstDayDate = new DateTime(PickerValue.Year, PickerValue.Month, 1, 0, 0, 0);
+    int monthFirstDayOfWeek = (int)calendar.GetDayOfWeek(monthFirstDayDate);
+
+    // sunday should be 7
+    if (monthFirstDayOfWeek == 0)
+    {
+        monthFirstDayOfWeek = DayOfWeekHelper.GetDiffForDayOfWeek(Locale.FirstDayOfWeek);
+    }
+
+    int diffDay = (int)Locale.FirstDayOfWeek - monthFirstDayOfWeek;
+    DateTime startDate;
+    int skipDays = 0;
+    if (monthFirstDayDate == DateTime.MinValue)
+    {
+        startDate = monthFirstDayDate;
+        skipDays = monthFirstDayOfWeek - (int)Locale.FirstDayOfWeek;
+    }
+    else
+    {
+        startDate = monthFirstDayDate.AddDays(diffDay);
+    }
+}
+
+<div class='@($"{PrefixCls}-datetime-panel")' @ref="Ref">
+    @if (IsShowTime)
+    {
+        <DatePickerTemplate TValue="TValue"
+                            @attributes="GetAttributes()"
+                            MaxRow="6"
+                            MaxCol="7"
+                            ViewStartDate="startDate"
+                            ShowFooter="@ShowToday"
+                            IsInView="date => DateHelper.IsSameMonth(date, PickerValue)"
+                            IsToday="date => DateHelper.IsSameDay(date, DatePicker.CurrentDate)"
+                            IsSelected="date => DateHelper.IsSameDay(date, Value)"
+                            GetColTitle='date => date.ToString(Locale.Lang.DateFormat, CultureInfo)'
+                            OnValueSelect="OnSelectDate"
+                            GetNextColValue="date => DateHelper.AddDaysSafely(date, 1)"
+                            SkipDays="skipDays">
+            <RenderPickerHeader>
+                <DatePickerHeader TValue="TValue"
+                                  @attributes="GetAttributes()" />
+            </RenderPickerHeader>
+            <RenderTableHeader>
+                <tr>
+                    @foreach(string weekDay in Locale.Lang.ShortWeekDays)
+                    {
+                        <th>@weekDay</th>
+                    }
+                </tr>
+            </RenderTableHeader>
+            <RenderColValue Context="currentColDate">
+                @currentColDate.Day
+            </RenderColValue>
+        </DatePickerTemplate>
+    }
+
+    @{
+        var startTime = new DateTime(2020, 1, 1, 0, 0, 0);
+        var timeFormat = ShowTimeFormat;
+
+        if (Picker == DatePickerType.Time && !string.IsNullOrEmpty(Format))
+        {
+            timeFormat = Format;
+        }
+
+        DatePickerDisabledTime disabledTime = GetDisabledTime();
+		bool isValueNull = Value is null;
+		Func<int, int?, string> selected;
+		string localValue;
+		if (Value is null)
+		{
+			localValue = "";
+			selected = (_, _) => "";
+		}
+		else
+		{
+			localValue = Value.Value.ToString(timeFormat);
+			selected = (viewTime, valueTime) =>  viewTime == valueTime ? $"{PrefixCls}-time-panel-cell-selected" : "";
+		}		
+    }
+    <div class="@(PrefixCls)-time-panel">
+        @if(Picker == DatePickerType.Date)
+        {
+            <div class="@(PrefixCls)-header">
+                <div class="@(PrefixCls)-header-view">
+                    @localValue <br />
+                </div>
+            </div>
+        }
+
+        <div class="@(PrefixCls)-content">
+            @if (timeFormat.ToLower().Contains("hh"))
+            {
+                <ul class="@(PrefixCls)-time-panel-column" style="position: relative;">
+                    @for (int hour = 0; hour < 24; hour++)
+                    {
+                        var viewTime = startTime;
+                        bool disabled = disabledTime._disabledHours.Contains(hour);
+                        string isSelectedCls = selected(viewTime.Hour, Value?.Hour);
+                        string disabledCls = disabled ? $"{PrefixCls}-time-panel-cell-disabled" : "";
+
+                        <li class="@(PrefixCls)-time-panel-cell @isSelectedCls @disabledCls">
+                            <div class="@(PrefixCls)-time-panel-cell-inner"
+                                 @onclick="e => { if (!disabled) OnSelectHour(viewTime); }">
+                                @hour
+                            </div>
+                        </li>
+
+                        startTime = startTime.AddHours(1);
+                    }
+                </ul>
+            }
+            @if (timeFormat.ToLower().Contains("mm"))
+            {
+                <ul class="@(PrefixCls)-time-panel-column" style="position: relative;">
+                    @for (int minute = 0; minute < 60; minute++)
+                    {
+                        var viewTime = startTime;
+                        bool disabled = disabledTime._disabledMinutes.Contains(minute);
+                        string isSelectedCls = selected(viewTime.Minute, Value?.Minute);
+                        string disabledCls = disabled ? $"{PrefixCls}-time-panel-cell-disabled" : "";
+
+                        <li class="@(PrefixCls)-time-panel-cell @isSelectedCls @disabledCls">
+                            <div class="@(PrefixCls)-time-panel-cell-inner"
+                                 @onclick="e => { if (!disabled) OnSelectMinute(viewTime); }">
+                                @minute
+                            </div>
+                        </li>
+
+                        startTime = startTime.AddMinutes(1);
+                    }
+                </ul>
+            }
+            @if (timeFormat.ToLower().Contains("ss"))
+            {
+                <ul class="@(PrefixCls)-time-panel-column" style="position: relative;">
+                    @for (int second = 0; second < 60; second++)
+                    {
+                        var viewTime = startTime;
+                        bool disabled = disabledTime._disabledSeconds.Contains(second);
+						string isSelectedCls = selected(viewTime.Second, Value?.Second);
+                        string disabledCls = disabled ? $"{PrefixCls}-time-panel-cell-disabled" : "";
+
+                        <li class="@(PrefixCls)-time-panel-cell @isSelectedCls @disabledCls">
+                            <div class="@(PrefixCls)-time-panel-cell-inner"
+                                 @onclick="e => { if (!disabled) OnSelectSecond(viewTime); }">
+                                @second
+                            </div>
+                        </li>
+
+                        startTime = startTime.AddSeconds(1);
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+@if (RenderExtraFooter != null)
+{
+    <div class="@(PrefixCls)-footer">
+        <div class="@(PrefixCls)-footer-extra">
+            @RenderExtraFooter
+        </div>
+    </div>
+}
+
+<div class="@(PrefixCls)-footer">
+    <ul class="@(PrefixCls)-ranges">
+        @if (ShowToday)
+        {
+            <li class="@(PrefixCls)-now">
+                <a class="@(PrefixCls)-now-btn"
+                @onclick="e => { OnSelectTime(DateTime.Now); Close(); }">
+                    @Locale.Lang.Now
+                </a>
+            </li>            
+        }
+        <li class="@(PrefixCls)-ok">
+            <Button Type="@ButtonType.Primary"
+                       OnClick="OnOkClick">
+                @Locale.Lang.Ok
+            </Button>
+        </li>
+    </ul>
+</div>

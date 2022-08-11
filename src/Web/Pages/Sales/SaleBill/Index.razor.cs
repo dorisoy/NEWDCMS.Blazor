@@ -1,14 +1,8 @@
-﻿using DCMS.Web.Pages.Sales.SaleBill;
-using AntDesign;
+﻿using AntDesign;
 using AntDesign.TableModels;
-using System.ComponentModel;
-using System.Text.Json;
-using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
-using Newtonsoft.Json;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Components.Web;
 using DCMS.Application.Models;
+using Microsoft.AspNetCore.Components.Web;
+using Newtonsoft.Json;
 
 
 namespace DCMS.Web.Pages.Sales.SaleBill
